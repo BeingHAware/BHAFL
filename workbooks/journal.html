@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Being HAware — The 90-Day Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f2eb;--paper2:#ede9df;--paper3:#e4dfd3;
+  --ink:#1c1a16;--ink2:#4a4740;--ink3:#8a8780;--ink4:#c4bfb4;
+  --accent:#c4501a;--accent2:#e8a882;
+  --green:#2d6a4f;--green2:#d4ede3;
+  --amber:#9a6c10;--amber2:#f5e8c0;
+  --purple:#6b5cb8;--purple2:#e8e4f8;
+  --display:'Bebas Neue',sans-serif;
+  --body:'Crimson Pro',Georgia,serif;
+  --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper2);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
+
+/* NAV */
+.nav{background:var(--ink);height:48px;display:flex;align-items:center;padding:0 20px;position:sticky;top:0;z-index:200;gap:8px}
+.nav-brand{font-family:var(--display);font-size:15px;letter-spacing:.06em;color:var(--paper);white-space:nowrap}
+.nav-brand span{color:var(--accent2)}
+.nav-tabs{display:flex;gap:1px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.tab-btn{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:48px;background:transparent;border:none;color:var(--ink4);cursor:pointer;transition:all .2s;border-bottom:3px solid transparent;white-space:nowrap}
+.tab-btn:hover{color:var(--paper)}
+.tab-btn.active{color:var(--accent2);border-bottom-color:var(--accent2)}
+.nav-right{display:flex;gap:4px}
+.nav-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;background:rgba(255,255,255,.08);border:none;color:var(--ink4);cursor:pointer;transition:all .15s;white-space:nowrap}
+.nav-btn:hover{background:rgba(255,255,255,.16);color:var(--paper)}
+.nav-btn.go{background:var(--accent);color:white}
+
+.page{max-width:780px;margin:0 auto;padding:36px 24px 60px}
+.chapter{display:none}.chapter.visible{display:block}
+
+/* ═══ COVER ═══ */
+.cover-rule{height:4px;background:var(--ink);margin-bottom:20px}
+.cover-title{font-family:var(--display);font-size:72px;line-height:.88;letter-spacing:.02em;color:var(--ink);margin-bottom:6px}
+.cover-title span{color:var(--accent)}
+.cover-vol{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px}
+.cover-sub{font-size:15px;font-style:italic;font-weight:300;color:var(--ink2);border-left:4px solid var(--accent);padding-left:16px;max-width:500px;line-height:1.55;margin-bottom:24px}
+
+.cover-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:20px}
+.cs{background:var(--paper);padding:12px 13px}
+.cs-n{font-family:var(--display);font-size:28px;color:var(--accent);line-height:1;margin-bottom:2px}
+.cs-l{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+
+.cover-dark{background:var(--ink);color:var(--paper);padding:20px 24px;margin-bottom:20px}
+.cover-dark-label{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px}
+.cover-dark p{font-size:13px;color:#d4d0c8;line-height:1.75;margin-bottom:8px}
+.cover-dark p:last-child{margin-bottom:0}
+.cover-dark strong{color:var(--paper)}
+
+/* ═══ INTRODUCTION ═══ */
+.intro-section{margin-bottom:28px}
+.section-eyebrow{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.section-title{font-family:var(--display);font-size:32px;letter-spacing:.04em;color:var(--ink);padding-bottom:8px;border-bottom:1px solid var(--ink4);margin-bottom:14px}
+.prose{font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:12px;max-width:620px}
+.prose strong{color:var(--ink);font-weight:600}
+.pullquote{border-left:4px solid var(--accent);padding:10px 16px;margin:14px 0;background:var(--paper)}
+.pullquote p{font-size:14px;font-style:italic;color:var(--ink);line-height:1.55}
+.pullquote cite{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-top:4px;display:block}
+
+/* HOW TO USE */
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:14px 0}
+.how-cell{background:var(--paper);padding:13px 14px}
+.how-label{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.how-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.how-desc{font-size:11px;color:var(--ink2);line-height:1.55}
+
+/* CIRCADIAN STRIP */
+.circ-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:16px 0}
+.circ-cell{background:var(--paper);padding:10px 8px;text-align:center}
+.circ-time{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--accent);margin-bottom:3px}
+.circ-name{font-family:var(--display);font-size:14px;letter-spacing:.04em;color:var(--ink);margin-bottom:3px}
+.circ-desc{font-size:9px;color:var(--ink3);line-height:1.4}
+
+/* ═══ WEEKLY SPREAD ═══ */
+.week-header{background:var(--ink);padding:14px 18px;margin-bottom:1px;display:flex;align-items:baseline;justify-content:space-between}
+.week-num{font-family:var(--display);font-size:42px;letter-spacing:.02em;color:var(--paper);line-height:1}
+.week-phase{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2)}
+.week-focus{font-size:13px;font-style:italic;color:var(--ink4);max-width:380px;line-height:1.4}
+
+.week-intention{background:var(--paper);border:1px solid var(--ink4);padding:14px 16px;margin-bottom:1px}
+.wi-label{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.wi-prompt{font-size:13px;font-style:italic;color:var(--ink2);margin-bottom:8px;line-height:1.5}
+.write-line{border-bottom:1px solid var(--ink4);height:22px;margin-bottom:4px}
+.write-area{border:1px solid var(--ink4);min-height:52px;background:var(--paper);padding:6px 8px;font-family:var(--body);font-size:12px;color:var(--ink);line-height:1.6;width:100%;resize:vertical;outline:none}
+.write-area:focus{border-color:var(--accent)}
+
+/* DAY CARD */
+.day-card{background:var(--paper);border:1px solid var(--ink4);margin-bottom:1px;overflow:hidden}
+.day-header{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--ink4);cursor:pointer;transition:background .12s}
+.day-header:hover{background:var(--paper2)}
+.day-num{font-family:var(--display);font-size:28px;color:var(--accent);line-height:1;min-width:36px}
+.day-name{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.day-date-line{font-size:11px;color:var(--ink4);font-style:italic}
+.day-toggle{font-family:var(--mono);font-size:10px;color:var(--ink4);transition:transform .2s}
+.day-toggle.open{transform:rotate(180deg)}
+.day-body{display:none;padding:0}
+.day-body.open{display:block}
+
+/* SECTIONS WITHIN DAY */
+.ds{border-bottom:1px solid var(--paper3)}
+.ds:last-child{border-bottom:none}
+.ds-head{display:grid;grid-template-columns:3px 1fr;background:var(--paper)}
+.ds-bar{width:3px}
+.ds-head-body{padding:8px 12px}
+.ds-eyebrow{font-family:var(--mono);font-size:7px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px}
+.ds-title{font-family:var(--display);font-size:17px;letter-spacing:.03em;color:var(--ink)}
+.ds-body{padding:10px 12px;background:var(--paper)}
+
+/* MORNING SECTION */
+.iea-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:10px}
+.iea-cell{background:var(--paper2);padding:8px 10px}
+.iea-word{font-family:var(--display);font-size:14px;letter-spacing:.04em;color:var(--ink);margin-bottom:3px}
+.iea-prompt{font-size:9px;color:var(--ink3);font-style:italic;line-height:1.4;margin-bottom:5px}
+
+/* FOOD LOG */
+.food-log{margin-bottom:8px}
+.food-time-row{display:grid;grid-template-columns:60px 1fr 80px;gap:6px;align-items:center;margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid var(--paper3)}
+.food-time-row:last-child{border-bottom:none}
+.ft-time{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--ink3)}
+.ft-food{font-family:var(--body);font-size:11px;color:var(--ink);border-bottom:1px solid var(--ink4);padding-bottom:2px;min-height:18px}
+.ft-energy{display:flex;gap:2px}
+.energy-dot{width:10px;height:10px;border-radius:50%;border:1px solid var(--ink4);cursor:pointer;transition:background .1s}
+.energy-dot.filled{background:var(--amber)}
+
+/* MOVEMENT LOG */
+.move-log{display:grid;grid-template-columns:1fr auto auto;gap:6px;align-items:center;margin-bottom:5px;font-size:11px;padding-bottom:5px;border-bottom:1px solid var(--paper3)}
+.move-log:last-child{border-bottom:none}
+.move-name{color:var(--ink);border-bottom:1px solid var(--ink4);padding-bottom:1px}
+.move-sets{font-family:var(--mono);font-size:8px;color:var(--ink3);white-space:nowrap}
+.move-check{width:14px;height:14px;border:1px solid var(--ink4);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--green);transition:all .1s}
+.move-check.done{background:var(--green2);border-color:var(--green)}
+
+/* MOOD / ENERGY SCALE */
+.scale-row{display:flex;gap:4px;align-items:center;margin-bottom:6px}
+.scale-label{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);width:60px;flex-shrink:0}
+.scale-btns{display:flex;gap:2px}
+.scale-pip{width:22px;height:22px;border:1px solid var(--ink4);font-family:var(--mono);font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink3);transition:all .12s;background:var(--paper2)}
+.scale-pip:hover{border-color:var(--ink2);color:var(--ink)}
+.scale-pip.sel-mood{background:var(--purple);border-color:var(--purple);color:white}
+.scale-pip.sel-energy{background:var(--amber);border-color:var(--amber);color:white}
+.scale-pip.sel-body{background:var(--green);border-color:var(--green);color:white}
+.scale-ends{display:flex;justify-content:space-between;font-family:var(--mono);font-size:7px;color:var(--ink4);margin-bottom:8px;padding:0 1px}
+
+/* EVENING */
+.reflect-q{font-size:11px;color:var(--ink2);font-style:italic;margin-bottom:5px;line-height:1.45}
+.reflect-label{font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px;margin-top:8px}
+
+/* WEEK REVIEW */
+.week-review{background:var(--paper);border:1px solid var(--ink4);margin-bottom:1px}
+.wr-head{background:var(--paper2);padding:11px 14px;border-bottom:1px solid var(--ink4);display:flex;justify-content:space-between;align-items:center}
+.wr-title{font-family:var(--display);font-size:22px;letter-spacing:.04em;color:var(--ink)}
+.wr-sub{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.wr-body{padding:14px}
+.wr-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.wr-cell{border:1px solid var(--ink4);padding:10px 12px}
+.wr-cell-label{font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.wr-cell-q{font-size:11px;font-style:italic;color:var(--ink2);margin-bottom:6px;line-height:1.45}
+
+/* PHASE OPENER */
+.phase-opener{background:var(--ink);padding:24px;margin-bottom:2px}
+.po-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}
+.po-title{font-family:var(--display);font-size:48px;letter-spacing:.02em;color:var(--paper);line-height:.9;margin-bottom:12px}
+.po-title span{color:var(--accent2)}
+.po-desc{font-size:13px;color:#d4d0c8;line-height:1.7;max-width:560px;margin-bottom:14px}
+.po-weeks{font-family:var(--mono);font-size:9px;color:var(--ink3);letter-spacing:.06em}
+.po-intention{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:12px 14px;margin-top:14px}
+.po-int-label{font-family:var(--mono);font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px}
+.po-int-q{font-size:12px;font-style:italic;color:#d4d0c8;margin-bottom:8px;line-height:1.5}
+
+/* FOOTER */
+.pg-foot{border-top:1px solid var(--ink4);padding-top:10px;margin-top:24px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--ink4)}
+
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .nav{display:none}
+  .chapter{display:block!important}
+  .day-body{display:block!important}
+  .day-toggle{display:none}
+  .day-header{cursor:default}
+  .write-area{border:1px solid #c4bfb4;min-height:60px;resize:none}
+  .scale-pip{border:1px solid #c4bfb4}
+  .energy-dot{border:1px solid #c4bfb4}
+  .day-card{page-break-inside:avoid;break-inside:avoid}
+  .week-review{page-break-inside:avoid;break-inside:avoid}
+  .phase-opener{page-break-after:always;break-after:always}
+  @page{margin:10mm;size:A5 portrait}
+  body{font-size:11px;background:white}
+  .page{padding:10px}
+}
+@media(max-width:600px){
+  .how-grid,.wr-grid{grid-template-columns:1fr}
+  .iea-row{grid-template-columns:1fr}
+  .cover-stats{grid-template-columns:1fr 1fr}
+  .circ-strip{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">BEING <span>HAware</span></div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="setTab('cover',this)">Cover</button>
+    <button class="tab-btn" onclick="setTab('intro',this)">Introduction</button>
+    <button class="tab-btn" onclick="setTab('phase1',this)">Foundation · Wks 1–4</button>
+    <button class="tab-btn" onclick="setTab('phase2',this)">Load · Wks 5–8</button>
+    <button class="tab-btn" onclick="setTab('phase3',this)">Forge · Wks 9–13</button>
+    <button class="tab-btn" onclick="setTab('review',this)">90-Day Review</button>
+  </div>
+  <div class="nav-right">
+    <a class="nav-btn" href="../index.html" style="text-decoration:none;display:inline-block">🏠 Home</a>
+    <a class="nav-btn" href="../programme/foundation-level.html" style="text-decoration:none;display:inline-block">Foundation Level</a>
+    <button class="nav-btn go" onclick="smartPrint()">Print / PDF</button>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ═══ COVER ═══ -->
+<div class="chapter visible" id="ch-cover">
+  <div class="cover-rule"></div>
+  <div class="cover-vol">Being HAware · Foundation Level · Volume One</div>
+  <div class="cover-title">THE<br>90-DAY<br><span>JOURNAL</span></div>
+  <p class="cover-sub">Memory is unreliable and malleable — often without our knowing it. This journal is the honest record that memory cannot be trusted to keep. Write it down. Everything counts.</p>
+
+  <div class="cover-stats">
+    <div class="cs"><div class="cs-n">90</div><div class="cs-l">Days of record</div></div>
+    <div class="cs"><div class="cs-n">5</div><div class="cs-l">Sections per day</div></div>
+    <div class="cs"><div class="cs-n">3</div><div class="cs-l">Programme phases</div></div>
+    <div class="cs"><div class="cs-n">1</div><div class="cs-l">Honest record</div></div>
+  </div>
+
+  <div class="cover-dark">
+    <div class="cover-dark-label">Before you begin</div>
+    <p>This journal is structured around the natural rhythm of the day — not because routine is the point, but because the body operates on a 24-hour biological clock that does not care about your schedule. <strong>When you eat, move, rest, and reflect matters as much as what you do.</strong> The five sections of each day follow that rhythm.</p>
+    <p>Write honestly. Especially on the bad days. A journal that only captures the good days is a fiction — and a fiction is precisely what memory alone would have given you. The bad days, written down, become the most useful data in the entire document.</p>
+    <p>There are no wrong entries. There is only the record. <strong>If You Bite It — Write It. If You Did It — Note It. If You Felt It — Say So.</strong></p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink4);border:1px solid var(--ink4)">
+    <div style="background:var(--paper);padding:14px">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px">The five daily sections</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.7">
+        <strong style="color:var(--ink)">Dawn — Morning Intention</strong><br>Set the IEA for the day before anything else.<br><br>
+        <strong style="color:var(--ink)">Morning — Movement</strong><br>Log the session. Note what happened.<br><br>
+        <strong style="color:var(--ink)">Midday — Nourishment</strong><br>If You Bite It Write It. Food, time, energy response.<br><br>
+        <strong style="color:var(--ink)">Afternoon — Body Check</strong><br>Mood, energy, body signals. The honest mid-point.<br><br>
+        <strong style="color:var(--ink)">Evening — Reflection</strong><br>The day reviewed. What was learned. What tomorrow needs.
+      </div>
+    </div>
+    <div style="background:var(--paper);padding:14px">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px">The three phases</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.7">
+        <strong style="color:var(--ink)">Foundation · Weeks 1–4</strong><br>Building the habit. Learning the movements. Discovering where the body actually is, rather than where you thought it was.<br><br>
+        <strong style="color:var(--ink)">Load · Weeks 5–8</strong><br>Increasing the demand. The adaptation is beginning. Progress is visible if you are looking for it.<br><br>
+        <strong style="color:var(--ink)">Forge · Weeks 9–13</strong><br>The programme earns its name here. The body has adapted. The mind has changed. The journal shows you both.
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;padding:12px 14px;border:1px solid var(--ink4);background:var(--paper)">
+    <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Name this journal</div>
+    <div style="font-size:12px;color:var(--ink2);margin-bottom:8px">Write your name, your start date, and the one honest reason you are beginning.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-bottom:4px">NAME</div><div class="write-line"></div></div>
+      <div><div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-bottom:4px">START DATE — DAY ONE</div><div class="write-line"></div></div>
+    </div>
+    <div style="margin-top:8px"><div style="font-family:var(--mono);font-size:8px;color:var(--ink4);margin-bottom:4px">THE ONE HONEST REASON I AM BEGINNING</div><div class="write-line"></div><div class="write-line"></div></div>
+  </div>
+
+  <div class="pg-foot"><span>Being HAware — The 90-Day Journal · Foundation Level</span><span>Health Awareness Is The Way</span></div>
+</div>
+
+<!-- ═══ INTRODUCTION ═══ -->
+<div class="chapter" id="ch-intro">
+
+  <div class="intro-section">
+    <div class="section-eyebrow">Introduction</div>
+    <div class="section-title">WHY A JOURNAL AT ALL</div>
+    <p class="prose">Memory is not a recording device. It is a reconstruction — built freshly each time you reach for it, shaped by your current mood, your current beliefs, and what you have experienced since the original event. This is not a flaw. For most of human history, the malleability of memory was an advantage — it allowed us to update our model of the world as circumstances changed. But it is a significant liability when what you need is an accurate account of what you actually ate on Wednesday, how you actually felt in week three, and whether the progress you are experiencing now is real or imagined.</p>
+    <p class="prose">Put plainly: this book exists so you don't have to remember what happened last Tuesday. Nobody can hold ninety days of eating, training, sleeping and feeling in their head with any accuracy — and pretending otherwise is how progress quietly goes unnoticed and setbacks quietly go unexplained. A journal isn't extra homework bolted onto the programme. It's the part of the programme that makes the rest of it accountable to something more honest than your own recollection.</p>
+    <p class="prose">Ask someone at the end of a 90-day programme how their first two weeks went. They will tell you through the lens of where they are now. If they succeeded, the early weeks feel manageable in retrospect. If they struggled, the early weeks feel harder than they were. <strong>Neither version is accurate. Only the journal knows.</strong></p>
+    <p class="prose">The journal is also the tool that closes the gap between Intention and Attention — the first and third words of the Being HAware framework. Intention is set in the morning. Attention is what actually happened. The evening reflection is where you compare the two honestly and decide what tomorrow requires.</p>
+    <p class="prose" style="font-size:12px;color:var(--ink3);font-style:italic">New here, or lost your place? <a href="../programme/foundation-level.html" style="color:var(--accent)">Return to Foundation Level</a> for the full 90-day programme this journal accompanies.</p>
+  </div>
+
+  <div class="pullquote">
+    <p>"The bad days, written down, become the most useful data in the entire document. They show you exactly where the body and the mind resist — and resistance, named clearly, is resistance half-dissolved."</p>
+    <cite>Being HAware — The 90-Day Journal</cite>
+  </div>
+
+  <div class="intro-section">
+    <div class="section-eyebrow">The Circadian Structure</div>
+    <div class="section-title">WHY FIVE SECTIONS, AND WHY THESE FIVE</div>
+    <p class="prose">Each day in this journal follows the body's own rhythm rather than the clock on the wall. The five sections correspond to the five natural phases of the biological day — the windows in which specific systems are most active, most receptive, and most in need of attention.</p>
+
+    <div class="circ-strip">
+      <div class="circ-cell">
+        <div class="circ-time">Dawn · 5–8am</div>
+        <div class="circ-name">INTENTION</div>
+        <div class="circ-desc">Cortisol peaks. The mind is sharpest for decision-making. Set the IEA before the day sets it for you.</div>
+      </div>
+      <div class="circ-cell">
+        <div class="circ-time">Morning · 8–12</div>
+        <div class="circ-name">MOVEMENT</div>
+        <div class="circ-desc">Body temperature and muscular output peak. The optimal window for the training session and the session log.</div>
+      </div>
+      <div class="circ-cell">
+        <div class="circ-time">Midday · 12–3pm</div>
+        <div class="circ-name">NOURISHMENT</div>
+        <div class="circ-desc">Digestive capacity is highest. The primary meal window. If You Bite It — Write It.</div>
+      </div>
+      <div class="circ-cell">
+        <div class="circ-time">Afternoon · 3–6pm</div>
+        <div class="circ-name">BODY CHECK</div>
+        <div class="circ-desc">The honest mid-point. Energy, mood, body signals. Note what the day has produced so far.</div>
+      </div>
+      <div class="circ-cell">
+        <div class="circ-time">Evening · 8–10pm</div>
+        <div class="circ-name">REFLECTION</div>
+        <div class="circ-desc">Before screens dim and sleep approaches. The day reviewed. The record completed. Tomorrow considered.</div>
+      </div>
+    </div>
+
+    <p class="prose">These windows are guidelines, not rules. Life does not conform to a biological ideal. Write in the section that fits the moment — the sections are labelled by rhythm, not by the hour. What matters is that all five are completed before you sleep.</p>
+  </div>
+
+  <div class="intro-section">
+    <div class="section-eyebrow">How to Use This Journal</div>
+    <div class="section-title">THE ONLY RULES</div>
+    <div class="how-grid">
+      <div class="how-cell">
+        <div class="how-label">Write every day</div>
+        <div class="how-title">Including the missed sessions</div>
+        <div class="how-desc">A missed session recorded honestly — with the reason — is more valuable than a skipped page. The pattern of absences is data. Do not hide it from yourself.</div>
+      </div>
+      <div class="how-cell">
+        <div class="how-label">Write honestly</div>
+        <div class="how-title">Especially about the food</div>
+        <div class="how-desc">If You Bite It Write It means all of it. The programme is not a judge. The journal is not a confession. It is a record. An incomplete record is simply less useful than a complete one.</div>
+      </div>
+      <div class="how-cell">
+        <div class="how-label">Review weekly</div>
+        <div class="how-title">The pattern is invisible day by day</div>
+        <div class="how-desc">Each week ends with a review page. Resist the urge to skip it. The single daily entry rarely reveals anything. Seven days together begin to show the pattern. Thirteen weeks together show the transformation.</div>
+      </div>
+      <div class="how-cell">
+        <div class="how-label">Trust the process</div>
+        <div class="how-title">Week three will be the hardest</div>
+        <div class="how-desc">It always is. The novelty has worn off and the adaptation has not yet arrived. Write through it. The journal will show you, at week thirteen, exactly what week three felt like — and how far you have come from it.</div>
+      </div>
+      <div class="how-cell">
+        <div class="how-label">Use the energy dots</div>
+        <div class="how-title">Food and energy are connected</div>
+        <div class="how-desc">After each meal, fill in the energy dots for the two hours that follow. Over weeks, the pattern of which foods produce which energy states becomes unmistakeable. This is more useful than any calorie count.</div>
+      </div>
+      <div class="how-cell">
+        <div class="how-label">No wrong entries</div>
+        <div class="how-title">The journal has no opinion</div>
+        <div class="how-desc">"Ate badly, skipped training, felt terrible" is a valid and useful entry. It is the truth of that day. Write it. Learn from it. Move on. Perfection is not the goal. Honest consistency is.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <p>"Intention without record is hope. Record without reflection is data. Intention, record, and reflection together — that is the practice."</p>
+    <cite>Being HAware — Foundation Level</cite>
+  </div>
+
+  <div class="pg-foot"><span>Being HAware — The 90-Day Journal · Introduction</span><span>Write it down. Everything counts.</span></div>
+</div>
+
+<!-- ═══ PHASE 1: FOUNDATION ═══ -->
+<div class="chapter" id="ch-phase1">
+
+  <div class="phase-opener">
+    <div class="po-eyebrow">Weeks 1–4 · Days 1–28</div>
+    <div class="po-title">FOUNDATION<br><span>PHASE</span></div>
+    <p class="po-desc">This is where the habit is built. Not the programme — the habit of doing the programme. The body in week one is not the body in week four. It is learning. It is adapting. It is finding movements that seem impossible and making them merely difficult. Your job in these four weeks is to show up and write it down. The results will follow. They always do.</p>
+    <div class="po-weeks">Week 1 · Week 2 · Week 3 (deload) · Week 4</div>
+    <div class="po-intention">
+      <div class="po-int-label">Phase Intention — set this before Day 1</div>
+      <div class="po-int-q">What does completing this phase honestly mean to you — not what it should mean, but what it actually means?</div>
+      <div class="write-line" style="border-color:rgba(255,255,255,.2)"></div>
+      <div class="write-line" style="border-color:rgba(255,255,255,.2)"></div>
+      <div class="write-line" style="border-color:rgba(255,255,255,.2)"></div>
+    </div>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="week-header">
+    <div>
+      <div class="week-num">WK 1</div>
+      <div class="week-phase">Foundation Phase · Days 1–7</div>
+    </div>
+    <div class="week-focus">The first week reveals where you actually are. Not where you thought you were. Begin without judgement.</div>
+  </div>
+
+  <div class="week-intention">
+    <div class="wi-label">Week Intention — complete before Day 1</div>
+    <div class="wi-prompt">What is the one specific thing you will do differently this week compared to any previous attempt?</div>
+    <textarea class="write-area" rows="2" placeholder="Write here..."></textarea>
+  </div>
+
+  <!-- SAMPLE DAY — DAY 1 (expanded to show full structure) -->
+  <div class="day-card">
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">01</div>
+      <div>
+        <div class="day-name">Day One · Foundation Phase</div>
+        <div class="day-date-line">Date: ___________________</div>
+      </div>
+      <div class="day-toggle">▼</div>
+    </div>
+    <div class="day-body open">
+
+      <!-- DAWN: MORNING INTENTION -->
+      <div class="ds">
+        <div class="ds-head">
+          <div class="ds-bar" style="background:#9a6c10"></div>
+          <div class="ds-head-body">
+            <div class="ds-eyebrow" style="color:#9a6c10">Dawn · Morning Intention</div>
+            <div class="ds-title">SET THE DAY</div>
+          </div>
+        </div>
+        <div class="ds-body">
+          <div class="iea-row">
+            <div class="iea-cell">
+              <div class="iea-word">INTENTION</div>
+              <div class="iea-prompt">What specifically am I choosing to do today?</div>
+              <textarea class="write-area" rows="2" placeholder="Today I intend to..."></textarea>
+            </div>
+            <div class="iea-cell">
+              <div class="iea-word">EXPECTATION</div>
+              <div class="iea-prompt">What do I honestly expect today to feel like?</div>
+              <textarea class="write-area" rows="2" placeholder="I expect today will..."></textarea>
+            </div>
+            <div class="iea-cell">
+              <div class="iea-word">ATTENTION</div>
+              <div class="iea-prompt">Where will I direct my full attention today?</div>
+              <textarea class="write-area" rows="2" placeholder="My attention goes to..."></textarea>
+            </div>
+          </div>
+          <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Morning energy on waking (1–5)</div>
+          <div class="scale-row">
+            <div class="scale-label">Energy</div>
+            <div class="scale-btns" id="morning-energy-1">
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','morning-energy-1')">1</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','morning-energy-1')">2</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','morning-energy-1')">3</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','morning-energy-1')">4</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','morning-energy-1')">5</div>
+            </div>
+          </div>
+          <div style="font-family:var(--mono);font-size:7px;letter-spacing:.08em;color:var(--ink4);display:flex;justify-content:space-between;width:118px;margin-left:64px;margin-bottom:8px"><span>Low</span><span>High</span></div>
+          <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Sleep quality last night</div>
+          <div class="scale-row">
+            <div class="scale-label">Sleep</div>
+            <div class="scale-btns" id="sleep-1">
+              <div class="scale-pip" onclick="setPip(this,'sel-body','sleep-1')">1</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','sleep-1')">2</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','sleep-1')">3</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','sleep-1')">4</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','sleep-1')">5</div>
+            </div>
+          </div>
+          <div style="font-family:var(--mono);font-size:7px;letter-spacing:.08em;color:var(--ink4);display:flex;justify-content:space-between;width:118px;margin-left:64px;margin-bottom:4px"><span>Poor</span><span>Excellent</span></div>
+        </div>
+      </div>
+
+      <!-- MORNING: MOVEMENT -->
+      <div class="ds">
+        <div class="ds-head">
+          <div class="ds-bar" style="background:#c4501a"></div>
+          <div class="ds-head-body">
+            <div class="ds-eyebrow" style="color:#c4501a">Morning · Movement</div>
+            <div class="ds-title">THE SESSION</div>
+          </div>
+        </div>
+        <div class="ds-body">
+          <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px">Session completed · tick each exercise as done</div>
+          <div class="move-log">
+            <div class="move-name" style="font-size:10px;color:var(--ink3);font-style:italic">Write today's prescribed exercises here</div>
+            <div class="move-sets"></div>
+            <div class="move-check"></div>
+          </div>
+          <div class="move-log">
+            <div class="move-name"></div>
+            <div class="move-sets"></div>
+            <div class="move-check" onclick="this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓':''"></div>
+          </div>
+          <div class="move-log">
+            <div class="move-name"></div>
+            <div class="move-sets"></div>
+            <div class="move-check" onclick="this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓':''"></div>
+          </div>
+          <div class="move-log">
+            <div class="move-name"></div>
+            <div class="move-sets"></div>
+            <div class="move-check" onclick="this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓':''"></div>
+          </div>
+          <div class="move-log">
+            <div class="move-name"></div>
+            <div class="move-sets"></div>
+            <div class="move-check" onclick="this.classList.toggle('done');this.textContent=this.classList.contains('done')?'✓':''"></div>
+          </div>
+          <div style="margin-top:8px">
+            <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Session notes — how it felt, what was hard, what surprised you</div>
+            <textarea class="write-area" rows="2" placeholder="Today's session..."></textarea>
+          </div>
+          <div style="margin-top:8px">
+            <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Session completed?</div>
+            <div style="display:flex;gap:6px">
+              <div style="font-family:var(--mono);font-size:9px;padding:4px 10px;border:1px solid var(--green);color:var(--green);cursor:pointer">✓ Full session</div>
+              <div style="font-family:var(--mono);font-size:9px;padding:4px 10px;border:1px solid var(--amber);color:var(--amber);cursor:pointer">~ Partial</div>
+              <div style="font-family:var(--mono);font-size:9px;padding:4px 10px;border:1px solid var(--folly,#7a1a1a);color:#7a1a1a;cursor:pointer">✕ Missed</div>
+            </div>
+          </div>
+          <div style="margin-top:8px">
+            <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">If missed or partial — the honest reason</div>
+            <textarea class="write-area" rows="1" placeholder="(leave blank if full session completed)"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDAY: NOURISHMENT -->
+      <div class="ds">
+        <div class="ds-head">
+          <div class="ds-bar" style="background:#9a6c10"></div>
+          <div class="ds-head-body">
+            <div class="ds-eyebrow" style="color:#9a6c10">Midday · Nourishment</div>
+            <div class="ds-title">IF YOU BITE IT WRITE IT</div>
+          </div>
+        </div>
+        <div class="ds-body">
+          <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px">Food log · time · what you ate · energy in the 2hrs after (fill dots)</div>
+          <div style="display:grid;grid-template-columns:60px 1fr 90px;gap:6px;margin-bottom:4px">
+            <div style="font-family:var(--mono);font-size:7px;letter-spacing:.06em;color:var(--ink4)">TIME</div>
+            <div style="font-family:var(--mono);font-size:7px;letter-spacing:.06em;color:var(--ink4)">WHAT I ATE / DRANK</div>
+            <div style="font-family:var(--mono);font-size:7px;letter-spacing:.06em;color:var(--ink4)">ENERGY AFTER</div>
+          </div>
+          <div class="food-log" id="food-log-day1">
+            <div class="food-time-row">
+              <div><input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--mono);font-size:9px;width:56px;outline:none;color:var(--ink)" placeholder="__:__"></div>
+              <div><input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--body);font-size:11px;width:100%;outline:none;color:var(--ink)" placeholder=""></div>
+              <div class="ft-energy" id="fe-1a">
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1a')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1a')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1a')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1a')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1a')"></div>
+              </div>
+            </div>
+            <div class="food-time-row">
+              <div><input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--mono);font-size:9px;width:56px;outline:none;color:var(--ink)" placeholder="__:__"></div>
+              <div><input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--body);font-size:11px;width:100%;outline:none;color:var(--ink)" placeholder=""></div>
+              <div class="ft-energy" id="fe-1b">
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1b')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1b')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1b')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1b')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1b')"></div>
+              </div>
+            </div>
+            <div class="food-time-row">
+              <div><input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--mono);font-size:9px;width:56px;outline:none;color:var(--ink)" placeholder="__:__"></div>
+              <div><input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--body);font-size:11px;width:100%;outline:none;color:var(--ink)" placeholder=""></div>
+              <div class="ft-energy" id="fe-1c">
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1c')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1c')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1c')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1c')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1c')"></div>
+              </div>
+            </div>
+            <div class="food-time-row">
+              <div><input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--mono);font-size:9px;width:56px;outline:none;color:var(--ink)" placeholder="__:__"></div>
+              <div><input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--body);font-size:11px;width:100%;outline:none;color:var(--ink)" placeholder=""></div>
+              <div class="ft-energy" id="fe-1d">
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1d')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1d')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1d')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1d')"></div>
+                <div class="energy-dot" onclick="fillEnergy(this,'fe-1d')"></div>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:var(--mono);font-size:7px;letter-spacing:.06em;color:var(--ink4);display:flex;justify-content:flex-end;gap:4px;margin-bottom:8px;padding-right:2px"><span>● = dots filled left to right = energy level after eating</span></div>
+          <div>
+            <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Water intake · glasses today</div>
+            <div style="display:flex;gap:4px">
+              <div class="scale-pip" style="width:26px;height:26px;border-radius:50%;font-size:10px" onclick="this.classList.toggle('sel-body')">1</div>
+              <div class="scale-pip" style="width:26px;height:26px;border-radius:50%;font-size:10px" onclick="this.classList.toggle('sel-body')">2</div>
+              <div class="scale-pip" style="width:26px;height:26px;border-radius:50%;font-size:10px" onclick="this.classList.toggle('sel-body')">3</div>
+              <div class="scale-pip" style="width:26px;height:26px;border-radius:50%;font-size:10px" onclick="this.classList.toggle('sel-body')">4</div>
+              <div class="scale-pip" style="width:26px;height:26px;border-radius:50%;font-size:10px" onclick="this.classList.toggle('sel-body')">5</div>
+              <div class="scale-pip" style="width:26px;height:26px;border-radius:50%;font-size:10px" onclick="this.classList.toggle('sel-body')">6</div>
+              <div class="scale-pip" style="width:26px;height:26px;border-radius:50%;font-size:10px" onclick="this.classList.toggle('sel-body')">7</div>
+              <div class="scale-pip" style="width:26px;height:26px;border-radius:50%;font-size:10px" onclick="this.classList.toggle('sel-body')">8</div>
+            </div>
+          </div>
+          <div style="margin-top:8px">
+            <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Food notes — anything worth recording about today's eating</div>
+            <textarea class="write-area" rows="1" placeholder="Observations about food, cravings, timing, how it felt..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- AFTERNOON: BODY CHECK -->
+      <div class="ds">
+        <div class="ds-head">
+          <div class="ds-bar" style="background:#6b5cb8"></div>
+          <div class="ds-head-body">
+            <div class="ds-eyebrow" style="color:#6b5cb8">Afternoon · Body Check</div>
+            <div class="ds-title">THE HONEST MID-POINT</div>
+          </div>
+        </div>
+        <div class="ds-body">
+          <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px">Rate each on a scale of 1–10 right now</div>
+          <div class="scale-row">
+            <div class="scale-label">Mood</div>
+            <div class="scale-btns" id="mood-1">
+              <div class="scale-pip" onclick="setPip(this,'sel-mood','mood-1')">1</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-mood','mood-1')">2</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-mood','mood-1')">3</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-mood','mood-1')">4</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-mood','mood-1')">5</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-mood','mood-1')">6</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-mood','mood-1')">7</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-mood','mood-1')">8</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-mood','mood-1')">9</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-mood','mood-1')">10</div>
+            </div>
+          </div>
+          <div class="scale-row">
+            <div class="scale-label">Energy</div>
+            <div class="scale-btns" id="energy-1">
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','energy-1')">1</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','energy-1')">2</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','energy-1')">3</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','energy-1')">4</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','energy-1')">5</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','energy-1')">6</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','energy-1')">7</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','energy-1')">8</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','energy-1')">9</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-energy','energy-1')">10</div>
+            </div>
+          </div>
+          <div class="scale-row">
+            <div class="scale-label">Body</div>
+            <div class="scale-btns" id="body-1">
+              <div class="scale-pip" onclick="setPip(this,'sel-body','body-1')">1</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','body-1')">2</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','body-1')">3</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','body-1')">4</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','body-1')">5</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','body-1')">6</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','body-1')">7</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','body-1')">8</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','body-1')">9</div>
+              <div class="scale-pip" onclick="setPip(this,'sel-body','body-1')">10</div>
+            </div>
+          </div>
+          <div class="scale-ends" style="margin-left:64px;width:226px">
+            <span>Low / poor / sore</span><span>High / full / strong</span>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Body signals — anything the body is telling you right now</div>
+            <textarea class="write-area" rows="2" placeholder="Soreness, tightness, energy dip, unexpected strength, anything notable..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENING: REFLECTION -->
+      <div class="ds">
+        <div class="ds-head">
+          <div class="ds-bar" style="background:#2d6a4f"></div>
+          <div class="ds-head-body">
+            <div class="ds-eyebrow" style="color:#2d6a4f">Evening · Reflection</div>
+            <div class="ds-title">THE DAY REVIEWED</div>
+          </div>
+        </div>
+        <div class="ds-body">
+          <div class="reflect-label">Did the day match the Intention set this morning?</div>
+          <div style="display:flex;gap:6px;margin-bottom:10px">
+            <div style="font-family:var(--mono);font-size:9px;padding:4px 12px;border:1px solid var(--green);color:var(--green);cursor:pointer">Yes</div>
+            <div style="font-family:var(--mono);font-size:9px;padding:4px 12px;border:1px solid var(--amber);color:var(--amber);cursor:pointer">Partly</div>
+            <div style="font-family:var(--mono);font-size:9px;padding:4px 12px;border:1px solid #7a1a1a;color:#7a1a1a;cursor:pointer">No</div>
+          </div>
+
+          <div class="reflect-label">The one thing that went well today</div>
+          <textarea class="write-area" rows="1" placeholder=""></textarea>
+
+          <div class="reflect-label" style="margin-top:8px">The one thing that didn't — and what it tells me</div>
+          <textarea class="write-area" rows="1" placeholder=""></textarea>
+
+          <div class="reflect-label" style="margin-top:8px">Where did my Attention actually go today — honestly?</div>
+          <textarea class="write-area" rows="2" placeholder=""></textarea>
+
+          <div class="reflect-label" style="margin-top:8px">Tomorrow's single most important action</div>
+          <textarea class="write-area" rows="1" placeholder=""></textarea>
+
+          <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+            <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)">Planned sleep time</div>
+            <input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--mono);font-size:10px;width:80px;outline:none;color:var(--ink);text-align:center" placeholder="__:__pm">
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end day-body -->
+  </div><!-- end day 1 -->
+
+  <!-- REMAINING DAYS 2-7 (collapsed templates) -->
+  <div id="days-2-7"></div>
+
+  <!-- WEEK 1 REVIEW -->
+  <div class="week-review">
+    <div class="wr-head">
+      <div class="wr-title">WEEK 1 REVIEW</div>
+      <div class="wr-sub">Complete on Day 7 evening</div>
+    </div>
+    <div class="wr-body">
+      <div class="wr-grid">
+        <div class="wr-cell">
+          <div class="wr-cell-label">Sessions completed</div>
+          <div class="wr-cell-q">How many of the 5 prescribed sessions did you complete?</div>
+          <div style="display:flex;gap:5px">
+            <div class="scale-pip" style="width:28px;height:28px" onclick="this.classList.toggle('sel-body')">0</div>
+            <div class="scale-pip" style="width:28px;height:28px" onclick="this.classList.toggle('sel-body')">1</div>
+            <div class="scale-pip" style="width:28px;height:28px" onclick="this.classList.toggle('sel-body')">2</div>
+            <div class="scale-pip" style="width:28px;height:28px" onclick="this.classList.toggle('sel-body')">3</div>
+            <div class="scale-pip" style="width:28px;height:28px" onclick="this.classList.toggle('sel-body')">4</div>
+            <div class="scale-pip" style="width:28px;height:28px" onclick="this.classList.toggle('sel-body')">5</div>
+          </div>
+        </div>
+        <div class="wr-cell">
+          <div class="wr-cell-label">Week average — mood</div>
+          <div class="wr-cell-q">Looking back, what was the overall mood of this week?</div>
+          <div style="display:flex;gap:3px">
+            <div class="scale-pip" onclick="this.classList.toggle('sel-mood')">1</div>
+            <div class="scale-pip" onclick="this.classList.toggle('sel-mood')">2</div>
+            <div class="scale-pip" onclick="this.classList.toggle('sel-mood')">3</div>
+            <div class="scale-pip" onclick="this.classList.toggle('sel-mood')">4</div>
+            <div class="scale-pip" onclick="this.classList.toggle('sel-mood')">5</div>
+            <div class="scale-pip" onclick="this.classList.toggle('sel-mood')">6</div>
+            <div class="scale-pip" onclick="this.classList.toggle('sel-mood')">7</div>
+            <div class="scale-pip" onclick="this.classList.toggle('sel-mood')">8</div>
+            <div class="scale-pip" onclick="this.classList.toggle('sel-mood')">9</div>
+            <div class="scale-pip" onclick="this.classList.toggle('sel-mood')">10</div>
+          </div>
+        </div>
+        <div class="wr-cell">
+          <div class="wr-cell-label">Food patterns noticed</div>
+          <div class="wr-cell-q">What pattern in your eating this week was most significant?</div>
+          <textarea class="write-area" rows="2" placeholder=""></textarea>
+        </div>
+        <div class="wr-cell">
+          <div class="wr-cell-label">Hardest moment</div>
+          <div class="wr-cell-q">The moment this week that most challenged your Intention — what happened?</div>
+          <textarea class="write-area" rows="2" placeholder=""></textarea>
+        </div>
+        <div class="wr-cell">
+          <div class="wr-cell-label">Biggest surprise</div>
+          <div class="wr-cell-q">What did this week reveal that you did not expect?</div>
+          <textarea class="write-area" rows="2" placeholder=""></textarea>
+        </div>
+        <div class="wr-cell">
+          <div class="wr-cell-label">Week 2 intention</div>
+          <div class="wr-cell-q">What does week two need that week one lacked?</div>
+          <textarea class="write-area" rows="2" placeholder=""></textarea>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px">Week one — in your own words. This is the entry your week thirteen self will read.</div>
+        <textarea class="write-area" rows="4" placeholder="Write freely. This is the record that memory will not keep accurately..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--paper2);border:1px solid var(--ink4);padding:12px 14px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:2px">
+    Weeks 2, 3 (Deload), and 4 follow the same structure · navigate using the arrow buttons above
+  </div>
+
+  <div class="pg-foot"><span>Being HAware — The 90-Day Journal · Foundation Phase · Weeks 1–4</span><span>Show up. Write it down.</span></div>
+</div>
+
+<!-- ═══ PHASE 2: LOAD ═══ -->
+<div class="chapter" id="ch-phase2">
+  <div class="phase-opener">
+    <div class="po-eyebrow">Weeks 5–8 · Days 29–56</div>
+    <div class="po-title">LOAD<br><span>PHASE</span></div>
+    <p class="po-desc">You have four weeks of the programme in your body now. The adaptation has begun — though it may not yet be visible. The Load phase increases the demand precisely because the foundation can now bear more weight. The journal in this phase begins to show you patterns. Look for them. The food and energy data accumulated over the last four weeks is starting to tell a story. Read it.</p>
+    <div class="po-weeks">Week 5 · Week 6 · Week 7 · Week 8 (deload)</div>
+    <div class="po-intention">
+      <div class="po-int-label">Phase Intention — set before Day 29</div>
+      <div class="po-int-q">What is different about you now compared to Day 1 — and what does the Load phase need from you that the Foundation phase did not?</div>
+      <div class="write-line" style="border-color:rgba(255,255,255,.2)"></div>
+      <div class="write-line" style="border-color:rgba(255,255,255,.2)"></div>
+      <div class="write-line" style="border-color:rgba(255,255,255,.2)"></div>
+    </div>
+  </div>
+
+  <div style="background:var(--paper);border:1px solid var(--ink4);padding:16px;margin-bottom:2px">
+    <div style="font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:8px">Mid-programme check — before you begin Week 5</div>
+    <div style="font-size:13px;font-style:italic;color:var(--ink2);margin-bottom:10px;line-height:1.55">Go back to your Day 1 entry. Read what you wrote. Read the Week 1 review. Then answer these honestly.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">What has genuinely changed in 4 weeks?</div>
+        <textarea class="write-area" rows="3" placeholder="Physical, mental, habitual — anything real..."></textarea>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">What has not changed that you expected would?</div>
+        <textarea class="write-area" rows="3" placeholder="Honest assessment — no softening..."></textarea>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">The food pattern that most surprised you over 4 weeks</div>
+        <textarea class="write-area" rows="2" placeholder="What did the journal reveal that you didn't know?"></textarea>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Your Expectation going into the Load phase</div>
+        <textarea class="write-area" rows="2" placeholder="Set it here. Calibrate it against what you now know."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--paper2);border:1px solid var(--ink4);padding:12px 14px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)">
+    Days 29–56 follow the same daily structure as Phase 1 · the pattern is now familiar · trust it
+  </div>
+
+  <div class="pg-foot"><span>Being HAware — The 90-Day Journal · Load Phase · Weeks 5–8</span><span>The adaptation is real. The journal shows you where.</span></div>
+</div>
+
+<!-- ═══ PHASE 3: FORGE ═══ -->
+<div class="chapter" id="ch-phase3">
+  <div class="phase-opener">
+    <div class="po-eyebrow">Weeks 9–13 · Days 57–90</div>
+    <div class="po-title">FORGE<br><span>PHASE</span></div>
+    <p class="po-desc">The programme earns its name here. Forge does not mean destroy and rebuild — it means the heat and pressure applied over time have produced something that was not there before. The body has changed. The mind has changed more than it knows. The journal in this phase becomes a document of genuine transformation — not dramatic, not photographic, but real in every way that actually matters for a long and capable life.</p>
+    <div class="po-weeks">Week 9 · Week 10 · Week 11 · Week 12 (deload) · Week 13</div>
+    <div class="po-intention">
+      <div class="po-int-label">Phase Intention — set before Day 57</div>
+      <div class="po-int-q">You have eight weeks of evidence behind you. What does that evidence tell you about what you are actually capable of — and what does the Forge phase demand that you now bring?</div>
+      <div class="write-line" style="border-color:rgba(255,255,255,.2)"></div>
+      <div class="write-line" style="border-color:rgba(255,255,255,.2)"></div>
+      <div class="write-line" style="border-color:rgba(255,255,255,.2)"></div>
+    </div>
+  </div>
+
+  <div style="background:var(--paper);border:1px solid var(--ink4);padding:16px;margin-bottom:2px">
+    <div style="font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px">The final push — what the Forge phase asks</div>
+    <div style="font-size:13px;color:var(--ink2);line-height:1.7;max-width:580px">The Forge phase is where most programmes lose people — not because the work is too hard, but because the novelty is entirely gone and the next milestone (completion) still feels distant. The journal is your anchor here. On the days when the Intention is weak, read back through the evidence. Week one is recorded. Week four is recorded. Week eight is recorded. The person who wrote those entries is not the person reading them now. That distance is the proof that the programme is working. <strong>Write through the Forge phase. Every day. Even when — especially when — there is nothing dramatic to record.</strong></div>
+  </div>
+
+  <div style="background:var(--paper2);border:1px solid var(--ink4);padding:12px 14px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)">
+    Days 57–90 follow the same daily structure · the routine is now yours · it no longer belongs to the programme
+  </div>
+
+  <div class="pg-foot"><span>Being HAware — The 90-Day Journal · Forge Phase · Weeks 9–13</span><span>The routine is yours now. It always was.</span></div>
+</div>
+
+<!-- ═══ 90-DAY REVIEW ═══ -->
+<div class="chapter" id="ch-review">
+  <div class="cover-rule"></div>
+  <div class="section-eyebrow">Day 90 · The Complete Record</div>
+  <div class="section-title">THE 90-DAY REVIEW</div>
+
+  <p class="prose">You have 90 days of record in this journal. Before you read back through it — before you look at the food logs, the mood scales, the session completions, and the weekly entries — answer these questions from memory alone. Then compare your answers to what the journal actually shows. The difference between the two is one of the most revealing things this journal will ever produce.</p>
+
+  <div style="background:var(--paper);border:1px solid var(--ink4);padding:16px;margin-bottom:14px">
+    <div style="font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px">From memory only — answer before reading the journal</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">How many sessions do you think you completed in total?</div>
+        <div class="write-line"></div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">What was your lowest week — the hardest one?</div>
+        <div class="write-line"></div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">What did you eat most consistently over 90 days?</div>
+        <div class="write-line"></div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">What was your average mood score — your honest guess?</div>
+        <div class="write-line"></div>
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">What do you think was the turning point — the moment the programme became something you did rather than something you were trying to do?</div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <div style="font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:8px;margin-top:16px">Now read the journal. Then return here.</div>
+
+  <div style="background:var(--paper);border:1px solid var(--ink4);padding:16px;margin-bottom:14px">
+    <div style="font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:10px">After reading — what the journal actually shows</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Actual sessions completed</div>
+        <div class="write-line"></div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">What the journal says was the hardest week</div>
+        <div class="write-line"></div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">The food pattern the journal actually shows</div>
+        <textarea class="write-area" rows="2" placeholder="What did you actually eat — as the record shows, not as you remember..."></textarea>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">The gap between memory and record</div>
+        <textarea class="write-area" rows="2" placeholder="Where did memory differ from what the journal actually shows?"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--ink);color:var(--paper);padding:20px 22px;margin-bottom:14px">
+    <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px">The final entry — write freely</div>
+    <div style="font-size:13px;color:#d4d0c8;line-height:1.6;margin-bottom:12px">Who were you on Day 1. Who are you on Day 90. What the 90 days actually produced. What comes next. Write without editing. This entry is for you alone.</div>
+    <textarea style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--paper);padding:10px 12px;font-family:var(--body);font-size:13px;line-height:1.75;min-height:200px;resize:vertical;outline:none" placeholder="Write here — as much as you need..."></textarea>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:16px">
+    <div style="background:var(--paper);padding:14px">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px">What continues</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:8px">The habits that are now yours — that belong to the person, not the programme</div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+    <div style="background:var(--paper);padding:14px">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px">What comes next</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:8px">The next Intention — On-Purpose, with open eyes, understanding what it will cost</div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <p>"Nobody has time to change — yet inevitably everyone will. On purpose, or by accident. You chose On-Purpose. The journal is the proof."</p>
+    <cite>Being HAware — Foundation Level</cite>
+  </div>
+
+  <div style="border-top:4px solid var(--ink);padding-top:14px;margin-top:20px;display:flex;justify-content:space-between;align-items:baseline">
+    <div style="font-family:var(--display);font-size:28px;letter-spacing:.04em;color:var(--ink)">HEALTH AWARENESS IS THE WAY</div>
+    <div style="font-family:var(--mono);font-size:8px;color:var(--ink3)">Martin Lord Morley · beinghaware.github.io</div>
+  </div>
+</div>
+
+</div><!-- end .page -->
+
+<script>
+var tabs = ['cover','intro','phase1','phase2','phase3','review'];
+
+function smartPrint() {
+  // Expand all chapters
+  document.querySelectorAll('.chapter').forEach(function(c){ c.classList.add('visible'); });
+  // Expand all day bodies
+  document.querySelectorAll('.day-body').forEach(function(b){ b.classList.add('open'); });
+  // Rotate all toggles
+  document.querySelectorAll('.day-toggle').forEach(function(t){ t.classList.add('open'); });
+  // Generate days 2-7 if not yet rendered
+  setTimeout(function(){ window.print(); }, 400);
+}
+var currentTab = 'cover';
+
+function setTab(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  document.querySelectorAll('.chapter').forEach(function(c){ c.classList.toggle('visible', c.id === 'ch-'+id); });
+  currentTab = id;
+  window.scrollTo(0,0);
+}
+
+function toggleDay(header) {
+  var body = header.nextElementSibling;
+  var toggle = header.querySelector('.day-toggle');
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+
+function setPip(el, cls, groupId) {
+  var group = document.getElementById(groupId);
+  if (!group) return;
+  group.querySelectorAll('.scale-pip').forEach(function(p){ p.classList.remove(cls); });
+  el.classList.add(cls);
+}
+
+function fillEnergy(dot, groupId) {
+  var group = document.getElementById(groupId);
+  if (!group) return;
+  var dots = group.querySelectorAll('.energy-dot');
+  var idx = Array.from(dots).indexOf(dot);
+  dots.forEach(function(d, i){ d.classList.toggle('filled', i <= idx); });
+}
+
+/* Generate days 2-7 */
+var dayNames = ['','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+var container = document.getElementById('days-2-7');
+if (container) {
+  for (var d = 2; d <= 7; d++) {
+    var card = document.createElement('div');
+    card.className = 'day-card';
+    card.innerHTML =
+      '<div class="day-header" onclick="toggleDay(this)">'
+      + '<div class="day-num">0'+d+'</div>'
+      + '<div>'
+        + '<div class="day-name">Day '+d+' · Foundation Phase</div>'
+        + '<div class="day-date-line">Date: ___________________</div>'
+      + '</div>'
+      + '<div class="day-toggle">▼</div>'
+      + '</div>'
+      + '<div class="day-body">'
+
+      /* DAWN */
+      + '<div class="ds"><div class="ds-head"><div class="ds-bar" style="background:#9a6c10"></div><div class="ds-head-body"><div class="ds-eyebrow" style="color:#9a6c10">Dawn · Morning Intention</div><div class="ds-title">SET THE DAY</div></div></div>'
+      + '<div class="ds-body">'
+      + '<div class="iea-row">'
+      + '<div class="iea-cell"><div class="iea-word">INTENTION</div><div class="iea-prompt">What specifically am I choosing to do today?</div><textarea class="write-area" rows="2" placeholder="Today I intend to..."></textarea></div>'
+      + '<div class="iea-cell"><div class="iea-word">EXPECTATION</div><div class="iea-prompt">What do I honestly expect today to feel like?</div><textarea class="write-area" rows="2" placeholder="I expect today will..."></textarea></div>'
+      + '<div class="iea-cell"><div class="iea-word">ATTENTION</div><div class="iea-prompt">Where will I direct my full attention today?</div><textarea class="write-area" rows="2" placeholder="My attention goes to..."></textarea></div>'
+      + '</div>'
+      + '<div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Morning energy · sleep quality</div>'
+      + '<div class="scale-row"><div class="scale-label">Energy</div><div class="scale-btns" id="me-'+d+'"><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'me-'+d+'\')">1</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'me-'+d+'\')">2</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'me-'+d+'\')">3</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'me-'+d+'\')">4</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'me-'+d+'\')">5</div></div></div>'
+      + '<div class="scale-row"><div class="scale-label">Sleep</div><div class="scale-btns" id="sl-'+d+'"><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'sl-'+d+'\')">1</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'sl-'+d+'\')">2</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'sl-'+d+'\')">3</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'sl-'+d+'\')">4</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'sl-'+d+'\')">5</div></div></div>'
+      + '</div></div>'
+
+      /* MOVEMENT */
+      + '<div class="ds"><div class="ds-head"><div class="ds-bar" style="background:#c4501a"></div><div class="ds-head-body"><div class="ds-eyebrow" style="color:#c4501a">Morning · Movement</div><div class="ds-title">THE SESSION</div></div></div>'
+      + '<div class="ds-body">'
+      + '<div class="move-log"><div class="move-name" style="font-size:10px;color:var(--ink3);font-style:italic">Today\'s exercises</div><div class="move-sets"></div><div class="move-check"></div></div>'
+      + ['','','','',''].map(function(){ return '<div class="move-log"><div class="move-name"></div><div class="move-sets"></div><div class="move-check" onclick="this.classList.toggle(\'done\');this.textContent=this.classList.contains(\'done\')?\'✓\':\'\'"></div></div>'; }).join('')
+      + '<div style="margin-top:8px"><div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Session notes</div><textarea class="write-area" rows="2" placeholder="How it felt..."></textarea></div>'
+      + '<div style="margin-top:8px;display:flex;gap:6px"><div style="font-family:var(--mono);font-size:9px;padding:4px 10px;border:1px solid var(--green);color:var(--green);cursor:pointer">✓ Full</div><div style="font-family:var(--mono);font-size:9px;padding:4px 10px;border:1px solid var(--amber);color:var(--amber);cursor:pointer">~ Partial</div><div style="font-family:var(--mono);font-size:9px;padding:4px 10px;border:1px solid #7a1a1a;color:#7a1a1a;cursor:pointer">✕ Missed</div></div>'
+      + '</div></div>'
+
+      /* FOOD */
+      + '<div class="ds"><div class="ds-head"><div class="ds-bar" style="background:#9a6c10"></div><div class="ds-head-body"><div class="ds-eyebrow" style="color:#9a6c10">Midday · Nourishment</div><div class="ds-title">IF YOU BITE IT WRITE IT</div></div></div>'
+      + '<div class="ds-body">'
+      + '<div style="display:grid;grid-template-columns:60px 1fr 90px;gap:6px;margin-bottom:4px"><div style="font-family:var(--mono);font-size:7px;color:var(--ink4)">TIME</div><div style="font-family:var(--mono);font-size:7px;color:var(--ink4)">WHAT I ATE</div><div style="font-family:var(--mono);font-size:7px;color:var(--ink4)">ENERGY AFTER</div></div>'
+      + ['a','b','c','d'].map(function(l){ return '<div class="food-time-row"><div><input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--mono);font-size:9px;width:56px;outline:none;color:var(--ink)" placeholder="__:__"></div><div><input style="border:none;border-bottom:1px solid var(--ink4);background:transparent;font-family:var(--body);font-size:11px;width:100%;outline:none;color:var(--ink)" placeholder=""></div><div class="ft-energy" id="fe-'+d+l+'"><div class="energy-dot" onclick="fillEnergy(this,\'fe-'+d+l+'\')"></div><div class="energy-dot" onclick="fillEnergy(this,\'fe-'+d+l+'\')"></div><div class="energy-dot" onclick="fillEnergy(this,\'fe-'+d+l+'\')"></div><div class="energy-dot" onclick="fillEnergy(this,\'fe-'+d+l+'\')"></div><div class="energy-dot" onclick="fillEnergy(this,\'fe-'+d+l+'\')"></div></div></div>'; }).join('')
+      + '<div style="margin-top:6px"><textarea class="write-area" rows="1" placeholder="Food notes..."></textarea></div>'
+      + '</div></div>'
+
+      /* BODY CHECK */
+      + '<div class="ds"><div class="ds-head"><div class="ds-bar" style="background:#6b5cb8"></div><div class="ds-head-body"><div class="ds-eyebrow" style="color:#6b5cb8">Afternoon · Body Check</div><div class="ds-title">THE HONEST MID-POINT</div></div></div>'
+      + '<div class="ds-body">'
+      + '<div class="scale-row"><div class="scale-label">Mood</div><div class="scale-btns" id="mo-'+d+'"><div class="scale-pip" onclick="setPip(this,\'sel-mood\',\'mo-'+d+'\')">1</div><div class="scale-pip" onclick="setPip(this,\'sel-mood\',\'mo-'+d+'\')">2</div><div class="scale-pip" onclick="setPip(this,\'sel-mood\',\'mo-'+d+'\')">3</div><div class="scale-pip" onclick="setPip(this,\'sel-mood\',\'mo-'+d+'\')">4</div><div class="scale-pip" onclick="setPip(this,\'sel-mood\',\'mo-'+d+'\')">5</div><div class="scale-pip" onclick="setPip(this,\'sel-mood\',\'mo-'+d+'\')">6</div><div class="scale-pip" onclick="setPip(this,\'sel-mood\',\'mo-'+d+'\')">7</div><div class="scale-pip" onclick="setPip(this,\'sel-mood\',\'mo-'+d+'\')">8</div><div class="scale-pip" onclick="setPip(this,\'sel-mood\',\'mo-'+d+'\')">9</div><div class="scale-pip" onclick="setPip(this,\'sel-mood\',\'mo-'+d+'\')">10</div></div></div>'
+      + '<div class="scale-row"><div class="scale-label">Energy</div><div class="scale-btns" id="en-'+d+'"><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'en-'+d+'\')">1</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'en-'+d+'\')">2</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'en-'+d+'\')">3</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'en-'+d+'\')">4</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'en-'+d+'\')">5</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'en-'+d+'\')">6</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'en-'+d+'\')">7</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'en-'+d+'\')">8</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'en-'+d+'\')">9</div><div class="scale-pip" onclick="setPip(this,\'sel-energy\',\'en-'+d+'\')">10</div></div></div>'
+      + '<div class="scale-row"><div class="scale-label">Body</div><div class="scale-btns" id="bo-'+d+'"><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'bo-'+d+'\')">1</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'bo-'+d+'\')">2</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'bo-'+d+'\')">3</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'bo-'+d+'\')">4</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'bo-'+d+'\')">5</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'bo-'+d+'\')">6</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'bo-'+d+'\')">7</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'bo-'+d+'\')">8</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'bo-'+d+'\')">9</div><div class="scale-pip" onclick="setPip(this,\'sel-body\',\'bo-'+d+'\')">10</div></div></div>'
+      + '<div style="margin-top:6px"><textarea class="write-area" rows="2" placeholder="Body signals..."></textarea></div>'
+      + '</div></div>'
+
+      /* EVENING */
+      + '<div class="ds"><div class="ds-head"><div class="ds-bar" style="background:#2d6a4f"></div><div class="ds-head-body"><div class="ds-eyebrow" style="color:#2d6a4f">Evening · Reflection</div><div class="ds-title">THE DAY REVIEWED</div></div></div>'
+      + '<div class="ds-body">'
+      + '<div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">Did the day match the Intention?</div>'
+      + '<div style="display:flex;gap:6px;margin-bottom:10px"><div style="font-family:var(--mono);font-size:9px;padding:4px 12px;border:1px solid var(--green);color:var(--green);cursor:pointer">Yes</div><div style="font-family:var(--mono);font-size:9px;padding:4px 12px;border:1px solid var(--amber);color:var(--amber);cursor:pointer">Partly</div><div style="font-family:var(--mono);font-size:9px;padding:4px 12px;border:1px solid #7a1a1a;color:#7a1a1a;cursor:pointer">No</div></div>'
+      + '<div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px">One thing that went well</div><textarea class="write-area" rows="1" placeholder=""></textarea>'
+      + '<div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px;margin-top:6px">One thing that didn\'t</div><textarea class="write-area" rows="1" placeholder=""></textarea>'
+      + '<div style="font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px;margin-top:6px">Tomorrow\'s single most important action</div><textarea class="write-area" rows="1" placeholder=""></textarea>'
+      + '</div></div>'
+
+      + '</div>';
+    container.appendChild(card);
+  }
+}
+</script>
+</body>
+</html>

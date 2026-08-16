@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Being HAware — The IPPF Challenge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f2eb;--paper2:#ede9df;--paper3:#e4dfd3;
+  --ink:#1c1a16;--ink2:#4a4740;--ink3:#8a8780;--ink4:#c4bfb4;
+  --accent:#c4501a;--accent2:#e8a882;
+  --green:#2d6a4f;--green2:#d4ede3;
+  --folly:#7a1a1a;--folly2:#f5e0e0;
+  --display:'Bebas Neue',sans-serif;--body:'Crimson Pro',Georgia,serif;--mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper2);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.nav{background:var(--ink);height:48px;display:flex;align-items:center;padding:0 20px;position:sticky;top:0;z-index:200;gap:8px}
+.nav-brand{font-family:var(--display);font-size:15px;letter-spacing:.06em;color:var(--paper);white-space:nowrap}
+.nav-brand span{color:var(--accent2)}
+.nav-tabs{display:flex;gap:1px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.tab-btn{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:48px;background:transparent;border:none;color:var(--ink4);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.tab-btn.active{color:var(--accent2);border-bottom-color:var(--accent2)}
+.nav-right{display:flex;gap:4px}
+.nav-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;background:rgba(255,255,255,.08);border:none;color:var(--ink4);cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+.nav-btn.go{background:var(--accent);color:white}
+.page{max-width:780px;margin:0 auto;padding:36px 24px 60px}
+.chapter{display:none}.chapter.visible{display:block}
+.cover-rule{height:4px;background:var(--ink);margin-bottom:20px}
+.cover-title{font-family:var(--display);font-size:56px;line-height:.92;letter-spacing:.02em;color:var(--ink);margin-bottom:6px}
+.cover-title span{color:var(--accent)}
+.cover-sub{font-size:15px;font-style:italic;font-weight:300;color:var(--ink2);border-left:4px solid var(--accent);padding-left:16px;max-width:560px;line-height:1.55;margin-bottom:20px}
+.phase-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:20px}
+.ph-cell{background:var(--paper);padding:12px 12px;cursor:pointer}
+.ph-cell:hover{background:var(--paper2)}
+.ph-n{font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--accent);margin-bottom:4px}
+.ph-t{font-family:var(--display);font-size:17px;letter-spacing:.03em;color:var(--ink)}
+.section-eyebrow{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.section-title{font-family:var(--display);font-size:30px;letter-spacing:.04em;color:var(--ink);padding-bottom:8px;border-bottom:1px solid var(--ink4);margin-bottom:14px}
+.prose{font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:12px;max-width:640px}
+.prose strong{color:var(--ink);font-weight:600}
+.pullquote{border-left:4px solid var(--accent);padding:10px 16px;margin:14px 0;background:var(--paper)}
+.pullquote p{font-size:13px;font-style:italic;color:var(--ink);line-height:1.55}
+.pullquote cite{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-top:4px;display:block}
+.suspect-card{background:var(--paper);border:1px solid var(--ink4);margin-bottom:14px;padding:16px 18px}
+.suspect-num{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.suspect-name{font-family:var(--display);font-size:24px;letter-spacing:.03em;color:var(--accent);margin-bottom:3px}
+.suspect-sub{font-size:12px;font-style:italic;color:var(--ink2);margin-bottom:8px}
+.suspect-body{font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:8px}
+.suspect-write{border-top:1px solid var(--paper3);padding-top:8px;margin-top:6px}
+.suspect-write-label{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.write-line{border-bottom:1px solid var(--ink4);height:20px;margin-bottom:4px}
+.day-card{background:var(--paper);border:1px solid var(--ink4);margin-bottom:14px}
+.day-hd{background:var(--ink);padding:10px 16px;display:flex;justify-content:space-between;align-items:baseline}
+.day-num{font-family:var(--display);font-size:24px;color:var(--paper);letter-spacing:.03em}
+.day-week{font-family:var(--mono);font-size:9px;color:var(--accent2);letter-spacing:.08em}
+.day-body{padding:14px 16px}
+.five-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:10px;font-size:9px}
+.five-cell{background:var(--paper2);padding:6px 6px;text-align:center}
+.five-name{font-weight:600;color:var(--ink);margin-bottom:3px}
+.symptom-row{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:8px;font-size:9px}
+.symptom-cell{background:var(--paper2);padding:6px 4px;text-align:center}
+.symptom-name{font-family:var(--mono);letter-spacing:.05em;color:var(--ink3);margin-bottom:3px}
+.food-line{border-bottom:1px solid var(--ink4);height:18px;margin-bottom:6px}
+.evening-line{font-size:11px;color:var(--ink3);font-style:italic;border-top:1px solid var(--paper3);padding-top:8px;margin-top:6px}
+.reintro-day{background:var(--paper);border:1px solid var(--ink4);margin-bottom:14px}
+.reintro-hd{background:var(--accent);padding:10px 16px}
+.reintro-hd.rest{background:var(--ink3)}
+.reintro-name{font-family:var(--display);font-size:22px;color:white;letter-spacing:.03em}
+.verdict-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:12px}
+.verdict-table th{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:8px;border-bottom:1px solid var(--ink4)}
+.verdict-table td{padding:10px 8px;border-bottom:1px solid var(--paper3)}
+.verdict-opts{font-family:var(--mono);font-size:9px;color:var(--ink3);white-space:nowrap}
+.pg-foot{border-top:1px solid var(--ink4);padding-top:10px;margin-top:20px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--ink3)}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .nav{display:none}
+  .chapter{display:block!important}
+  .day-card,.reintro-day,.suspect-card{page-break-inside:avoid;break-inside:avoid}
+  @page{margin:10mm;size:A4 portrait}
+  body{font-size:11px;background:white}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">BEING <span>HAware</span></div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="setTab('cover',this)">Cover</button>
+    <button class="tab-btn" onclick="setTab('case',this)">The Case</button>
+    <button class="tab-btn" onclick="setTab('elimination',this)">Elimination · 21 Days</button>
+    <button class="tab-btn" onclick="setTab('reintro',this)">Reintroduction · 7 Days</button>
+    <button class="tab-btn" onclick="setTab('verdict',this)">The Verdict</button>
+  </div>
+  <div class="nav-right">
+    <a class="nav-btn" href="../index.html">🏠 Home</a>
+    <a class="nav-btn" href="../programme/foundation-level.html">Foundation Level</a>
+    <button class="nav-btn go" onclick="window.print()">Print / PDF</button>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- COVER -->
+<div class="chapter visible" id="ch-cover">
+  <div class="cover-rule"></div>
+  <div class="cover-title">THE IPPF<br><span>CHALLENGE</span></div>
+  <p class="cover-sub">Isolate Potentially Problematic Foods. Twenty-eight days. Take the usual suspects out, one deliberate week at a time — then bring each one back, alone, and watch what actually happens. Not a diet. Not a punishment. An honest experiment, run on a sample size of one, with the only subject who has ever really mattered to you: yourself.</p>
+  <div class="phase-row">
+    <div class="ph-cell" onclick="setTabById('case')"><div class="ph-n">Phase 1 · 3 Days</div><div class="ph-t">The Case</div></div>
+    <div class="ph-cell" onclick="setTabById('elimination')"><div class="ph-n">Phase 2 · 21 Days</div><div class="ph-t">Elimination</div></div>
+    <div class="ph-cell" onclick="setTabById('reintro')"><div class="ph-n">Phase 3 · 7 Days</div><div class="ph-t">Reintroduction</div></div>
+    <div class="ph-cell" onclick="setTabById('verdict')"><div class="ph-n">Phase 4</div><div class="ph-t">The Verdict</div></div>
+  </div>
+  <p class="prose" style="font-size:12px;color:var(--ink3);font-style:italic">A more focused cousin of <a href="bite-it-write-it.html" style="color:var(--accent)">Bite It, Write It</a> — this one asks a specific question about five named foods, rather than an open-ended record of everything.</p>
+  <div class="pg-foot"><span>Being HAware — The IPPF Challenge</span><span>Health Awareness Is The Way</span></div>
+</div>
+
+<!-- THE CASE -->
+<div class="chapter" id="ch-case">
+  <div class="section-eyebrow">Section One</div>
+  <div class="section-title">THE CASE</div>
+  <p class="prose">Five suspects, five honest pages. Read these before day one — not to be convinced, just to be informed.</p>
+
+  <div class="suspect-card">
+    <div class="suspect-num">Suspect 1 of 5</div>
+    <div class="suspect-name">GLUTEN</div>
+    <div class="suspect-sub">The bread and pasta question</div>
+    <div class="suspect-body">Modern wheat isn't the wheat your grandmother ate, and gluten itself is a genuinely difficult protein for a meaningful number of digestive systems to break down cleanly — even in people who'd never test positive for coeliac disease on a standard panel.</div>
+    <div class="suspect-write"><div class="suspect-write-label">What I already suspect about this one — before I start</div><div class="write-line"></div><div class="write-line"></div></div>
+  </div>
+
+  <div class="suspect-card">
+    <div class="suspect-num">Suspect 2 of 5</div>
+    <div class="suspect-name">INDUSTRIAL SEED OILS</div>
+    <div class="suspect-sub">The invisible ingredient in almost everything</div>
+    <div class="suspect-body">Vegetable, sunflower, rapeseed, soybean — highly refined, high in omega-6, and prone to oxidising under heat in ways that fats your great-grandmother cooked with simply weren't. They're everywhere because they're cheap, not because they're kind to you.</div>
+    <div class="suspect-write"><div class="suspect-write-label">What I already suspect about this one — before I start</div><div class="write-line"></div><div class="write-line"></div></div>
+  </div>
+
+  <div class="suspect-card">
+    <div class="suspect-num">Suspect 3 of 5</div>
+    <div class="suspect-name">ADDED SUGAR</div>
+    <div class="suspect-sub">The one everybody already suspects</div>
+    <div class="suspect-body">Not fruit, not the sugar that arrives packaged with fibre and water — the sugar added deliberately to make food more moreish. Repeated spikes, repeated crashes, and a sweetness threshold that keeps quietly climbing.</div>
+    <div class="suspect-write"><div class="suspect-write-label">What I already suspect about this one — before I start</div><div class="write-line"></div><div class="write-line"></div></div>
+  </div>
+
+  <div class="suspect-card">
+    <div class="suspect-num">Suspect 4 of 5</div>
+    <div class="suspect-name">CONVENTIONAL DAIRY</div>
+    <div class="suspect-sub">Standardised, pasteurised, homogenised</div>
+    <div class="suspect-body">Not dairy itself — the industrial version of it. High-heat pasteurisation and homogenisation change the structure of the fat, and a meaningful number of people react to that processed version without reacting to raw or fermented dairy at all.</div>
+    <div class="suspect-write"><div class="suspect-write-label">What I already suspect about this one — before I start</div><div class="write-line"></div><div class="write-line"></div></div>
+  </div>
+
+  <div class="suspect-card">
+    <div class="suspect-num">Suspect 5 of 5</div>
+    <div class="suspect-name">ALCOHOL <span style="font-size:13px;color:var(--ink3)">(Optional)</span></div>
+    <div class="suspect-sub">Include it if you're honest enough to</div>
+    <div class="suspect-body">Already covered honestly elsewhere in this programme: no safe minimum, a direct burden on the liver, a reliable disruptor of sleep architecture. Most people already suspect what a month without it would show them. Few have actually let it show them.</div>
+    <div class="suspect-write"><div class="suspect-write-label">What I already suspect about this one — before I start</div><div class="write-line"></div><div class="write-line"></div></div>
+  </div>
+
+  <div class="pullquote"><p>You are not trying to prove these foods are bad. You are trying to find out — honestly, once, for yourself — whether any of them have been quietly costing you more than they were worth.</p><cite>Being HAware — The IPPF Challenge</cite></div>
+  <div class="pg-foot"><span>Being HAware — IPPF Challenge · The Case</span><span>Five suspects. One honest experiment.</span></div>
+</div>
+
+<!-- ELIMINATION -->
+<div class="chapter" id="ch-elimination">
+  <div class="section-eyebrow">Section Two</div>
+  <div class="section-title">ELIMINATION — DAYS 1 TO 21</div>
+  <p class="prose">All five suspects removed at once — not staggered, not gradual. A clean break is easier to sustain than a slow negotiation.</p>
+  <div id="elim-container"></div>
+  <div class="pg-foot"><span>Being HAware — IPPF Challenge · Elimination</span><span>Twenty-one days. A clean break, not a negotiation.</span></div>
+</div>
+
+<!-- REINTRODUCTION -->
+<div class="chapter" id="ch-reintro">
+  <div class="section-eyebrow">Section Three</div>
+  <div class="section-title">REINTRODUCTION — DAYS 22 TO 28</div>
+  <p class="prose">One suspect returns per day, in a proper portion — not a taste, an actual serving — with the following day left clear to watch. This is the only way cause and effect stay legible.</p>
+  <div id="reintro-container"></div>
+  <div class="pg-foot"><span>Being HAware — IPPF Challenge · Reintroduction</span><span>One suspect a day. A rest day to watch what follows.</span></div>
+</div>
+
+<!-- VERDICT -->
+<div class="chapter" id="ch-verdict">
+  <div class="section-eyebrow">Section Four</div>
+  <div class="section-title">THE VERDICT</div>
+  <p class="prose">One plain question per suspect. Circle honestly — this page is the entire point of the exercise.</p>
+  <table class="verdict-table">
+    <tr><th>Suspect</th><th>Verdict</th><th>What I Noticed</th></tr>
+    <tr><td><strong>Gluten</strong></td><td class="verdict-opts">KEEP · REDUCE · DONE WITH IT</td><td style="border-bottom:1px solid var(--ink4)"></td></tr>
+    <tr><td><strong>Industrial Seed Oils</strong></td><td class="verdict-opts">KEEP · REDUCE · DONE WITH IT</td><td style="border-bottom:1px solid var(--ink4)"></td></tr>
+    <tr><td><strong>Added Sugar</strong></td><td class="verdict-opts">KEEP · REDUCE · DONE WITH IT</td><td style="border-bottom:1px solid var(--ink4)"></td></tr>
+    <tr><td><strong>Conventional Dairy</strong></td><td class="verdict-opts">KEEP · REDUCE · DONE WITH IT</td><td style="border-bottom:1px solid var(--ink4)"></td></tr>
+    <tr><td><strong>Alcohol</strong></td><td class="verdict-opts">KEEP · REDUCE · DONE WITH IT</td><td style="border-bottom:1px solid var(--ink4)"></td></tr>
+  </table>
+  <div class="pullquote"><p>This page doesn't need to be dramatic to be useful. "Reduce" is a perfectly good verdict. So is "keep" — you're allowed to test something honestly and come out the other side still eating it, guilt-free, because now you actually know.</p><cite>Being HAware — The IPPF Challenge</cite></div>
+  <div style="margin-top:16px"><div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">The one thing I'd tell someone about to start this</div><div class="write-line"></div><div class="write-line"></div><div class="write-line"></div></div>
+  <div style="border-top:3px solid var(--ink);padding-top:16px;margin-top:20px;font-family:var(--display);font-size:20px;letter-spacing:.03em;color:var(--ink)">SOME THINGS HAVE GOT TO GO — NOW YOU'VE SEEN IT FOR YOURSELF</div>
+  <div class="pg-foot"><span>Being HAware — IPPF Challenge · The Verdict</span><span>Health Awareness Is The Way</span></div>
+</div>
+
+</div>
+
+<script>
+function setTab(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.chapter').forEach(c => c.classList.toggle('visible', c.id === 'ch-'+id));
+  window.scrollTo(0,0);
+}
+function setTabById(id) {
+  const btn = document.querySelector(`.tab-btn[onclick*="'${id}'"]`);
+  setTab(id, btn);
+}
+
+function fiveRow() {
+  const foods = ['Gluten','Seed Oils','Added Sugar','Conv. Dairy','Alcohol'];
+  return `<div class="five-row">${foods.map(f=>`<div class="five-cell"><div class="five-name">${f}</div>AVOIDED ○ &nbsp; SLIPPED ○</div>`).join('')}</div>`;
+}
+function symptomRow() {
+  const s = ['Skin','Sleep','Joints','Energy','Mood','Digestion'];
+  return `<div class="symptom-row">${s.map(x=>`<div class="symptom-cell"><div class="symptom-name">${x}</div>○ ○ ○ ○ ○</div>`).join('')}</div>`;
+}
+function elimDay(n, week) {
+  return `<div class="day-card">
+    <div class="day-hd"><div class="day-num">Day ${n}</div><div class="day-week">Elimination · Week ${week} · Date: ______________</div></div>
+    <div class="day-body">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px">The Five, Today — None Of Them, On Purpose</div>
+      ${fiveRow()}
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:8px 0 5px">If You Bite It — Write It</div>
+      ${[1,2].map(()=>'<div class="food-line"></div>').join('')}
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:8px 0 5px">The Symptom Strip — Low To High</div>
+      ${symptomRow()}
+      <div class="evening-line">One honest line: <span style="display:inline-block;width:65%;border-bottom:1px solid var(--ink4)"></span></div>
+    </div>
+  </div>`;
+}
+function elimReview(weekNum, dayRange) {
+  return `<div style="background:var(--ink);color:white;padding:16px 20px;margin-bottom:14px">
+    <div style="font-family:var(--display);font-size:22px;color:var(--accent2);letter-spacing:.04em;margin-bottom:8px">ELIMINATION — WEEK ${weekNum} CHECK-IN</div>
+    <div style="font-family:var(--mono);font-size:9px;color:#d4d0c8;margin-bottom:10px">Days ${dayRange}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:11px;color:#d4d0c8">
+      <div><em>Slip-ups, honestly — which of the five, if any, snuck back in?</em><div style="border-bottom:1px solid rgba(255,255,255,.2);height:20px;margin-top:6px"></div></div>
+      <div><em>The clearest change — what's shifted most since day one?</em><div style="border-bottom:1px solid rgba(255,255,255,.2);height:20px;margin-top:6px"></div></div>
+      <div><em>What surprised you this week?</em><div style="border-bottom:1px solid rgba(255,255,255,.2);height:20px;margin-top:6px"></div></div>
+      <div><em>Going into next week — what does it need that this one didn't get?</em><div style="border-bottom:1px solid rgba(255,255,255,.2);height:20px;margin-top:6px"></div></div>
+    </div>
+  </div>`;
+}
+const elimContainer = document.getElementById('elim-container');
+let elimHtml = '';
+for (let d = 1; d <= 21; d++) {
+  const week = Math.ceil(d/7);
+  elimHtml += elimDay(d, week);
+  if (d % 7 === 0) {
+    const start = d - 6;
+    elimHtml += elimReview(week, `${start}–${d}`);
+  }
+}
+elimContainer.innerHTML = elimHtml;
+
+const reintroSchedule = [
+  {n:22, name:'GLUTEN', rest:false, note:'A proper portion — real bread, real pasta, not a token slice. Twice today if you can.'},
+  {n:23, name:'REST DAY', rest:true, note:"No new suspect today. Keep watching what yesterday's reintroduction is still doing."},
+  {n:24, name:'SEED OILS', rest:false, note:'Cook with them deliberately today — the way most restaurant and packaged food already does.'},
+  {n:25, name:'ADDED SUGAR', rest:false, note:'A proper sweet portion, not a single biscuit. Let it be genuinely sweet.'},
+  {n:26, name:'REST DAY', rest:true, note:'Watching, not testing. Note anything still lingering from sugar.'},
+  {n:27, name:'CONVENTIONAL DAIRY', rest:false, note:'Standard milk, standard cheese — the ordinary supermarket version, not the artisan exception.'},
+  {n:28, name:'ALCOHOL (OPTIONAL)', rest:false, note:'If you included it — a normal serving, not a symbolic sip. If not, use today as a final rest and reflection day.'},
+];
+const reintroContainer = document.getElementById('reintro-container');
+reintroContainer.innerHTML = reintroSchedule.map(day => `
+  <div class="reintro-day">
+    <div class="reintro-hd${day.rest?' rest':''}"><div class="reintro-name">${day.name}</div></div>
+    <div class="day-body">
+      <div style="font-size:11px;font-style:italic;color:var(--ink3);margin-bottom:8px">Day ${day.n} of 28 · ${day.note}</div>
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px">What I Ate — The Reintroduction Meal, In Full</div>
+      <div class="food-line"></div><div class="food-line"></div>
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin:8px 0 5px">The Symptom Strip — Same Six, Rate Each</div>
+      ${symptomRow()}
+      <div class="evening-line">What happened — hours 1 through 24: <span style="display:inline-block;width:60%;border-bottom:1px solid var(--ink4)"></span></div>
+    </div>
+  </div>
+`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Being HAware — Bite It, Write It</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f2eb;--paper2:#ede9df;--paper3:#e4dfd3;
+  --ink:#1c1a16;--ink2:#4a4740;--ink3:#8a8780;--ink4:#c4bfb4;
+  --accent:#c4501a;--accent2:#e8a882;
+  --green:#2d6a4f;--green2:#d4ede3;
+  --amber:#9a6c10;--amber2:#f5e8c0;
+  --display:'Bebas Neue',sans-serif;--body:'Crimson Pro',Georgia,serif;--mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper2);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.nav{background:var(--ink);height:48px;display:flex;align-items:center;padding:0 20px;position:sticky;top:0;z-index:200;gap:8px}
+.nav-brand{font-family:var(--display);font-size:15px;letter-spacing:.06em;color:var(--paper);white-space:nowrap}
+.nav-brand span{color:var(--accent2)}
+.nav-tabs{display:flex;gap:1px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.tab-btn{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:48px;background:transparent;border:none;color:var(--ink4);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.tab-btn.active{color:var(--accent2);border-bottom-color:var(--accent2)}
+.nav-right{display:flex;gap:4px}
+.nav-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;background:rgba(255,255,255,.08);border:none;color:var(--ink4);cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+.nav-btn.go{background:var(--accent);color:white}
+.page{max-width:760px;margin:0 auto;padding:36px 24px 60px}
+.chapter{display:none}.chapter.visible{display:block}
+.cover-rule{height:4px;background:var(--ink);margin-bottom:20px}
+.cover-title{font-family:var(--display);font-size:64px;line-height:.9;letter-spacing:.02em;color:var(--ink);margin-bottom:6px}
+.cover-title span{color:var(--accent)}
+.cover-sub{font-size:15px;font-style:italic;font-weight:300;color:var(--ink2);border-left:4px solid var(--accent);padding-left:16px;max-width:520px;line-height:1.55;margin-bottom:20px}
+.three-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:20px}
+.tr-cell{background:var(--paper);padding:12px 14px}
+.tr-label{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.tr-val{font-size:12px;color:var(--ink2);line-height:1.5}
+.section-eyebrow{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.section-title{font-family:var(--display);font-size:30px;letter-spacing:.04em;color:var(--ink);padding-bottom:8px;border-bottom:1px solid var(--ink4);margin-bottom:14px}
+.prose{font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:12px;max-width:620px}
+.prose strong{color:var(--ink);font-weight:600}
+.pullquote{border-left:4px solid var(--accent);padding:10px 16px;margin:14px 0;background:var(--paper)}
+.pullquote p{font-size:14px;font-style:italic;color:var(--ink);line-height:1.55}
+.pullquote cite{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-top:4px;display:block}
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:14px 0}
+.rule-cell{background:var(--paper);padding:13px 14px}
+.rule-label{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.rule-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.rule-desc{font-size:11px;color:var(--ink2);line-height:1.5}
+.day-card{background:var(--paper);border:1px solid var(--ink4);margin-bottom:14px}
+.day-hd{background:var(--ink);padding:10px 16px;display:flex;justify-content:space-between;align-items:baseline}
+.day-num{font-family:var(--display);font-size:26px;color:var(--paper);letter-spacing:.03em}
+.day-week{font-family:var(--mono);font-size:9px;color:var(--accent2);letter-spacing:.08em}
+.day-body{padding:14px 16px}
+.iea-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:10px}
+.iea-cell{background:var(--paper2);padding:8px 10px}
+.iea-word{font-family:var(--display);font-size:13px;letter-spacing:.04em;color:var(--ink);margin-bottom:2px}
+.iea-prompt{font-size:9px;color:var(--ink3);font-style:italic;line-height:1.4;margin-bottom:5px}
+.write-line{border-bottom:1px solid var(--ink4);height:20px}
+.food-table{width:100%;border-collapse:collapse;margin-bottom:8px;font-size:11px}
+.food-table th{font-family:var(--mono);font-size:7px;letter-spacing:.06em;color:var(--ink4);text-align:left;padding:4px 6px;border-bottom:1px solid var(--ink4)}
+.food-table td{padding:5px 6px;border-bottom:1px solid var(--paper3)}
+.food-line{border-bottom:1px solid var(--ink4);height:16px}
+.dots{font-size:11px;color:var(--ink4)}
+.water-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:11px}
+.water-dots{font-size:14px;letter-spacing:3px;color:var(--ink4)}
+.evening-line{font-size:11px;color:var(--ink3);font-style:italic;border-top:1px solid var(--paper3);padding-top:8px;margin-top:6px}
+.week-review{background:var(--ink);color:var(--paper);padding:18px 22px;margin-bottom:14px}
+.wr-title{font-family:var(--display);font-size:24px;letter-spacing:.04em;margin-bottom:8px;color:var(--accent2)}
+.wr-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.wr-q{font-size:11px;font-style:italic;color:#d4d0c8;margin-bottom:6px;line-height:1.5}
+.wr-line{border-bottom:1px solid rgba(255,255,255,.2);height:20px;margin-bottom:4px}
+.pg-foot{border-top:1px solid var(--ink4);padding-top:10px;margin-top:20px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--ink3)}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .nav{display:none}
+  .chapter{display:block!important}
+  .day-card,.week-review{page-break-inside:avoid;break-inside:avoid}
+  @page{margin:10mm;size:A4 portrait}
+  body{font-size:11px;background:white}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">BEING <span>HAware</span></div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="setTab('cover',this)">Cover</button>
+    <button class="tab-btn" onclick="setTab('why',this)">Why Bother</button>
+    <button class="tab-btn" onclick="setTab('how',this)">How To Use It</button>
+    <button class="tab-btn" onclick="setTab('days',this)">The 30 Days</button>
+  </div>
+  <div class="nav-right">
+    <a class="nav-btn" href="../index.html">🏠 Home</a>
+    <a class="nav-btn" href="../programme/foundation-level.html">Foundation Level</a>
+    <a class="nav-btn" href="journal.html">The Journal</a>
+    <button class="nav-btn go" onclick="window.print()">Print / PDF</button>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- COVER -->
+<div class="chapter visible" id="ch-cover">
+  <div class="cover-rule"></div>
+  <div class="cover-title">BITE IT —<br><span>WRITE IT</span></div>
+  <p class="cover-sub">A record of what you eat, when, and how it leaves you feeling. Not a diet. Not a set of rules. Just the honest habit of noticing — because memory, left to its own devices, will always tell you a kinder story than the one that actually happened.</p>
+  <div class="three-row">
+    <div class="tr-cell"><div class="tr-label">The Rule</div><div class="tr-val">If You Bite It — Write It.</div></div>
+    <div class="tr-cell"><div class="tr-label">What It Costs</div><div class="tr-val">Thirty seconds, three times a day.</div></div>
+    <div class="tr-cell"><div class="tr-label">What It Gives Back</div><div class="tr-val">The pattern memory alone would never have shown you.</div></div>
+  </div>
+  <div class="pg-foot"><span>Being HAware — Bite It, Write It</span><span>Health Awareness Is The Way</span></div>
+</div>
+
+<!-- WHY BOTHER -->
+<div class="chapter" id="ch-why">
+  <div class="section-eyebrow">Section One</div>
+  <div class="section-title">WHY BOTHER WRITING IT DOWN</div>
+  <p class="prose">Ask most people what they ate on Tuesday and they'll give you a version of the truth — reasonable, plausible, and quietly wrong. Not because they're lying. Because memory isn't a filing cabinet. It's more like a story we retell ourselves each time we reach for it, and every retelling smooths the edges a little more.</p>
+  <p class="prose">That's not a flaw in you. It's how memory has always worked, for everyone, since before writing existed. The trouble is that a smoothed-over story is a poor tool for noticing that the 3pm slump always follows the same two foods, or that the good sleep nights line up with the early dinners. Those patterns are small and unglamorous and entirely invisible to a memory that's busy being kind to you.</p>
+  <p class="prose">The food journal isn't about control. It isn't a scoreboard, and it certainly isn't a confession booth. It's closer to a weather log — a plain, dated record of what happened, kept without judgement, so that six weeks from now the pattern can show itself instead of staying buried under a hundred half-remembered Tuesdays.</p>
+  <div class="pullquote"><p>Write it down. Especially the bad days. A journal that only records the good days is a fiction — and a fiction is exactly what memory would have given you for free.</p><cite>Being HAware — Foundation Level</cite></div>
+  <p class="prose">There's no wrong way to fill a page here. "Ate standing up at the counter, felt fine, felt tired an hour later" is a complete and useful entry. So is "skipped lunch, regretted it by four." The point was never to perform a perfect diet on paper. It was to have an honest witness — even when that witness is only you, an hour later, reading your own handwriting.</p>
+  <p class="prose" style="font-size:12px;color:var(--ink3);font-style:italic">Already using the <a href="journal.html" style="color:var(--accent)">90-Day Journal</a>? This one is a focused companion — food only, thirty days, for anyone who wants to isolate eating patterns specifically rather than the whole day.</p>
+  <div class="pg-foot"><span>Being HAware — Bite It, Write It · Why Bother</span><span>An honest witness, kept faithfully.</span></div>
+</div>
+
+<!-- HOW TO USE -->
+<div class="chapter" id="ch-how">
+  <div class="section-eyebrow">Section Two</div>
+  <div class="section-title">HOW TO USE THIS JOURNAL</div>
+  <p class="prose">Six honest rules — none of them difficult, all of them worth actually following.</p>
+  <div class="rule-grid">
+    <div class="rule-cell"><div class="rule-label">Write it as you go</div><div class="rule-title">Not from memory at the end of the day</div><div class="rule-desc">The three-word description written the moment you eat it beats the beautifully reconstructed memory written at 9pm.</div></div>
+    <div class="rule-cell"><div class="rule-label">Note the time</div><div class="rule-title">It matters more than it seems</div><div class="rule-desc">Energy dips and food are often separated by an hour or two — long enough that the connection disappears unless the clock is written down alongside the food.</div></div>
+    <div class="rule-cell"><div class="rule-label">Rate the energy after, honestly</div><div class="rule-title">Not the energy you expected to have</div><div class="rule-desc">Fill in the dots an hour or two after eating, not immediately. The immediate feeling is mostly digestion.</div></div>
+    <div class="rule-cell"><div class="rule-label">Review weekly, not daily</div><div class="rule-title">The pattern is invisible day by day</div><div class="rule-desc">One day tells you almost nothing. Seven days, read together, tend to tell you a great deal.</div></div>
+    <div class="rule-cell"><div class="rule-label">Leave nothing out</div><div class="rule-title">Especially the things you'd rather not write</div><div class="rule-desc">The occasional biscuit, the second coffee, the meal skipped entirely — all of it is data. None of it is a confession.</div></div>
+    <div class="rule-cell"><div class="rule-label">Trust the slow reveal</div><div class="rule-title">Patterns take a fortnight, not a day</div><div class="rule-desc">Most people notice their first real pattern somewhere around day ten to fourteen. Keep going even if early pages feel uneventful.</div></div>
+  </div>
+  <p class="prose">That's the whole method. Print the days that follow, or fill them in here — one page per day, thirty days, a weekly review after each seven.</p>
+  <div class="pg-foot"><span>Being HAware — Bite It, Write It · How To Use It</span><span>Thirty seconds, three times a day.</span></div>
+</div>
+
+<!-- THE 30 DAYS -->
+<div class="chapter" id="ch-days">
+  <div class="section-eyebrow">Section Three</div>
+  <div class="section-title">THE THIRTY DAYS</div>
+  <p class="prose">One page per day, printable one at a time or all together. Each week closes with a short review — resist the urge to skip it.</p>
+  <div id="days-container"></div>
+  <div class="pg-foot"><span>Being HAware — Bite It, Write It · Thirty Days</span><span>Health Awareness Is The Way</span></div>
+</div>
+
+</div>
+
+<script>
+function setTab(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.chapter').forEach(c => c.classList.toggle('visible', c.id === 'ch-'+id));
+  window.scrollTo(0,0);
+}
+
+function dayCard(n, week) {
+  return `<div class="day-card">
+    <div class="day-hd"><div class="day-num">Day ${n}</div><div class="day-week">Week ${week} · Date: ______________</div></div>
+    <div class="day-body">
+      <div class="iea-row">
+        <div class="iea-cell"><div class="iea-word">INTENTION</div><div class="iea-prompt">What am I choosing to eat well today?</div><div class="write-line"></div></div>
+        <div class="iea-cell"><div class="iea-word">EXPECTATION</div><div class="iea-prompt">What do I honestly expect today's meals to feel like?</div><div class="write-line"></div></div>
+        <div class="iea-cell"><div class="iea-word">ATTENTION</div><div class="iea-prompt">Where will I actually notice how food makes me feel?</div><div class="write-line"></div></div>
+      </div>
+      <table class="food-table">
+        <tr><th>Time</th><th>What I Ate / Drank</th><th>Energy After</th></tr>
+        ${[1,2,3,4].map(()=>'<tr><td class="food-line" style="width:60px"></td><td class="food-line"></td><td class="dots">○ ○ ○ ○ ○</td></tr>').join('')}
+      </table>
+      <div class="water-row"><span>Water today</span><span class="water-dots">○ ○ ○ ○ ○ ○ ○ ○</span></div>
+      <div class="evening-line">Evening — one honest line: <span class="write-line" style="display:inline-block;width:70%;border-bottom:1px solid var(--ink4)"></span></div>
+    </div>
+  </div>`;
+}
+
+function weekReview(weekNum, dayRange) {
+  return `<div class="week-review">
+    <div class="wr-title">WEEK ${weekNum} REVIEW</div>
+    <div style="font-family:var(--mono);font-size:9px;color:var(--accent2);letter-spacing:.08em">Covering days ${dayRange}</div>
+    <div class="wr-grid">
+      <div><div class="wr-q">How many days did you actually fill the page in?</div><div class="wr-line"></div></div>
+      <div><div class="wr-q">Did any food, time, or feeling repeat?</div><div class="wr-line"></div></div>
+      <div><div class="wr-q">Which entry, reading back, stands out as the one that felt right?</div><div class="wr-line"></div></div>
+      <div><div class="wr-q">Anything worth watching more closely next week?</div><div class="wr-line"></div></div>
+    </div>
+  </div>`;
+}
+
+const container = document.getElementById('days-container');
+let html = '';
+for (let d = 1; d <= 30; d++) {
+  const week = Math.ceil(d/7);
+  html += dayCard(d, week);
+  if (d % 7 === 0 || d === 30) {
+    const start = d - (d % 7 === 0 ? 6 : (d % 7) - 1);
+    html += weekReview(week, `${start}–${d}`);
+  }
+}
+container.innerHTML = html;
+</script>
+</body>
+</html>
