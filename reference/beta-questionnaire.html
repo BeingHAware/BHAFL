@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Being HAware — Beta Tester Questionnaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f2eb;--paper2:#ede9df;--paper3:#e4dfd3;
+  --ink:#1c1a16;--ink2:#4a4740;--ink3:#8a8780;--ink4:#c4bfb4;
+  --accent:#c4501a;--accent2:#e8a882;
+  --green:#2d6a4f;--green2:#d4ede3;
+  --amber:#9a6c10;--amber2:#f5e8c0;
+  --purple:#6b5cb8;--purple2:#e8e4f8;
+  --folly:#7a1a1a;--folly2:#f5e0e0;
+  --display:'Bebas Neue',sans-serif;
+  --body:'Crimson Pro',Georgia,serif;
+  --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;padding:0 0 80px}
+
+/* NAV */
+.nav{background:var(--ink);padding:0 24px;height:48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:var(--display);font-size:16px;letter-spacing:.06em;color:var(--paper)}
+.nav-brand span{color:var(--accent2)}
+.nav-right{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+
+/* PAGE */
+.page{max-width:720px;margin:0 auto;padding:40px 28px}
+
+/* MASTHEAD */
+.cover-rule{height:4px;background:var(--ink);margin-bottom:22px}
+.eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.main-title{font-family:var(--display);font-size:56px;line-height:.9;letter-spacing:.02em;color:var(--ink);margin-bottom:10px}
+.main-title span{color:var(--accent)}
+.intro{font-size:14px;color:var(--ink2);line-height:1.75;margin-bottom:6px;max-width:580px}
+.intro strong{color:var(--ink)}
+
+/* TESTER INFO BOX */
+.tester-box{background:var(--ink);color:var(--paper);padding:20px 24px;margin:20px 0 32px}
+.tester-box-label{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:12px}
+.tester-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tfield{display:flex;flex-direction:column;gap:5px}
+.tfield label{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
+.tfield input{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:var(--paper);padding:7px 10px;font-family:var(--mono);font-size:11px;outline:none;border-radius:1px}
+.tfield input:focus{border-color:var(--accent2)}
+
+/* SECTION */
+.q-section{margin-bottom:36px}
+.q-section-label{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px}
+.q-section-title{font-family:var(--display);font-size:26px;letter-spacing:.04em;color:var(--ink);padding-bottom:8px;border-bottom:1px solid var(--ink4);margin-bottom:16px}
+
+/* QUESTION */
+.q{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--paper3)}
+.q:last-child{border-bottom:none}
+.q-num{font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:var(--ink4);margin-bottom:4px}
+.q-text{font-size:14px;color:var(--ink);line-height:1.55;margin-bottom:8px;font-weight:600}
+.q-hint{font-size:12px;color:var(--ink3);font-style:italic;margin-bottom:8px;line-height:1.5}
+
+/* INPUTS */
+.q-textarea{width:100%;background:var(--paper2);border:1px solid var(--ink4);color:var(--ink2);padding:10px 12px;font-family:var(--body);font-size:13px;line-height:1.6;outline:none;resize:vertical;min-height:70px;border-radius:1px}
+.q-textarea:focus{border-color:var(--accent)}
+.q-input{width:100%;background:var(--paper2);border:1px solid var(--ink4);color:var(--ink2);padding:8px 12px;font-family:var(--body);font-size:13px;outline:none;border-radius:1px}
+.q-input:focus{border-color:var(--accent)}
+
+/* SCALE */
+.scale-wrap{display:flex;gap:0;border:1px solid var(--ink4);overflow:hidden;width:100%}
+.scale-btn{flex:1;padding:8px 4px;text-align:center;font-family:var(--mono);font-size:10px;cursor:pointer;background:var(--paper2);border:none;border-right:1px solid var(--ink4);color:var(--ink3);transition:all .15s;line-height:1.2}
+.scale-btn:last-child{border-right:none}
+.scale-btn:hover{background:var(--paper3);color:var(--ink)}
+.scale-btn.selected{background:var(--ink);color:var(--paper)}
+.scale-labels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--ink4);margin-top:4px;letter-spacing:.06em}
+
+/* RADIO / CHECK */
+.options{display:flex;flex-direction:column;gap:6px}
+.option{display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:7px 10px;background:var(--paper2);border:1px solid var(--ink4);transition:background .12s}
+.option:hover{background:var(--paper3)}
+.option.selected{background:var(--green2);border-color:var(--green)}
+.option input{margin-top:3px;flex-shrink:0;accent-color:var(--accent)}
+.option-text{font-size:13px;color:var(--ink2);line-height:1.4}
+
+/* MULTI-COL OPTIONS */
+.options-2col{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+
+/* SUBMIT */
+.submit-section{background:var(--ink);padding:24px 28px;margin-top:32px}
+.submit-note{font-size:13px;color:#d4d0c8;line-height:1.65;margin-bottom:16px}
+.submit-btn{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:12px 28px;background:var(--accent);border:none;color:white;cursor:pointer;transition:opacity .15s}
+.submit-btn:hover{opacity:.85}
+.print-btn{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:12px 28px;background:transparent;border:1px solid rgba(255,255,255,.2);color:#d4d0c8;cursor:pointer;margin-left:10px;transition:all .15s}
+.print-btn:hover{border-color:rgba(255,255,255,.5);color:white}
+
+/* PROGRESS */
+.progress-bar{position:fixed;top:48px;left:0;right:0;height:3px;background:var(--paper3);z-index:99}
+.progress-fill{height:100%;background:var(--accent);transition:width .3s;width:0%}
+
+/* THANK YOU */
+.thankyou{display:none;background:var(--green2);border:1px solid var(--green);padding:20px 24px;margin-top:20px}
+.thankyou-title{font-family:var(--display);font-size:24px;letter-spacing:.04em;color:var(--green);margin-bottom:8px}
+.thankyou-text{font-size:13px;color:var(--ink2);line-height:1.6}
+
+@media(max-width:600px){
+  .tester-fields{grid-template-columns:1fr}
+  .options-2col{grid-template-columns:1fr}
+  .main-title{font-size:40px}
+}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .nav,.progress-bar,.submit-section{display:none}
+  .page{padding:20px}
+  @page{margin:10mm;size:A4 portrait}
+  .q-textarea,.q-input{border:1px solid #ccc;min-height:40px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">BEING <span>HAware</span></div>
+  <div class="nav-right" style="display:flex;align-items:center;gap:12px">
+    <a href="../index.html" style="color:var(--ink4);text-decoration:none">🏠 Home</a>
+    <a href="../programme/foundation-level.html" style="color:var(--ink4);text-decoration:none">Foundation Level</a>
+    <span>Beta Tester Questionnaire</span>
+  </div>
+</nav>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<div class="page">
+  <div class="cover-rule"></div>
+  <div class="eyebrow">Being HAware · Foundation Level · Beta Test</div>
+  <div class="main-title">YOUR HONEST<br><span>EXPERIENCE</span></div>
+
+  <p class="intro">This questionnaire exists for one reason: to make Being HAware better. Not better in the eyes of the person who wrote it — better in the experience of the person doing it. That person is you. Your honest answers, however uncomfortable, are more valuable than any amount of encouragement.</p>
+  <p class="intro" style="margin-top:8px"><strong>There are no wrong answers.</strong> If something confused you, that is the programme's fault, not yours. If something didn't work for your body, that is important information. If you gave up — tell us when, and why. All of it counts.</p>
+  <p class="intro" style="margin-top:8px">Please answer every section you have experience of. Skip any question that genuinely does not apply. Take as long as you need.</p>
+
+  <!-- TESTER INFO -->
+  <div class="tester-box">
+    <div class="tester-box-label">About You — before we begin</div>
+    <div class="tester-fields">
+      <div class="tfield"><label>First name (or initials)</label><input type="text" id="t-name" placeholder="How we'll refer to you"></div>
+      <div class="tfield"><label>Age range</label><input type="text" id="t-age" placeholder="e.g. 35–44"></div>
+      <div class="tfield"><label>How did you receive the programme?</label><input type="text" id="t-source" placeholder="Family / friend / online / other"></div>
+      <div class="tfield"><label>Weeks completed (approx)</label><input type="text" id="t-weeks" placeholder="e.g. 4, or 'still going'"></div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 1: FIRST IMPRESSIONS ═══ -->
+  <div class="q-section">
+    <div class="q-section-label">Section 01</div>
+    <div class="q-section-title">First Impressions</div>
+
+    <div class="q">
+      <div class="q-num">Q01</div>
+      <div class="q-text">When you first opened the programme, what was your immediate reaction?</div>
+      <div class="q-hint">Honest first gut response — not what you thought you should feel.</div>
+      <textarea class="q-textarea" id="q01" placeholder="Your first impression..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q02</div>
+      <div class="q-text">How would you describe the overall look and feel of the document?</div>
+      <div class="q-hint">Visual design, layout, readability — does it feel professional? Trustworthy? Overwhelming? Accessible?</div>
+      <textarea class="q-textarea" id="q02" placeholder="Visual impression..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q03</div>
+      <div class="q-text">Did the cover and introduction make you want to read on?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q03" value="yes-immediately"> <span class="option-text">Yes — immediately. I wanted to get started.</span></label>
+        <label class="option"><input type="radio" name="q03" value="yes-gradually"> <span class="option-text">Yes — but it took a few pages to find my footing.</span></label>
+        <label class="option"><input type="radio" name="q03" value="uncertain"> <span class="option-text">Uncertain — I wasn't sure what I was looking at.</span></label>
+        <label class="option"><input type="radio" name="q03" value="no"> <span class="option-text">Not particularly — and here's why:</span></label>
+      </div>
+      <textarea class="q-textarea" id="q03b" placeholder="If not, what held you back?" style="margin-top:8px;min-height:50px"></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q04</div>
+      <div class="q-text">Before starting, how would you describe your existing fitness level?</div>
+      <div class="options options-2col">
+        <label class="option"><input type="radio" name="q04" value="none"> <span class="option-text">No regular exercise at all</span></label>
+        <label class="option"><input type="radio" name="q04" value="occasional"> <span class="option-text">Occasional movement, nothing structured</span></label>
+        <label class="option"><input type="radio" name="q04" value="some"> <span class="option-text">Some regular activity — walks, gym occasionally</span></label>
+        <label class="option"><input type="radio" name="q04" value="regular"> <span class="option-text">Regular structured training</span></label>
+        <label class="option"><input type="radio" name="q04" value="experienced"> <span class="option-text">Experienced — I train consistently and have done for years</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 2: THE PROGRAMME ITSELF ═══ -->
+  <div class="q-section">
+    <div class="q-section-label">Section 02</div>
+    <div class="q-section-title">The Programme</div>
+
+    <div class="q">
+      <div class="q-num">Q05</div>
+      <div class="q-text">How clear were the daily and weekly instructions?</div>
+      <div class="scale-wrap" id="scale-q05"></div>
+      <div class="scale-labels"><span>Very unclear</span><span>Perfectly clear</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q06</div>
+      <div class="q-text">Were the exercise descriptions in the Movement Guide easy to follow?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q06" value="very-easy"> <span class="option-text">Very easy — I understood every exercise immediately</span></label>
+        <label class="option"><input type="radio" name="q06" value="mostly"> <span class="option-text">Mostly — one or two exercises needed re-reading</span></label>
+        <label class="option"><input type="radio" name="q06" value="some-confusion"> <span class="option-text">Some confusion — I had to guess at a few</span></label>
+        <label class="option"><input type="radio" name="q06" value="often-unclear"> <span class="option-text">Often unclear — I wasn't confident I was doing them right</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q07</div>
+      <div class="q-text">Which exercises, if any, were confusing or difficult to understand from the description?</div>
+      <div class="q-hint">Name the exercise and describe what was unclear — this goes directly into improving the Movement Guide.</div>
+      <textarea class="q-textarea" id="q07" placeholder="Exercise name and what confused you..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q08</div>
+      <div class="q-text">Did you use the Exercise Key (the companion document explaining each movement in full)?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q08" value="yes-regularly"> <span class="option-text">Yes — I referred to it regularly alongside the programme</span></label>
+        <label class="option"><input type="radio" name="q08" value="yes-occasionally"> <span class="option-text">Yes — occasionally when I needed clarification</span></label>
+        <label class="option"><input type="radio" name="q08" value="no-didnt-know"> <span class="option-text">No — I didn't know it existed</span></label>
+        <label class="option"><input type="radio" name="q08" value="no-not-needed"> <span class="option-text">No — I didn't feel I needed it</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q09</div>
+      <div class="q-text">How did the programme difficulty feel week by week?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q09" value="too-easy"> <span class="option-text">Too easy throughout — I needed more challenge from the start</span></label>
+        <label class="option"><input type="radio" name="q09" value="right-level"> <span class="option-text">About right — challenging without being impossible</span></label>
+        <label class="option"><input type="radio" name="q09" value="too-hard"> <span class="option-text">Too hard — I struggled to complete the prescribed sessions</span></label>
+        <label class="option"><input type="radio" name="q09" value="variable"> <span class="option-text">Variable — some weeks fine, some weeks very hard</span></label>
+      </div>
+      <textarea class="q-textarea" id="q09b" placeholder="Tell us more — which weeks, which exercises..." style="margin-top:8px;min-height:50px"></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q10</div>
+      <div class="q-text">Did you use the filler exercises when the prescribed movement was beyond your current level?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q10" value="yes-helpful"> <span class="option-text">Yes — and they were helpful</span></label>
+        <label class="option"><input type="radio" name="q10" value="yes-unclear"> <span class="option-text">Yes — but I wasn't always sure I was choosing the right one</span></label>
+        <label class="option"><input type="radio" name="q10" value="no-didnt-know"> <span class="option-text">No — I didn't know fillers were available</span></label>
+        <label class="option"><input type="radio" name="q10" value="no-not-needed"> <span class="option-text">No — I could do all prescribed exercises</span></label>
+        <label class="option"><input type="radio" name="q10" value="no-skipped"> <span class="option-text">No — I skipped the exercise entirely</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q11</div>
+      <div class="q-text">How did the deload weeks (weeks 4, 8, and 12) feel in practice?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q11" value="very-useful"> <span class="option-text">Very useful — I felt genuinely recovered and ready</span></label>
+        <label class="option"><input type="radio" name="q11" value="somewhat"> <span class="option-text">Somewhat useful — I'm not sure I noticed a significant difference</span></label>
+        <label class="option"><input type="radio" name="q11" value="not-reached"> <span class="option-text">I haven't reached a deload week yet</span></label>
+        <label class="option"><input type="radio" name="q11" value="skipped"> <span class="option-text">I skipped it — it felt unnecessary</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q12</div>
+      <div class="q-text">How much time were you actually spending per session?</div>
+      <div class="options options-2col">
+        <label class="option"><input type="radio" name="q12" value="under-20"> <span class="option-text">Under 20 minutes</span></label>
+        <label class="option"><input type="radio" name="q12" value="20-30"> <span class="option-text">20–30 minutes</span></label>
+        <label class="option"><input type="radio" name="q12" value="30-45"> <span class="option-text">30–45 minutes</span></label>
+        <label class="option"><input type="radio" name="q12" value="45-60"> <span class="option-text">45–60 minutes</span></label>
+        <label class="option"><input type="radio" name="q12" value="over-60"> <span class="option-text">Over 60 minutes</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q13</div>
+      <div class="q-text">Was there anything in the programme structure you found confusing, frustrating, or poorly explained?</div>
+      <div class="q-hint">Be specific. This is exactly what we need to know.</div>
+      <textarea class="q-textarea" id="q13" placeholder="Specific issues with the programme structure..."></textarea>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 3: NUTRITION MATTERS ═══ -->
+  <div class="q-section">
+    <div class="q-section-label">Section 03</div>
+    <div class="q-section-title">Nutrition Matters</div>
+
+    <div class="q">
+      <div class="q-num">Q14</div>
+      <div class="q-text">Did you read the Nutrition Matters chapter?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q14" value="all"> <span class="option-text">All of it — cover to cover</span></label>
+        <label class="option"><input type="radio" name="q14" value="most"> <span class="option-text">Most of it</span></label>
+        <label class="option"><input type="radio" name="q14" value="some"> <span class="option-text">Some sections — the ones that seemed most relevant</span></label>
+        <label class="option"><input type="radio" name="q14" value="skimmed"> <span class="option-text">Skimmed it</span></label>
+        <label class="option"><input type="radio" name="q14" value="not-yet"> <span class="option-text">Not yet — I focused on the movement programme first</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q15</div>
+      <div class="q-text">Did any of the nutritional information challenge something you previously believed?</div>
+      <div class="q-hint">For example — views on dietary fat, carbohydrates, alcohol, supplementation, or the egg.</div>
+      <textarea class="q-textarea" id="q15" placeholder="What surprised you, if anything..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q16</div>
+      <div class="q-text">Did you make any changes to your eating or supplementation as a result?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q16" value="significant"> <span class="option-text">Yes — significant changes</span></label>
+        <label class="option"><input type="radio" name="q16" value="small"> <span class="option-text">Yes — small adjustments</span></label>
+        <label class="option"><input type="radio" name="q16" value="intend"> <span class="option-text">Not yet — but I intend to</span></label>
+        <label class="option"><input type="radio" name="q16" value="no"> <span class="option-text">No — my diet stayed the same</span></label>
+      </div>
+      <textarea class="q-textarea" id="q16b" placeholder="What changed, specifically..." style="margin-top:8px;min-height:50px"></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q17</div>
+      <div class="q-text">Was the Nutrition Matters chapter too long, too short, or about right?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q17" value="too-long"> <span class="option-text">Too long — I lost interest partway through</span></label>
+        <label class="option"><input type="radio" name="q17" value="right"> <span class="option-text">About right — thorough without being overwhelming</span></label>
+        <label class="option"><input type="radio" name="q17" value="too-short"> <span class="option-text">Too short — I wanted more depth on certain topics</span></label>
+      </div>
+      <textarea class="q-textarea" id="q17b" placeholder="Which topics wanted more or less?" style="margin-top:8px;min-height:50px"></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q18</div>
+      <div class="q-text">Did you read Going Deeper — the companion science volume?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q18" value="yes-all"> <span class="option-text">Yes — all of it</span></label>
+        <label class="option"><input type="radio" name="q18" value="yes-some"> <span class="option-text">Yes — certain sections</span></label>
+        <label class="option"><input type="radio" name="q18" value="no-didnt-know"> <span class="option-text">No — I didn't know it existed</span></label>
+        <label class="option"><input type="radio" name="q18" value="no-not-yet"> <span class="option-text">No — not yet, but I intend to</span></label>
+        <label class="option"><input type="radio" name="q18" value="no-not-interested"> <span class="option-text">No — the depth of science isn't what I'm looking for</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 4: CONSISTENCY AND BARRIERS ═══ -->
+  <div class="q-section">
+    <div class="q-section-label">Section 04</div>
+    <div class="q-section-title">Consistency and Barriers</div>
+
+    <div class="q">
+      <div class="q-num">Q19</div>
+      <div class="q-text">How many sessions per week were you actually completing on average?</div>
+      <div class="options options-2col">
+        <label class="option"><input type="radio" name="q19" value="5-plus"> <span class="option-text">5 or more — as prescribed</span></label>
+        <label class="option"><input type="radio" name="q19" value="3-4"> <span class="option-text">3–4 sessions</span></label>
+        <label class="option"><input type="radio" name="q19" value="1-2"> <span class="option-text">1–2 sessions</span></label>
+        <label class="option"><input type="radio" name="q19" value="less-than-1"> <span class="option-text">Less than one per week on average</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q20</div>
+      <div class="q-text">What was the most common reason for missing a session?</div>
+      <div class="options options-2col">
+        <label class="option"><input type="checkbox" name="q20" value="time"> <span class="option-text">Not enough time</span></label>
+        <label class="option"><input type="checkbox" name="q20" value="energy"> <span class="option-text">Too tired or low energy</span></label>
+        <label class="option"><input type="checkbox" name="q20" value="motivation"> <span class="option-text">Couldn't find the motivation</span></label>
+        <label class="option"><input type="checkbox" name="q20" value="soreness"> <span class="option-text">Soreness or physical discomfort</span></label>
+        <label class="option"><input type="checkbox" name="q20" value="injury"> <span class="option-text">Minor injury or pain</span></label>
+        <label class="option"><input type="checkbox" name="q20" value="travel"> <span class="option-text">Travel or change of routine</span></label>
+        <label class="option"><input type="checkbox" name="q20" value="confusion"> <span class="option-text">Unsure what I was supposed to do that day</span></label>
+        <label class="option"><input type="checkbox" name="q20" value="rarely-missed"> <span class="option-text">I rarely missed sessions</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q21</div>
+      <div class="q-text">Did you experience a plateau — a period where progress seemed to stop?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q21" value="yes-handled"> <span class="option-text">Yes — and I worked through it using the programme guidance</span></label>
+        <label class="option"><input type="radio" name="q21" value="yes-stuck"> <span class="option-text">Yes — and I wasn't sure what to do about it</span></label>
+        <label class="option"><input type="radio" name="q21" value="yes-stopped"> <span class="option-text">Yes — and it's why I reduced my effort or stopped</span></label>
+        <label class="option"><input type="radio" name="q21" value="no"> <span class="option-text">No — progress felt consistent throughout</span></label>
+        <label class="option"><input type="radio" name="q21" value="not-far-enough"> <span class="option-text">I haven't been doing it long enough to know</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q22</div>
+      <div class="q-text">If you stopped or significantly reduced your effort — when did that happen and why?</div>
+      <div class="q-hint">If you're still going strong, tell us that instead. Both are equally useful.</div>
+      <textarea class="q-textarea" id="q22" placeholder="When, what week, what happened..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q23</div>
+      <div class="q-text">Was there anything in the programme's philosophy — Intention, Expectation, Attention — that actually helped you keep going?</div>
+      <textarea class="q-textarea" id="q23" placeholder="Did the philosophy make a practical difference, or did it feel like background noise?"></textarea>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 5: RESULTS AND CHANGES ═══ -->
+  <div class="q-section">
+    <div class="q-section-label">Section 05</div>
+    <div class="q-section-title">Results and Changes</div>
+
+    <div class="q">
+      <div class="q-num">Q24</div>
+      <div class="q-text">Overall, how satisfied are you with the results so far?</div>
+      <div class="scale-wrap" id="scale-q24"></div>
+      <div class="scale-labels"><span>Not at all satisfied</span><span>Extremely satisfied</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q25</div>
+      <div class="q-text">What specific physical changes have you noticed, if any?</div>
+      <div class="options options-2col">
+        <label class="option"><input type="checkbox" name="q25" value="strength"> <span class="option-text">Increased strength</span></label>
+        <label class="option"><input type="checkbox" name="q25" value="endurance"> <span class="option-text">Better endurance</span></label>
+        <label class="option"><input type="checkbox" name="q25" value="weight"> <span class="option-text">Body composition change</span></label>
+        <label class="option"><input type="checkbox" name="q25" value="sleep"> <span class="option-text">Better sleep quality</span></label>
+        <label class="option"><input type="checkbox" name="q25" value="energy"> <span class="option-text">More energy day to day</span></label>
+        <label class="option"><input type="checkbox" name="q25" value="pain"> <span class="option-text">Reduction in aches or pain</span></label>
+        <label class="option"><input type="checkbox" name="q25" value="mobility"> <span class="option-text">Better mobility or flexibility</span></label>
+        <label class="option"><input type="checkbox" name="q25" value="posture"> <span class="option-text">Improved posture</span></label>
+        <label class="option"><input type="checkbox" name="q25" value="confidence"> <span class="option-text">Greater physical confidence</span></label>
+        <label class="option"><input type="checkbox" name="q25" value="nothing-yet"> <span class="option-text">Nothing noticeable yet</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q26</div>
+      <div class="q-text">Have you noticed any mental or emotional changes alongside the physical?</div>
+      <div class="q-hint">Changes in mood, stress levels, how you think about your body, how you approach difficult things.</div>
+      <textarea class="q-textarea" id="q26" placeholder="Mental and emotional shifts, if any..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q27</div>
+      <div class="q-text">What is the single most valuable thing the programme has given you so far?</div>
+      <textarea class="q-textarea" id="q27" placeholder="One thing — the most important..."></textarea>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 6: THE DOCUMENT ITSELF ═══ -->
+  <div class="q-section">
+    <div class="q-section-label">Section 06</div>
+    <div class="q-section-title">The Document Itself</div>
+
+    <div class="q">
+      <div class="q-num">Q28</div>
+      <div class="q-text">How did you access the programme?</div>
+      <div class="options options-2col">
+        <label class="option"><input type="radio" name="q28" value="browser"> <span class="option-text">In a web browser on a computer</span></label>
+        <label class="option"><input type="radio" name="q28" value="phone-browser"> <span class="option-text">In a browser on my phone</span></label>
+        <label class="option"><input type="radio" name="q28" value="printed"> <span class="option-text">Printed it out</span></label>
+        <label class="option"><input type="radio" name="q28" value="tablet"> <span class="option-text">On a tablet</span></label>
+        <label class="option"><input type="radio" name="q28" value="mixed"> <span class="option-text">A mixture of the above</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q29</div>
+      <div class="q-text">How well did the document work on the device you used most often?</div>
+      <div class="scale-wrap" id="scale-q29"></div>
+      <div class="scale-labels"><span>Very poorly</span><span>Perfectly</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q30</div>
+      <div class="q-text">Did you use the navigation (the chapter tabs at the top) to move between sections?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q30" value="yes-intuitive"> <span class="option-text">Yes — it was intuitive and easy</span></label>
+        <label class="option"><input type="radio" name="q30" value="yes-took-time"> <span class="option-text">Yes — but it took a moment to figure out</span></label>
+        <label class="option"><input type="radio" name="q30" value="no-scrolled"> <span class="option-text">No — I scrolled through the whole document</span></label>
+        <label class="option"><input type="radio" name="q30" value="no-didnt-notice"> <span class="option-text">No — I didn't notice the navigation</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q31</div>
+      <div class="q-text">Did you use the Print / PDF function?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q31" value="yes-worked"> <span class="option-text">Yes — it worked well</span></label>
+        <label class="option"><input type="radio" name="q31" value="yes-issues"> <span class="option-text">Yes — but there were formatting issues</span></label>
+        <label class="option"><input type="radio" name="q31" value="no-didnt-need"> <span class="option-text">No — I didn't need to print it</span></label>
+        <label class="option"><input type="radio" name="q31" value="no-didnt-know"> <span class="option-text">No — I didn't know that was possible</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q32</div>
+      <div class="q-text">Did you use the Progress Tracker (the daily tick-box section)?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q32" value="yes-consistently"> <span class="option-text">Yes — consistently</span></label>
+        <label class="option"><input type="radio" name="q32" value="yes-sometimes"> <span class="option-text">Sometimes — not every session</span></label>
+        <label class="option"><input type="radio" name="q32" value="no-paper"> <span class="option-text">No — I tracked on paper instead</span></label>
+        <label class="option"><input type="radio" name="q32" value="no-didnt"> <span class="option-text">No — I didn't track at all</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q33</div>
+      <div class="q-text">Was there anything missing from the document that you expected to find or felt you needed?</div>
+      <textarea class="q-textarea" id="q33" placeholder="What was absent that would have helped..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q34</div>
+      <div class="q-text">Was there anything in the document that you felt was unnecessary, too long, or could be cut?</div>
+      <textarea class="q-textarea" id="q34" placeholder="What could be reduced or removed..."></textarea>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 7: THE VOICE ═══ -->
+  <div class="q-section">
+    <div class="q-section-label">Section 07</div>
+    <div class="q-section-title">The Writing and Voice</div>
+
+    <div class="q">
+      <div class="q-num">Q35</div>
+      <div class="q-text">How would you describe the way the programme speaks to you?</div>
+      <div class="options options-2col">
+        <label class="option"><input type="checkbox" name="q35" value="warm"> <span class="option-text">Warm and encouraging</span></label>
+        <label class="option"><input type="checkbox" name="q35" value="honest"> <span class="option-text">Honest and direct</span></label>
+        <label class="option"><input type="checkbox" name="q35" value="authoritative"> <span class="option-text">Authoritative and knowledgeable</span></label>
+        <label class="option"><input type="checkbox" name="q35" value="preachy"> <span class="option-text">Occasionally preachy</span></label>
+        <label class="option"><input type="checkbox" name="q35" value="overwhelming"> <span class="option-text">Overwhelming in places</span></label>
+        <label class="option"><input type="checkbox" name="q35" value="accessible"> <span class="option-text">Accessible — easy to understand</span></label>
+        <label class="option"><input type="checkbox" name="q35" value="inspiring"> <span class="option-text">Genuinely inspiring</span></label>
+        <label class="option"><input type="checkbox" name="q35" value="clinical"> <span class="option-text">Too clinical or detached</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q36</div>
+      <div class="q-text">Was there any passage, section, or phrase that genuinely stuck with you?</div>
+      <div class="q-hint">Something you found yourself thinking about later, or that changed how you saw something.</div>
+      <textarea class="q-textarea" id="q36" placeholder="The words or ideas that stayed with you..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q37</div>
+      <div class="q-text">Was there any section where the writing lost you — felt too dense, too long, or too abstract?</div>
+      <textarea class="q-textarea" id="q37" placeholder="Where the writing didn't land..."></textarea>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 8: RECOMMENDATION ═══ -->
+  <div class="q-section">
+    <div class="q-section-label">Section 08</div>
+    <div class="q-section-title">Recommendation and Future</div>
+
+    <div class="q">
+      <div class="q-num">Q38</div>
+      <div class="q-text">How likely are you to recommend Being HAware to someone you care about?</div>
+      <div class="scale-wrap" id="scale-q38"></div>
+      <div class="scale-labels"><span>Would not recommend</span><span>Would absolutely recommend</span></div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q39</div>
+      <div class="q-text">Who would you recommend it to — what kind of person is this programme for?</div>
+      <textarea class="q-textarea" id="q39" placeholder="Describe the person you'd give this to..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q40</div>
+      <div class="q-text">Who would you not recommend it to — who is this programme not for?</div>
+      <div class="q-hint">Honest answer. Every programme has a wrong audience as well as a right one.</div>
+      <textarea class="q-textarea" id="q40" placeholder="Who shouldn't attempt this, and why..."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q41</div>
+      <div class="q-text">Would you be interested in an Intermediate Level — harder movements, deeper training, and the full Mind Works section?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q41" value="yes-definitely"> <span class="option-text">Yes — absolutely. Take my name down now.</span></label>
+        <label class="option"><input type="radio" name="q41" value="yes-when-ready"> <span class="option-text">Yes — once I've completed Foundation Level properly</span></label>
+        <label class="option"><input type="radio" name="q41" value="maybe"> <span class="option-text">Maybe — depends on how Foundation Level goes</span></label>
+        <label class="option"><input type="radio" name="q41" value="no"> <span class="option-text">No — Foundation Level is the right level for me long-term</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q42</div>
+      <div class="q-text">If Being HAware produced a printed and bound version of the programme, would you buy it?</div>
+      <div class="options options-2col">
+        <label class="option"><input type="radio" name="q42" value="yes-any-price"> <span class="option-text">Yes — at any reasonable price</span></label>
+        <label class="option"><input type="radio" name="q42" value="yes-under-20"> <span class="option-text">Yes — if it were under £20</span></label>
+        <label class="option"><input type="radio" name="q42" value="yes-under-40"> <span class="option-text">Yes — if it were under £40</span></label>
+        <label class="option"><input type="radio" name="q42" value="no-digital"> <span class="option-text">No — I prefer the digital version</span></label>
+        <label class="option"><input type="radio" name="q42" value="no-free"> <span class="option-text">No — I wouldn't pay for something available free</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-num">Q43</div>
+      <div class="q-text">Is there anything else you want to say — anything the questions haven't asked?</div>
+      <div class="q-hint">This is the open floor. Use it if you have something to add. Leave it blank if you don't.</div>
+      <textarea class="q-textarea" id="q43" placeholder="Anything at all..." style="min-height:100px"></textarea>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-section">
+    <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px">Thank you</div>
+    <div class="submit-note">Every answer you've given here goes directly to improving Being HAware — for you, and for everyone who comes to it after you. This is what beta testing actually means: your experience shapes the next version. It is a genuine contribution, and it is genuinely appreciated.</div>
+    <button class="submit-btn" onclick="submitForm()">Submit My Responses</button>
+    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <div class="thankyou" id="thankyou">
+    <div class="thankyou-title">Received. Thank you.</div>
+    <div class="thankyou-text">Your responses have been noted. If you left contact details, Martin will be in touch. Health Awareness Is The Way — and you've just helped make it a better one.<br><br><strong>Being HAware — Foundation Level</strong><br>beinghaware.github.io/Being-HAware</div>
+  </div>
+
+</div><!-- end .page -->
+
+<script>
+/* ── SCALE BUTTONS ── */
+function buildScale(id, n) {
+  var wrap = document.getElementById('scale-'+id);
+  if (!wrap) return;
+  for (var i = 1; i <= n; i++) {
+    var btn = document.createElement('button');
+    btn.className = 'scale-btn';
+    btn.textContent = i;
+    btn.setAttribute('data-val', i);
+    btn.setAttribute('data-scale', id);
+    btn.onclick = (function(b, scaleId) {
+      return function() {
+        var allBtns = document.querySelectorAll('.scale-btn[data-scale="'+scaleId+'"]');
+        allBtns.forEach(function(x){ x.classList.remove('selected'); });
+        b.classList.add('selected');
+      };
+    })(btn, id);
+    wrap.appendChild(btn);
+  }
+}
+buildScale('q05', 10);
+buildScale('q24', 10);
+buildScale('q29', 10);
+buildScale('q38', 10);
+
+/* ── OPTION HIGHLIGHTING ── */
+document.querySelectorAll('.option input[type="radio"]').forEach(function(radio) {
+  radio.addEventListener('change', function() {
+    var name = this.name;
+    document.querySelectorAll('.option input[name="'+name+'"]').forEach(function(r) {
+      r.closest('.option').classList.remove('selected');
+    });
+    this.closest('.option').classList.add('selected');
+  });
+});
+
+document.querySelectorAll('.option input[type="checkbox"]').forEach(function(cb) {
+  cb.addEventListener('change', function() {
+    this.closest('.option').classList.toggle('selected', this.checked);
+  });
+});
+
+/* ── PROGRESS ── */
+function updateProgress() {
+  var inputs = document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked, textarea, input[type="text"]');
+  var filled = 0;
+  inputs.forEach(function(el) {
+    if (el.type === 'radio' || el.type === 'checkbox') filled++;
+    else if (el.value.trim().length > 2) filled++;
+  });
+  var total = 43;
+  var pct = Math.min(100, Math.round((filled / total) * 100));
+  document.getElementById('progress').style.width = pct + '%';
+}
+document.addEventListener('change', updateProgress);
+document.addEventListener('input', updateProgress);
+
+/* ── COLLECT RESPONSES ── */
+function collectResponses() {
+  var out = {};
+  out['tester-name']  = document.getElementById('t-name').value;
+  out['tester-age']   = document.getElementById('t-age').value;
+  out['tester-source']= document.getElementById('t-source').value;
+  out['tester-weeks'] = document.getElementById('t-weeks').value;
+
+  var textareas = document.querySelectorAll('textarea[id^="q"]');
+  textareas.forEach(function(ta){ out[ta.id] = ta.value; });
+
+  var radios = document.querySelectorAll('input[type="radio"]:checked');
+  radios.forEach(function(r){ out[r.name] = r.value; });
+
+  var checks = document.querySelectorAll('input[type="checkbox"]:checked');
+  checks.forEach(function(c){
+    if (!out[c.name]) out[c.name] = [];
+    out[c.name].push(c.value);
+  });
+
+  var scales = document.querySelectorAll('.scale-btn.selected');
+  scales.forEach(function(b){ out['scale-'+b.getAttribute('data-scale')] = b.getAttribute('data-val'); });
+
+  return out;
+}
+
+/* ── SUBMIT ── */
+function submitForm() {
+  var responses = collectResponses();
+  var name = responses['tester-name'] || 'Beta Tester';
+
+  // Build form data for Formspree
+  var formData = new FormData();
+  formData.append('_subject', 'Being HAware Beta Response — ' + name);
+  formData.append('Tester Name', responses['tester-name'] || '—');
+  formData.append('Age Range', responses['tester-age'] || '—');
+  formData.append('Source', responses['tester-source'] || '—');
+  formData.append('Weeks Completed', responses['tester-weeks'] || '—');
+
+  var qLabels = {
+    'q01':'First impression',
+    'q02':'Look and feel',
+    'q03':'Cover drew you in',
+    'q03b':'If not — why',
+    'q04':'Fitness level before',
+    'scale-q05':'Clarity of instructions (1-10)',
+    'q06':'Exercise descriptions',
+    'q07':'Confusing exercises',
+    'q08':'Used Exercise Key',
+    'q09':'Difficulty level',
+    'q09b':'Difficulty detail',
+    'q10':'Used filler exercises',
+    'q11':'Deload weeks',
+    'q12':'Time per session',
+    'q13':'Structure issues',
+    'q14':'Read Nutrition Matters',
+    'q15':'Nutritional surprises',
+    'q16':'Diet changes made',
+    'q16b':'Changes detail',
+    'q17':'Nutrition chapter length',
+    'q17b':'Length detail',
+    'q18':'Read Going Deeper',
+    'q19':'Sessions per week',
+    'q20':'Reasons for missing',
+    'q21':'Plateau experience',
+    'q22':'When and why stopped',
+    'q23':'IEA philosophy helped',
+    'scale-q24':'Overall satisfaction (1-10)',
+    'q25':'Physical changes noticed',
+    'q26':'Mental and emotional changes',
+    'q27':'Most valuable thing',
+    'q28':'How accessed',
+    'scale-q29':'Device performance (1-10)',
+    'q30':'Used navigation',
+    'q31':'Used print function',
+    'q32':'Used progress tracker',
+    'q33':'What was missing',
+    'q34':'What could be cut',
+    'q35':'How voice described',
+    'q36':'What stuck with you',
+    'q37':'Where writing lost you',
+    'scale-q38':'Likelihood to recommend (1-10)',
+    'q39':'Who would you recommend to',
+    'q40':'Who is it not for',
+    'q41':'Interest in Intermediate Level',
+    'q42':'Would buy printed version',
+    'q43':'Anything else'
+  };
+
+  Object.keys(qLabels).forEach(function(key) {
+    var val = responses[key];
+    if (val) {
+      if (Array.isArray(val)) val = val.join(', ');
+      formData.append(qLabels[key], val);
+    }
+  });
+
+  // Show sending state
+  var btn = document.querySelector('.submit-btn');
+  btn.textContent = 'Sending...';
+  btn.style.opacity = '.6';
+  btn.disabled = true;
+
+  // Submit to Formspree
+  fetch('https://formspree.io/f/xpqvnapd', {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(response) {
+    if (response.ok) {
+      // Also trigger local download as backup
+      var lines = ['BEING HAware — Beta Test Responses', '================================', ''];
+      lines.push('Tester: ' + (responses['tester-name']||'—'));
+      lines.push('Age range: ' + (responses['tester-age']||'—'));
+      lines.push('Source: ' + (responses['tester-source']||'—'));
+      lines.push('Weeks completed: ' + (responses['tester-weeks']||'—'));
+      lines.push('');
+      var qNums = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43'];
+      qNums.forEach(function(n) {
+        var key = 'q'+n;
+        var val = responses[key] || responses['scale-q'+n] || '';
+        if (Array.isArray(val)) val = val.join(', ');
+        if (val) {
+          lines.push('Q'+n+': ' + val);
+          if (responses[key+'b']) lines.push('  + ' + responses[key+'b']);
+        }
+      });
+      var blob = new Blob([lines.join('\n')], {type:'text/plain'});
+      var url  = URL.createObjectURL(blob);
+      var a    = document.createElement('a');
+      a.href   = url;
+      a.download = 'being-haaware-beta-' + name.toLowerCase().replace(/\s+/g,'-') + '.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+
+      document.getElementById('thankyou').style.display = 'block';
+      document.getElementById('thankyou').scrollIntoView({behavior:'smooth'});
+    } else {
+      btn.textContent = 'Submit My Responses';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      alert('Something went wrong sending your responses. Please try again or save the page and send it manually.');
+    }
+  }).catch(function() {
+    // Network error — fall back to download only
+    btn.textContent = 'Submit My Responses';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    alert('Could not connect to send your responses automatically. Your answers have been saved locally — please email the downloaded file to your programme provider.');
+    var lines = ['BEING HAware — Beta Test Responses (offline backup)', ''];
+    lines.push('Tester: ' + (responses['tester-name']||'—'));
+    var blob = new Blob([lines.join('\n')], {type:'text/plain'});
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    a.href = url;
+    a.download = 'being-haaware-beta-' + name.toLowerCase().replace(/\s+/g,'-') + '.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+}
+</script>
+</body>
+</html>

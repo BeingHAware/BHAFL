@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Being HAware — Illustrated Quick Reference Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+:root{--paper:#f5f2eb;--ink:#1c1a16;--ink3:#8a8780;--ink4:#c4bfb4;--accent:#c4501a;--display:'Bebas Neue',sans-serif;--mono:'DM Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);-webkit-font-smoothing:antialiased}
+.site-nav{background:var(--ink);height:48px;display:flex;align-items:center;padding:0 20px;gap:8px;position:sticky;top:0;z-index:300}
+.site-nav-brand{font-family:var(--display);font-size:15px;letter-spacing:.06em;color:var(--paper);white-space:nowrap}
+.site-nav-brand span{color:#e8a882}
+.site-nav-right{margin-left:auto;display:flex;gap:4px}
+.site-nav-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;background:rgba(255,255,255,.08);color:var(--ink4);text-decoration:none;display:inline-block;white-space:nowrap}
+.site-page{max-width:900px;margin:0 auto;padding:0 28px}
+@media print{.site-nav{display:none}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="site-nav-brand">BEING <span>HAware</span></div>
+  <div class="site-nav-right">
+    <a class="site-nav-btn" href="../index.html">🏠 Home</a>
+    <a class="site-nav-btn" href="../programme/foundation-level.html">Foundation Level</a>
+    <a class="site-nav-btn" href="../programme/exercise-key.html">Full Exercise Key</a>
+  </div>
+</nav>
+<div class="site-page">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.ha-wrap{font-family:'Crimson Pro',Georgia,serif;background:transparent;padding:.5rem 0 1.5rem}
+.ha-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:1px solid #c4bfb4;padding-bottom:10px}
+.ha-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;color:#1c1a16}
+.ha-brand span{color:#c4501a}
+.ha-controls{display:flex;gap:6px;flex-wrap:wrap}
+.ha-filter{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border:1px solid #c4bfb4;background:transparent;color:#8a8780;cursor:pointer;transition:all .15s;border-radius:1px}
+.ha-filter:hover{border-color:#4a4740;color:#1c1a16}
+.ha-filter.active{background:#1c1a16;border-color:#1c1a16;color:#f5f2eb}
+.ha-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.ha-card{background:#f5f2eb;border:1px solid #c4bfb4;position:relative;overflow:hidden;cursor:pointer;transition:all .18s}
+.ha-card:hover{border-color:#4a4740}
+.ha-card.expanded{border-color:#1c1a16}
+.ha-card-top{display:flex;gap:0}
+.ha-color-bar{width:4px;flex-shrink:0}
+.ha-card-main{padding:11px 13px;flex:1;min-width:0}
+.ha-eyebrow{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:#8a8780;margin-bottom:4px}
+.ha-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.04em;color:#1c1a16;line-height:1;margin-bottom:5px}
+.ha-muscles{font-size:11px;color:#4a4740;font-style:italic;margin-bottom:7px}
+.ha-desc{font-size:12px;color:#4a4740;line-height:1.5}
+.ha-svg-wrap{width:90px;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:8px 6px}
+.ha-detail{display:none;padding:0 13px 12px 17px;border-top:1px solid #e4dfd3;margin-top:0}
+.ha-detail.open{display:block}
+.ha-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ha-det-box{padding:8px 10px}
+.ha-det-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:#8a8780;margin-bottom:4px}
+.ha-det-val{font-size:11px;color:#4a4740;line-height:1.5}
+.ha-folly{background:#f5e0e0;border-left:3px solid #7a1a1a;padding:8px 10px;margin-top:8px}
+.ha-folly-head{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:#7a1a1a;margin-bottom:3px}
+.ha-folly-val{font-size:11px;color:#5a2020;line-height:1.5}
+.ha-folly-fix{font-size:11px;color:#2d6a4f;margin-top:4px;padding-left:12px;position:relative}
+.ha-folly-fix::before{content:'→';position:absolute;left:0;color:#2d6a4f}
+.ha-prog{background:#d4ede3;border-left:3px solid #2d6a4f;padding:8px 10px;margin-top:8px}
+.ha-prog-head{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:#2d6a4f;margin-bottom:3px}
+.ha-prog-val{font-size:11px;color:#1c1a16;line-height:1.5}
+.ha-diff-pip{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:2px}
+.ha-count{font-family:'DM Mono',monospace;font-size:9px;color:#8a8780;margin-bottom:10px;letter-spacing:.06em}
+</style>
+
+<div class="ha-wrap">
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Being HAware exercise reference guide — tap any exercise to see form cues, common mistakes, and progressions</h2>
+
+<div class="ha-header">
+  <div class="ha-brand">BEING <span>HAware</span></div>
+  <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#8a8780">Exercise Reference</div>
+</div>
+
+<div class="ha-controls" style="margin-bottom:12px">
+  <button class="ha-filter active" onclick="filterEx('all',this)">All</button>
+  <button class="ha-filter" onclick="filterEx('Upper',this)">Upper</button>
+  <button class="ha-filter" onclick="filterEx('Lower',this)">Lower</button>
+  <button class="ha-filter" onclick="filterEx('Core',this)">Core</button>
+  <button class="ha-filter" onclick="filterEx('Beginner',this)">Beginner</button>
+  <button class="ha-filter" onclick="filterEx('Intermediate',this)">Intermediate</button>
+  <button class="ha-filter" onclick="filterEx('Advanced',this)">Advanced</button>
+</div>
+
+<div class="ha-count" id="ha-count">20 exercises</div>
+<div class="ha-grid" id="ha-grid"></div>
+</div>
+
+<script>
+const COLORS = {
+  Upper:{bar:'#c4501a',bg:'#fde8df'},
+  Lower:{bar:'#9a6c10',bg:'#f5e8c0'},
+  Core:{bar:'#8a8780',bg:'#ede9df'}
+};
+
+const exercises = [
+  {name:'Hollow Body Hold',cat:'Core',move:'Isometric',muscles:'Abs, Hip Flexors, Quads',desc:'Lie on back, press lower back flat, lift into banana shape.',mistake:'Arching lower back',fix:'Think of pressing your navel to the spine. Every gap between back and floor is energy lost.',prog:'Tuck → Full → Rock',diff:'Beginner → Advanced'},
+  {name:'Glute Bridge',cat:'Lower',move:'Hip Extension',muscles:'Glutes, Hamstrings',desc:'Lift hips high by squeezing glutes, driving through the heels.',mistake:'Arching lower back instead of squeezing',fix:'Drive through heels, squeeze the glutes hard at the top and hold two seconds. Feel it there — not in your spine.',prog:'Two legs → Single leg',diff:'Beginner → Intermediate'},
+  {name:'Scapular Pull',cat:'Upper',move:'Scapular',muscles:'Upper Back, Lats',desc:'Hang from a bar and pull shoulder blades down without bending the arms.',mistake:'Bending the elbows',fix:'Think "shoulders into back pockets." Arms stay straight. Only the scapulae move.',prog:'Basic scap pulls → weighted hang',diff:'Beginner'},
+  {name:'Pike Push-Up',cat:'Upper',move:'Vertical Push',muscles:'Shoulders, Triceps',desc:'Start in downward dog, lower your head toward the ground between your hands.',mistake:'Hips too low — it becomes a push-up',fix:'The higher the hips, the more shoulder work. Aim for an inverted V that makes you feel the front deltoid loading.',prog:'Elevated feet → Full → Handstand push-up',diff:'Intermediate'},
+  {name:'Pistol Squat',cat:'Lower',move:'Single Leg Squat',muscles:'Quads, Glutes',desc:'Full single leg squat with the opposite leg extended forward.',mistake:'Losing balance — heel rising',fix:'Reach the non-working leg forward as a counterweight. Sit back and down, not just down.',prog:'Box assisted → TRX → Full',diff:'Advanced'},
+  {name:'L-Sit',cat:'Core',move:'Compression',muscles:'Abs, Hip Flexors',desc:'Support the body on hands and lift the legs parallel to the ground.',mistake:'Rounded back and sagging hips',fix:'Protract the scapulae, push the floor away, and think of your hips rising rather than legs lifting.',prog:'Tuck → One leg → Full',diff:'Intermediate → Advanced'},
+  {name:'Muscle-Up',cat:'Upper',move:'Explosive Pull',muscles:'Back, Chest, Triceps',desc:'An explosive pull-up that transitions over the bar into a dip.',mistake:'Poor timing on the transition',fix:'The pull and the transition are one fluid movement — not a pull-up and then a push. The false grip is your friend here.',prog:'Negatives → Band assisted → Full',diff:'Advanced'},
+  {name:'Dead Bug',cat:'Core',move:'Anti-extension',muscles:'Abs, Core stabilisers',desc:'On your back, extend the opposite arm and leg while keeping the lower back flat.',mistake:'Arching the lower back as the limbs lower',fix:'Press the lower back into the floor before the movement begins and maintain it throughout. Slow is hard. Slow is correct.',prog:'Bent knee → Straight leg → Weighted',diff:'Beginner'},
+  {name:'Dragon Flag',cat:'Core',move:'Advanced Isometric',muscles:'Abs, Lats',desc:'Grip behind the head and lift the entire body into a horizontal flag position.',mistake:'Losing the hollow body position',fix:'The body is one rigid unit. If you pike or arch, the flag fails. Build hollow body hold before attempting this.',prog:'Tuck → Half → Full',diff:'Advanced'},
+  {name:'Windshield Wiper',cat:'Core',move:'Rotation',muscles:'Obliques',desc:'Hanging from a bar, rotate the legs from side to side like a windscreen wiper.',mistake:'Using momentum to swing the legs',fix:'Control the lowering. The obliques work hardest on the way down, not up. Never let gravity drive this.',prog:'Bent knees → Straight legs → Weighted',diff:'Advanced'},
+  {name:'Nordic Curl',cat:'Lower',move:'Knee Flexion',muscles:'Hamstrings',desc:'Anchor the feet, then lower the torso toward the floor under control.',mistake:'Using the hips to compensate',fix:'The hips stay extended throughout. Only the knees flex. This is the hardest hamstring exercise available without equipment.',prog:'Negative only → Partial → Full',diff:'Intermediate → Advanced'},
+  {name:'Bodyweight Squat',cat:'Lower',move:'Squat',muscles:'Quads, Glutes',desc:'Sit back and down until the hips are below parallel, then stand.',mistake:'Knees caving inward',fix:'Drive the knees out actively over the little toes. Think of spreading the floor beneath your feet.',prog:'Assisted → Full → Jump squat',diff:'Beginner'},
+  {name:'Reverse Lunge',cat:'Lower',move:'Lunge',muscles:'Quads, Glutes',desc:'Step backward and lower until the rear knee hovers above the floor.',mistake:'Front knee travelling past the toes',fix:'Keep the front shin vertical. If the knee tracks forward, step back further. The front heel should stay fully grounded.',prog:'Bodyweight → Elevated rear foot → Weighted',diff:'Beginner → Intermediate'},
+  {name:'Calf Raise',cat:'Lower',move:'Plantarflexion',muscles:'Calves',desc:'Rise onto the toes through the full range of motion.',mistake:'Short range — not reaching full plantarflexion',fix:'Pause at the top and lower slowly to a full stretch at the bottom. The stretch phase is where the calf grows.',prog:'Two legs → Single leg → Weighted',diff:'Beginner'},
+  {name:'Push-Up',cat:'Upper',move:'Horizontal Push',muscles:'Chest, Triceps, Front Shoulders',desc:'Maintain a rigid plank and lower until the chest touches the ground.',mistake:'Elbows flaring out wide',fix:'Elbows should track at roughly 45° from the body — not tucked in tight, not flared wide. Think of making an arrow shape, not a T.',prog:'Incline → Full → Archer → One-arm',diff:'Beginner → Advanced'},
+  {name:'Dip',cat:'Upper',move:'Vertical Push',muscles:'Chest, Triceps',desc:'Lower between parallel bars until the upper arm is at least parallel to the ground.',mistake:'Flaring elbows outward',fix:'Keep the elbows tracking behind the body throughout. Forward lean increases chest involvement; upright posture hits triceps more.',prog:'Bench → Parallel bars → Ring dips',diff:'Intermediate'},
+  {name:'Inverted Row',cat:'Upper',move:'Horizontal Pull',muscles:'Back, Biceps, Rear Deltoid',desc:'Hang beneath a bar and pull the chest to it, keeping the body rigid.',mistake:'Chin leading instead of the chest',fix:'Initiate with the shoulder blades pulling together and down. The chin follows the chest — it never leads.',prog:'High bar → Feet elevated → Ring rows',diff:'Beginner → Intermediate'},
+  {name:'Chin-Up',cat:'Upper',move:'Vertical Pull',muscles:'Back, Biceps',desc:'Underhand grip, pull until the chin clears the bar through full range.',mistake:'Partial range — not going to dead hang',fix:'Start each rep from a true dead hang, scapulae elevated. Finish with the chin clearly above the bar. Partial reps build partial strength.',prog:'Negatives → Band → Full → Weighted',diff:'Intermediate'},
+  {name:'Hanging Leg Raise',cat:'Core',move:'Hip Flexion',muscles:'Abs, Hip Flexors',desc:'Hang from a bar and raise the legs to horizontal or above.',mistake:'Swinging and using momentum',fix:'Control the lowering completely. The eccentric is where most people give up their gains. Dead stop at the bottom before each rep.',prog:'Knees bent → Legs straight → Toes to bar',diff:'Intermediate → Advanced'},
+  {name:'Dead Hang',cat:'Upper',move:'Grip and Shoulder',muscles:'Lats, Grip, Shoulder Stabilisers',desc:'Hang passively then actively pull the shoulder blades down without bending the arms.',mistake:'Permanently shrugging — scapulae never depress',fix:'Let the shoulders shrug fully to start (passive hang), then consciously pull the blades down (active hang). Feel the difference. Train both.',prog:'Passive → Active → Weighted',diff:'Beginner'},
+];
+
+function diffDots(d){
+  const lvls = d.toLowerCase();
+  const isAdv = lvls.includes('advanced');
+  const isInt = lvls.includes('intermediate');
+  const isBeg = lvls.includes('beginner');
+  const count = isAdv ? 3 : isInt ? 2 : 1;
+  let html = '';
+  for(let i=0;i<3;i++){
+    const filled = i < count;
+    html += `<span class="ha-diff-pip" style="background:${filled?'#1c1a16':'#c4bfb4'}"></span>`;
+  }
+  return html;
+}
+
+function makeSVG(ex){
+  const c = ex.cat;
+  const stroke = COLORS[c]?.bar || '#8a8780';
+  const svgs = {
+    'Hollow Body Hold':'<ellipse cx="45" cy="38" rx="10" ry="10" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="48" x2="38" y2="62" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="48" x2="52" y2="62" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="55" x2="38" y2="52" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="55" x2="52" y2="52" stroke="'+stroke+'" stroke-width="1.5"/>',
+    'Push-Up':'<ellipse cx="45" cy="22" rx="8" ry="8" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="30" x2="45" y2="44" stroke="'+stroke+'" stroke-width="1.5"/><line x1="28" y1="36" x2="62" y2="44" stroke="'+stroke+'" stroke-width="2"/><line x1="36" y1="44" x2="28" y2="54" stroke="'+stroke+'" stroke-width="1.5"/><line x1="54" y1="44" x2="62" y2="54" stroke="'+stroke+'" stroke-width="1.5"/>',
+    'Glute Bridge':'<ellipse cx="45" cy="50" rx="9" ry="9" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><path d="M45 59 L40 68 L30 72" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><path d="M45 59 L50 68 L60 65" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><path d="M30 72 L22 72" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><path d="M60 65 L68 70" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><line x1="40" y1="63" x2="52" y2="60" stroke="'+stroke+'" stroke-width="1.5"/>',
+    'Chin-Up':'<ellipse cx="45" cy="28" rx="9" ry="9" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="37" x2="45" y2="52" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="42" x2="33" y2="30" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="42" x2="57" y2="30" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="52" x2="37" y2="68" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="52" x2="53" y2="68" stroke="'+stroke+'" stroke-width="1.5"/><line x1="20" y1="18" x2="70" y2="18" stroke="#c4bfb4" stroke-width="2"/>',
+    'Bodyweight Squat':'<ellipse cx="45" cy="22" rx="9" ry="9" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><path d="M45 31 L45 44 L36 56 L30 70" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><path d="M45 44 L54 56 L60 70" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="37" x2="33" y2="43" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="37" x2="57" y2="43" stroke="'+stroke+'" stroke-width="1.5"/>',
+    'Dead Hang':'<line x1="15" y1="14" x2="75" y2="14" stroke="#c4bfb4" stroke-width="2"/><ellipse cx="45" cy="28" rx="9" ry="9" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="37" x2="45" y2="55" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="44" x2="30" y2="30" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="44" x2="60" y2="30" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="55" x2="37" y2="72" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="55" x2="53" y2="72" stroke="'+stroke+'" stroke-width="1.5"/>',
+    'Inverted Row':'<line x1="15" y1="22" x2="75" y2="22" stroke="#c4bfb4" stroke-width="2"/><ellipse cx="45" cy="32" rx="9" ry="9" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="41" x2="45" y2="55" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="46" x2="30" y2="28" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="46" x2="60" y2="28" stroke="'+stroke+'" stroke-width="1.5"/><line x1="30" y1="55" x2="60" y2="55" stroke="'+stroke+'" stroke-width="1.5"/><line x1="30" y1="55" x2="26" y2="70" stroke="'+stroke+'" stroke-width="1.5"/><line x1="60" y1="55" x2="64" y2="70" stroke="'+stroke+'" stroke-width="1.5"/>',
+    'default':'<ellipse cx="45" cy="25" rx="9" ry="9" fill="none" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="34" x2="45" y2="55" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="42" x2="30" y2="50" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="42" x2="60" y2="50" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="55" x2="37" y2="72" stroke="'+stroke+'" stroke-width="1.5"/><line x1="45" y1="55" x2="53" y2="72" stroke="'+stroke+'" stroke-width="1.5"/>'
+  };
+  const body = svgs[ex.name] || svgs['default'];
+  return `<svg viewBox="0 0 90 88" width="84" height="82" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${body}</svg>`;
+}
+
+function renderCards(filter){
+  const grid = document.getElementById('ha-grid');
+  const count = document.getElementById('ha-count');
+  let filtered = exercises;
+  if(filter !== 'all'){
+    if(['Upper','Lower','Core'].includes(filter)){
+      filtered = exercises.filter(e => e.cat === filter);
+    } else {
+      filtered = exercises.filter(e => e.diff.toLowerCase().includes(filter.toLowerCase()));
+    }
+  }
+  count.textContent = filtered.length + ' exercise' + (filtered.length===1?'':'s');
+  grid.innerHTML = filtered.map((ex,i) => {
+    const c = COLORS[ex.cat] || {bar:'#8a8780',bg:'#ede9df'};
+    return `<div class="ha-card" id="card-${i}" onclick="toggleCard(${i})">
+      <div class="ha-card-top">
+        <div class="ha-color-bar" style="background:${c.bar}"></div>
+        <div class="ha-card-main">
+          <div class="ha-eyebrow">${ex.cat} · ${ex.move}</div>
+          <div class="ha-name">${ex.name}</div>
+          <div class="ha-muscles">${ex.muscles}</div>
+          <div class="ha-desc">${ex.desc}</div>
+          <div style="margin-top:6px">${diffDots(ex.diff)}<span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.08em;color:#8a8780;margin-left:4px">${ex.diff}</span></div>
+        </div>
+        <div class="ha-svg-wrap">${makeSVG(ex)}</div>
+      </div>
+      <div class="ha-detail" id="detail-${i}">
+        <div class="ha-folly">
+          <div class="ha-folly-head">&#x2715; Common Folly</div>
+          <div class="ha-folly-val">${ex.mistake}</div>
+          <div class="ha-folly-fix">${ex.fix}</div>
+        </div>
+        <div class="ha-prog">
+          <div class="ha-prog-head">&#8593; Progressions</div>
+          <div class="ha-prog-val">${ex.prog}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleCard(i){
+  const detail = document.getElementById('detail-'+i);
+  const card = document.getElementById('card-'+i);
+  const isOpen = detail.classList.contains('open');
+  detail.classList.toggle('open', !isOpen);
+  card.classList.toggle('expanded', !isOpen);
+}
+
+function filterEx(f, btn){
+  document.querySelectorAll('.ha-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards(f);
+}
+
+renderCards('all');
+</script>
+</div>
+</body>
+</html>
