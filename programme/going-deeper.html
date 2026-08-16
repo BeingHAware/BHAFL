@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Being HAware — Going Deeper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f2eb;--paper2:#ede9df;--paper3:#e4dfd3;
+  --ink:#1c1a16;--ink2:#4a4740;--ink3:#8a8780;--ink4:#c4bfb4;
+  --accent:#c4501a;--accent2:#e8a882;
+  --green:#2d6a4f;--green2:#d4ede3;
+  --amber:#9a6c10;--amber2:#f5e8c0;
+  --purple:#6b5cb8;--purple2:#e8e4f8;
+  --folly:#7a1a1a;--folly2:#f5e0e0;
+  --display:"Bebas Neue",sans-serif;
+  --body:"Crimson Pro",Georgia,serif;
+  --mono:"DM Mono",monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.nav{position:fixed;top:0;left:0;right:0;z-index:300;background:var(--ink);height:48px;display:flex;align-items:center;padding:0 20px;gap:0}
+.nav-brand{font-family:var(--display);font-size:17px;letter-spacing:.06em;color:var(--paper);margin-right:16px;white-space:nowrap}
+.nav-brand span{color:var(--accent2)}
+.nav-chapters{display:flex;gap:1px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-chapters::-webkit-scrollbar{display:none}
+.ch-btn{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:0 11px;height:48px;background:transparent;border:none;color:var(--ink4);cursor:pointer;transition:all .2s;border-bottom:3px solid transparent;white-space:nowrap}
+.ch-btn:hover{color:var(--paper)}
+.ch-btn.active{color:var(--accent2);border-bottom-color:var(--accent2)}
+.nav-right{display:flex;gap:4px;margin-left:8px}
+.nav-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;background:rgba(255,255,255,.08);border:none;color:var(--ink4);cursor:pointer;white-space:nowrap}
+.nav-btn:hover{background:rgba(255,255,255,.16);color:var(--paper)}
+.nav-btn.print{background:var(--accent);color:white}
+.page{max-width:920px;margin:0 auto;padding:68px 28px 60px}
+.chapter{display:none}.chapter.visible{display:block}
+.cover-rule{height:4px;background:var(--ink);margin-bottom:20px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.cover-title{font-family:var(--display);font-size:72px;line-height:.92;color:var(--ink);letter-spacing:.02em;margin-bottom:14px}
+.cover-title span{color:var(--accent)}
+.cover-sub{font-size:16px;font-weight:300;font-style:italic;color:var(--ink2);max-width:520px;line-height:1.55;border-left:3px solid var(--accent);padding-left:16px;margin-bottom:24px}
+.cover-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:20px}
+.stat{background:var(--paper);padding:12px 14px}
+.stat-n{font-family:var(--display);font-size:28px;color:var(--ink);line-height:1;margin-bottom:2px}
+.stat-l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.contents{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:20px}
+.toc-item{background:var(--paper);padding:12px 16px;cursor:pointer;transition:background .15s}
+.toc-item:hover{background:var(--paper2)}
+.toc-num{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--ink3);margin-bottom:3px}
+.toc-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.toc-desc{font-size:11px;color:var(--ink2);line-height:1.4;font-style:italic}
+.sec-hd{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:end;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--ink4)}
+.sec-n{font-family:var(--display);font-size:68px;line-height:1;opacity:.1;letter-spacing:-.02em}
+.sec-t{font-family:var(--display);font-size:36px;letter-spacing:.04em;color:var(--ink);margin-bottom:3px}
+.sec-st{font-size:13px;font-style:italic;color:var(--ink2);font-weight:300}
+.prose{font-size:14px;line-height:1.75;color:var(--ink2);margin-bottom:14px;max-width:640px}
+.prose strong{color:var(--ink);font-weight:600}
+.pull-q{border-left:4px solid var(--accent);padding:10px 18px;margin:16px 0;background:var(--paper2)}
+.pull-q p{font-size:16px;font-style:italic;color:var(--ink);line-height:1.5;margin-bottom:4px}
+.pull-q cite{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.wisdom{background:var(--ink);color:var(--paper);padding:18px 24px;margin:18px 0}
+.wisdom p{font-size:15px;font-style:italic;line-height:1.55;margin-bottom:6px}
+.wisdom cite{font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase}
+.folly{background:var(--folly2);border:1px solid #d4a0a0;border-left:4px solid var(--folly);padding:14px 18px;margin:16px 0}
+.folly-hd{font-family:var(--display);font-size:16px;letter-spacing:.06em;color:var(--folly);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.folly-hd::before{content:"✕";font-size:13px}
+.folly-item{font-size:12px;color:#5a2020;line-height:1.55;padding:5px 0 5px 14px;position:relative;border-bottom:1px solid #e8c0c0}
+.folly-item:last-child{border-bottom:none}
+.folly-item::before{content:"—";position:absolute;left:0;color:#c08080}
+.folly-fix{font-size:11px;color:var(--green);margin-top:2px;padding-left:14px;position:relative}
+.folly-fix::before{content:"→";position:absolute;left:0;color:var(--green)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.ib{border:1px solid var(--ink4);padding:13px 15px}
+.ib-title{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--ink4)}
+.ib-item{font-size:12px;color:var(--ink2);line-height:1.55;margin-bottom:5px;padding-left:12px;position:relative}
+.ib-item::before{content:"—";position:absolute;left:0;color:var(--ink4)}
+.ib-item strong{color:var(--ink)}
+.qf-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:16px 0}
+.qf{background:var(--paper);padding:12px 14px}
+.qf-n{font-family:var(--display);font-size:28px;color:var(--accent);line-height:1;margin-bottom:3px}
+.qf-l{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+.qf-d{font-size:11px;color:var(--ink2);line-height:1.4}
+.ptabs{display:flex;gap:3px;margin-bottom:14px;flex-wrap:wrap}
+.ptab{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:4px 12px;border:1px solid var(--ink4);background:transparent;color:var(--ink3);cursor:pointer;border-radius:1px;transition:all .15s}
+.ptab:hover{border-color:var(--ink2);color:var(--ink)}
+.ptab.active{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.ptab-panel{display:none}.ptab-panel.visible{display:block}
+.min-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:16px 0}
+.mc{background:var(--paper);padding:10px 13px}
+.mc-n{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:2px;font-weight:500}
+.mc-r{font-size:11px;color:var(--ink2);line-height:1.4;margin-bottom:2px}
+.mc-s{font-size:10px;color:var(--ink3);font-style:italic}
+.mc-def{font-size:10px;color:var(--accent);margin-top:2px}
+.nut-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:12px}
+.nut-table th{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:7px 10px;border-bottom:1px solid var(--ink4);text-align:left;background:var(--paper2)}
+.nut-table td{padding:7px 10px;border-bottom:1px solid var(--paper3);color:var(--ink2);vertical-align:top;line-height:1.4}
+.nut-table tr:hover td{background:var(--paper2)}
+.nut-table .name{font-weight:600;color:var(--ink)}
+.circ-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:16px 0}
+.cc{background:var(--paper);padding:9px 7px 10px;text-align:center}
+.cc-time{font-family:var(--mono);font-size:8px;letter-spacing:.06em;color:var(--ink3);margin-bottom:3px}
+.cc-icon{font-size:15px;margin-bottom:3px}
+.cc-lbl{font-size:10px;color:var(--ink);font-weight:600;margin-bottom:2px}
+.cc-desc{font-size:9px;color:var(--ink2);line-height:1.3}
+.poly-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:16px 0}
+.poly-cell{background:var(--paper);padding:11px 13px}
+.poly-name{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:3px;font-weight:500}
+.poly-type{font-size:10px;color:var(--ink3);margin-bottom:4px;font-style:italic}
+.poly-role{font-size:11px;color:var(--ink2);line-height:1.4;margin-bottom:3px}
+.poly-food{font-size:10px;color:var(--green);font-style:italic}
+.plateau-block{border:1px solid var(--purple);border-left:4px solid var(--purple);background:var(--purple2);padding:16px 20px;margin:18px 0}
+.plateau-hd{font-family:var(--display);font-size:20px;letter-spacing:.06em;color:var(--purple);margin-bottom:8px}
+.plateau-body{font-size:13px;color:var(--ink2);line-height:1.7}
+.plateau-body strong{color:var(--ink)}
+.plateau-fix{font-size:12px;color:var(--green);margin-top:8px;padding-top:8px;border-top:1px solid #d0c8e8;padding-left:14px;position:relative}
+.plateau-fix::before{content:"→";position:absolute;left:0;color:var(--green)}
+.ref-item{background:var(--paper);padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;border-bottom:1px solid var(--ink4)}
+.ref-item:last-child{border-bottom:none}
+.ref-item:nth-child(even){background:var(--paper2)}
+.ref-num{font-family:var(--display);font-size:22px;color:var(--accent);opacity:.5;line-height:1;padding-top:2px}
+.ref-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.ref-auth{font-family:var(--mono);font-size:9px;color:var(--ink3);letter-spacing:.06em;margin-bottom:4px}
+.ref-desc{font-size:12px;color:var(--ink2);line-height:1.5;font-style:italic}
+hr.ruled{border:none;border-top:1px solid var(--ink4);margin:20px 0}
+.pg-foot{border-top:1px solid var(--ink4);padding-top:10px;margin-top:18px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--ink4)}
+@media print{
+  .nav{display:none!important}
+  .page{padding:10px 16px;max-width:100%}
+  .chapter{display:block!important}
+  .ptab-panel{display:block!important}
+  .ptabs,.nav-right{display:none!important}
+  @page{margin:9mm;size:A4 portrait}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .chapter+.chapter{page-break-before:always;break-before:page}
+  .folly,.pull-q,.wisdom,.plateau-block,.qf-row,.two-col,.min-grid,.poly-grid,.circ-strip,.ib,.ref-item{page-break-inside:avoid;break-inside:avoid}
+  .sec-hd,.ib-title,.folly-hd,.plateau-hd{page-break-after:avoid;break-after:avoid}
+  .prose{orphans:3;widows:3}
+  body{font-size:13px}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-brand">BEING <span>HAware</span></div>
+  <div class="nav-chapters">
+    <button class="ch-btn active" onclick="setChapter('cover',this)">Cover</button>
+    <button class="ch-btn" onclick="setChapter('mighty90',this)">The Mighty 90</button>
+    <button class="ch-btn" onclick="setChapter('circadian',this)">Circadian Biology</button>
+    <button class="ch-btn" onclick="setChapter('detox',this)">Detoxification</button>
+    <button class="ch-btn" onclick="setChapter('polyphenols',this)">Polyphenols</button>
+    <button class="ch-btn" onclick="setChapter('mindworks',this)">Mind Works</button>
+    <button class="ch-btn" onclick="setChapter('plateau',this)">Breaking Plateau</button>
+    <button class="ch-btn" onclick="setChapter('references',this)">References</button>
+  </div>
+  <div class="nav-right">
+    <a class="nav-btn" href="../index.html" style="text-decoration:none;display:inline-block">🏠 Home</a>
+    <a class="nav-btn" href="foundation-level.html" style="text-decoration:none;display:inline-block">Foundation Level</a>
+    <button class="nav-btn" onclick="prevChapter()">&#8592; Back</button>
+    <button class="nav-btn" onclick="nextChapter()">Forward &#8594;</button>
+    <button class="nav-btn print" onclick="smartPrint()">Print / PDF</button>
+  </div>
+</nav>
+<div class="page">
+
+<!-- COVER -->
+<div class="chapter visible" id="ch-cover">
+  <div style="padding:40px 0 32px;border-bottom:1px solid var(--ink4);margin-bottom:28px">
+    <div class="cover-rule"></div>
+    <div class="eyebrow">Being HAware · Volume Two · A Companion to Foundation Level</div>
+    <div class="cover-title">GOING<br><span>DEEPER</span></div>
+    <p class="cover-sub">Foundation Level taught you what to do and why it matters. This volume explains the soil in which that understanding grows. The science beneath the practice — written for legacy, not for a market. For any Human Being willing to know themselves better. Whenever you are reading this: the body works the same way it always has. These principles do not expire.</p>
+    <div class="cover-stats">
+      <div class="stat"><div class="stat-n">90</div><div class="stat-l">Essential nutrients</div></div>
+      <div class="stat"><div class="stat-n">24</div><div class="stat-l">Hours in the clock</div></div>
+      <div class="stat"><div class="stat-n">500+</div><div class="stat-l">Liver functions</div></div>
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">Deep sections</div></div>
+      <div class="stat"><div class="stat-n">8k+</div><div class="stat-l">Polyphenols known</div></div>
+      <div class="stat"><div class="stat-n">1</div><div class="stat-l">Body to understand</div></div>
+    </div>
+    <div class="contents">
+      <div class="toc-item" onclick="setChapterById('mighty90')"><div class="toc-num">Section One</div><div class="toc-title">The Mighty 90</div><div class="toc-desc">Dr Wallach's 90 essential nutrients in full. What each one does. What deficiency looks like. Where to find it.</div></div>
+      <div class="toc-item" onclick="setChapterById('circadian')"><div class="toc-num">Section Two</div><div class="toc-title">Circadian Biology</div><div class="toc-desc">The body's internal clock in full. Light, hormones, the Sun, the Moon, and the 24-hour cascade.</div></div>
+      <div class="toc-item" onclick="setChapterById('detox')"><div class="toc-num">Section Three</div><div class="toc-title">Detoxification</div><div class="toc-desc">The liver, the lymph, the pathways. Protocols done honestly. The crucial warning: mobilise and clear.</div></div>
+      <div class="toc-item" onclick="setChapterById('polyphenols')"><div class="toc-num">Section Four</div><div class="toc-title">Polyphenols &amp; Bioflavonoids</div><div class="toc-desc">The plant compounds the modern diet overlooks. What they do at cellular level. The colour is the medicine.</div></div>
+      <div class="toc-item" onclick="setChapterById('mindworks')"><div class="toc-num">Section Five</div><div class="toc-title">Mind Works — A Taster</div><div class="toc-desc">Habit, stress, and the neuroscience of becoming. A finger pointing at the moon.</div></div>
+      <div class="toc-item" onclick="setChapterById('plateau')"><div class="toc-num">Section Six</div><div class="toc-title">Breaking Through Plateau</div><div class="toc-desc">Why it comes to everyone. Why most mistake it for failure. How to push through it On-Purpose.</div></div>
+    </div>
+  </div>
+  <div class="wisdom"><p>"The doctor of the future will give no medicine, but will interest his patients in the care of the human frame, in diet, and in the cause and prevention of disease."</p><cite>Thomas Edison, 1903 — still waiting for that future</cite></div>
+  <div class="pull-q"><p>"Being HAware is an awakening. Being HAware is the key. Health Awareness Is The Way. Nobody has time to change — yet inevitably everyone will. On purpose, or by accident."</p><cite>Being HAware — Foundation Level · The Founding Statement</cite></div>
+  
+  <div style="border-top:3px solid var(--ink);margin-top:28px;padding-top:20px">
+    <div style="display:grid;grid-template-columns:1fr auto;align-items:start;gap:24px;margin-bottom:16px">
+      <div>
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:7px">Author</div>
+        <div style="font-family:var(--display);font-size:34px;letter-spacing:.04em;color:var(--ink);line-height:1;margin-bottom:8px">Martin Lord Morley</div>
+        <div style="font-size:14px;font-style:italic;color:var(--accent);line-height:1.5;margin-bottom:10px;border-left:3px solid var(--accent);padding-left:12px">"This is for you. With love and genuine intent."</div>
+        <div style="font-size:11px;color:var(--ink3);line-height:1.65;max-width:500px">Being HAware is an original work. The philosophy, programme structure, nutritional framework, and visual identity are the intellectual property of the author. HA stands for Health Aware — and for the universal human sound of joy and realisation. Reproduction for personal use is warmly encouraged. Commercial reproduction without permission is not.</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Foundation Level Series</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink2);line-height:2;text-align:right">
+          Volume One · Foundation Level<br>
+          <strong style="color:var(--ink)">Volume Two · Going Deeper</strong><br>
+          Volume Three · Exercise Key
+        </div>
+        <div style="margin-top:12px;font-family:var(--display);font-size:14px;letter-spacing:.08em;color:var(--ink4)">HEALTH AWARENESS IS THE WAY</div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--ink4);padding-top:8px;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)">&copy; Martin Lord Morley · Being HAware</div>
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)">Produced with AI collaboration · Claude by Anthropic</div>
+    </div>
+  </div>
+  <div class="pg-foot"><span>Being HAware — Going Deeper · Volume Two</span><span>The science beneath the practice.</span></div>
+</div>
+
+<!-- MIGHTY 90 -->
+<div class="chapter" id="ch-mighty90">
+  <div class="sec-hd"><div class="sec-n">01</div><div><div class="sec-t">THE MIGHTY 90</div><div class="sec-st">Dr Joel Wallach's 90 essential nutrients — the complete picture</div></div></div>
+  <div class="prose">The body requires 90 essential nutrients to function optimally. Not as a rough guideline — as a biological fact. Dr Joel Wallach, whose veterinary and human clinical research spans more than four decades and whose zoological contributions are preserved in the Smithsonian Institution, identified these 90 through comparative study across species: when an animal was denied any one of them consistently, a predictable and specific set of diseases followed. Every time. The implication for human health is profound and largely unacknowledged by mainstream medicine.</div>
+  <div class="prose">The 90 essential nutrients divide into four categories: <strong>60 minerals</strong>, <strong>16 vitamins</strong>, <strong>12 amino acids</strong>, and <strong>3 essential fatty acids</strong>. Essential means the body cannot manufacture them — they must come from outside. The modern diet, even a careful one, struggles to deliver all 60 minerals with any consistency. This is not a personal failing. It is a consequence of depleted soils, long supply chains, and the industrialisation of food.</div>
+  <div class="pull-q"><p>"Every man, woman, and child needs 90 essential nutrients just to survive — let alone thrive."</p><cite>Dr Joel Wallach — Dead Doctors Don't Lie</cite></div>
+  <div class="qf-row">
+    <div class="qf"><div class="qf-n">60</div><div class="qf-l">Essential minerals</div><div class="qf-d">The most depleted category. Soil depletion means most people are chronically short of 30–40 of these regardless of diet quality.</div></div>
+    <div class="qf"><div class="qf-n">16</div><div class="qf-l">Essential vitamins</div><div class="qf-d">Better understood by mainstream medicine — though bioavailability of synthetic forms remains a significant and under-discussed issue.</div></div>
+    <div class="qf"><div class="qf-n">15</div><div class="qf-l">Amino acids + fatty acids</div><div class="qf-d">12 essential amino acids plus 3 essential fatty acids. Complete proteins and oily fish cover most of these. Source quality matters enormously.</div></div>
+  </div>
+  <div class="ptabs">
+    <button class="ptab active" onclick="setPTab('minerals',this)">60 Minerals</button>
+    <button class="ptab" onclick="setPTab('vitamins',this)">16 Vitamins</button>
+    <button class="ptab" onclick="setPTab('aminos',this)">12 Amino Acids</button>
+    <button class="ptab" onclick="setPTab('efa',this)">3 Fatty Acids</button>
+  </div>
+  <div class="ptab-panel visible" id="pt-minerals">
+    <div class="prose">The minerals are the most neglected of the 90 and the most consequential. Unlike vitamins, minerals are entirely earth-derived. They enter the food chain through soil, through plants that absorb them, and through the animals that eat those plants. When soil is depleted — as McCance and Widdowson's data confirms it has been since the mid-twentieth century — deficiency cascades are inevitable. <strong>Colloidal minerals</strong> — plant-derived from ancient deposits — offer significantly higher bioavailability than metallic mineral supplements. The form matters as much as the quantity.</div>
+    <div class="min-grid">
+      <div class="mc"><div class="mc-n">Calcium</div><div class="mc-r">Bone density, muscle contraction, nerve signalling, blood clotting. Most abundant mineral in the body.</div><div class="mc-s">Dairy, sardines with bones, leafy greens, sesame. Requires D3 and K2 to be directed to bone correctly.</div><div class="mc-def">Deficiency: osteoporosis, muscle cramps, poor dental health, hypertension.</div></div>
+      <div class="mc"><div class="mc-n">Magnesium</div><div class="mc-r">Over 300 enzymatic reactions. Muscle relaxation, sleep quality, blood pressure regulation, ATP energy production.</div><div class="mc-s">Leafy greens, pumpkin seeds, dark chocolate, almonds. Glycinate or malate form — oxide does not absorb meaningfully.</div><div class="mc-def">Deficiency: insomnia, muscle cramps, anxiety, constipation, hypertension. Extremely common.</div></div>
+      <div class="mc"><div class="mc-n">Potassium</div><div class="mc-r">Fluid balance, nerve function, muscle contraction, blood pressure counterbalance to sodium.</div><div class="mc-s">Avocado, sweet potato, banana, leafy greens, lentils. Processed food destroys the sodium-potassium ratio.</div><div class="mc-def">Deficiency: muscle weakness, heart arrhythmia, fatigue, elevated blood pressure.</div></div>
+      <div class="mc"><div class="mc-n">Selenium</div><div class="mc-r">Antioxidant defence via selenoproteins, thyroid hormone metabolism, immune function, DNA repair.</div><div class="mc-s">Brazil nuts (2–3 daily is sufficient and safe), seafood, organ meats. Soil concentration varies enormously by region.</div><div class="mc-def">Deficiency: thyroid dysfunction, weakened immunity, Keshan disease, increased cancer susceptibility.</div></div>
+      <div class="mc"><div class="mc-n">Zinc</div><div class="mc-r">Immune function, wound healing, testosterone production, taste and smell, protein synthesis, DNA repair.</div><div class="mc-s">Oysters, red meat, pumpkin seeds, chickpeas. Picolinate or bisglycinate absorb well. Excess zinc depletes copper.</div><div class="mc-def">Deficiency: impaired immunity, poor wound healing, loss of taste and smell, low testosterone.</div></div>
+      <div class="mc"><div class="mc-n">Iron</div><div class="mc-r">Oxygen transport via haemoglobin, energy production, immune function, cognitive performance.</div><div class="mc-s">Red meat provides haem iron which absorbs best. Vitamin C dramatically improves non-haem iron absorption from plant sources.</div><div class="mc-def">Deficiency: anaemia, fatigue, cognitive impairment, cold intolerance. Most common deficiency globally.</div></div>
+      <div class="mc"><div class="mc-n">Copper</div><div class="mc-r">Iron metabolism, connective tissue formation, nerve function, antioxidant enzyme (ceruloplasmin) production.</div><div class="mc-s">Liver, shellfish, nuts, seeds, dark chocolate. Zinc and copper compete — excess zinc supplementation depletes copper.</div><div class="mc-def">Deficiency: anaemia despite adequate iron, weakened connective tissue, neurological issues over time.</div></div>
+      <div class="mc"><div class="mc-n">Iodine</div><div class="mc-r">Thyroid hormone production — regulates metabolism, body temperature, energy, growth, and development.</div><div class="mc-s">Seaweed, seafood, iodised salt. Inland populations historically deficient. Supplement if seafood intake is consistently low.</div><div class="mc-def">Deficiency: hypothyroidism, goitre, fatigue, weight gain, cognitive impairment in development.</div></div>
+      <div class="mc"><div class="mc-n">Chromium</div><div class="mc-r">Insulin sensitivity and glucose metabolism. Largely absent from modern processed diets.</div><div class="mc-s">Broccoli, whole grains, liver, brewer's yeast. Picolinate form for supplementation. One of Wallach's key trace minerals.</div><div class="mc-def">Deficiency: insulin resistance, blood sugar dysregulation, increased diabetes risk.</div></div>
+      <div class="mc"><div class="mc-n">Manganese</div><div class="mc-r">Bone formation, wound healing, superoxide dismutase antioxidant enzyme, carbohydrate and fat metabolism.</div><div class="mc-s">Whole grains, legumes, nuts, leafy vegetables, tea. Obtained through a varied whole-food diet.</div><div class="mc-def">Deficiency: bone malformation, impaired glucose tolerance, poor wound healing.</div></div>
+      <div class="mc"><div class="mc-n">Molybdenum</div><div class="mc-r">Detoxification enzyme function. Processes sulphur-containing amino acids. Essential to the body's detoxification chemistry.</div><div class="mc-s">Legumes, whole grains, liver. Often overlooked entirely in nutritional discussions.</div><div class="mc-def">Deficiency: sulphite sensitivity, rapid heart rate, neurological symptoms in severe depletion.</div></div>
+      <div class="mc"><div class="mc-n">Vanadium</div><div class="mc-r">Insulin-mimicking activity, bone development. Consistently cited by Wallach across species studies.</div><div class="mc-s">Shellfish, mushrooms, black pepper, dill. Present in quality colloidal plant-source mineral supplements.</div><div class="mc-def">Deficiency: impaired glucose metabolism, cardiovascular issues in animal research.</div></div>
+      <div class="mc"><div class="mc-n">Boron</div><div class="mc-r">Bone health alongside calcium and D3, joint function, hormone metabolism, cognitive performance.</div><div class="mc-s">Almonds, avocado, raisins, prunes, legumes. Soil depletion has significantly reduced its presence in modern food.</div><div class="mc-def">Deficiency: osteoporosis, arthritis, impaired hormone regulation, reduced cognitive function.</div></div>
+      <div class="mc"><div class="mc-n">Silicon</div><div class="mc-r">Connective tissue integrity — collagen, bone, cartilage, hair, skin, nails. Structurally critical but rarely discussed.</div><div class="mc-s">Whole grains, oats, barley, horsetail herb. Present in quality colloidal mineral supplements.</div><div class="mc-def">Deficiency: brittle bones, poor skin elasticity, hair loss, weak connective tissue.</div></div>
+      <div class="mc"><div class="mc-n">Sulphur</div><div class="mc-r">Protein structure, detoxification via glutathione production, joint health via MSM, skin and nail integrity.</div><div class="mc-s">Eggs, cruciferous vegetables — broccoli, cabbage, garlic, onion. MSM is a well-tolerated supplemental form.</div><div class="mc-def">Deficiency: joint pain, poor skin and hair quality, impaired detoxification, reduced glutathione levels.</div></div>
+      <div class="mc"><div class="mc-n">Phosphorus</div><div class="mc-r">Bone and tooth formation alongside calcium. Energy production (ATP). Cell membrane structure. DNA synthesis.</div><div class="mc-s">Meat, fish, eggs, dairy, legumes. Rarely deficient in those eating adequate protein. Balance with calcium matters.</div><div class="mc-def">Deficiency: bone pain, weakness, poor appetite. Excess common in processed food depletes calcium.</div></div>
+    </div>
+    <div class="prose" style="margin-top:10px">The 60 minerals include the 16 above plus a further 44 trace minerals — cobalt, fluoride, germanium, nickel, rubidium, strontium, tin, and others — present in micro-quantities but performing specific enzymatic roles. The complete list is found in Wallach's work and in plant-source colloidal mineral supplements. <strong>The body uses what it is given. Give it the full spectrum and it has the tools to do its work.</strong></div>
+  </div>
+  <div class="ptab-panel" id="pt-vitamins">
+    <div class="prose">The 16 essential vitamins divide into fat-soluble (A, D, E, K — stored in body fat) and water-soluble (C and the eight B vitamins — not stored, replenished regularly). The <em>form</em> of each vitamin matters as much as the dose — this is where the gap between cheap multivitamins and effective supplementation lives.</div>
+    <table class="nut-table">
+      <thead><tr><th>Vitamin</th><th>Primary role</th><th>Best food sources</th><th>Supplement note</th></tr></thead>
+      <tbody>
+        <tr><td class="name">A (Retinol)</td><td>Vision, immune function, skin integrity, gene expression</td><td>Liver, egg yolk, dairy, oily fish</td><td>Preformed retinol from animal sources. Beta-carotene converts poorly in many people — don't rely on it as sole source.</td></tr>
+        <tr><td class="name">D3</td><td>Calcium absorption, immune modulation, mood, muscle function</td><td>Sunlight (primary), oily fish, egg yolk, liver</td><td>Always D3 not D2. Take with K2. Non-negotiable above 50° latitude for most of the year.</td></tr>
+        <tr><td class="name">E (Tocopherol)</td><td>Antioxidant — protects cell membranes from oxidative damage</td><td>Sunflower seeds, almonds, avocado, olive oil, spinach</td><td>Mixed tocopherols preferred over alpha-tocopherol alone. Synthetic dl-alpha significantly less effective than natural d-alpha.</td></tr>
+        <tr><td class="name">K2 (Menaquinone)</td><td>Directs calcium to bones not arteries. Works with D3 — always together.</td><td>Natto (highest), cheese, egg yolk, liver, butter</td><td>MK-7 form has longer half-life. Essential companion to D3 supplementation — never take one without the other.</td></tr>
+        <tr><td class="name">C (Ascorbate)</td><td>Collagen synthesis, antioxidant, immune support, adrenal function, iron absorption</td><td>Bell peppers, kiwi, broccoli, citrus, strawberries</td><td>Buffered ascorbate gentler on gut. Liposomal C for higher tissue saturation. Stress and training significantly increase the requirement.</td></tr>
+        <tr><td class="name">B1 (Thiamine)</td><td>Carbohydrate metabolism, nerve function, energy production</td><td>Pork, sunflower seeds, legumes, whole grains</td><td>Alcohol is a major B1 depleter. Benfotiamine (fat-soluble form) has better cellular penetration for nerve health.</td></tr>
+        <tr><td class="name">B2 (Riboflavin)</td><td>Energy production, fatty acid metabolism, glutathione regeneration</td><td>Liver, eggs, dairy, almonds, leafy greens</td><td>Depleted by light — store foods away from clear packaging. B2 degrades most in transit of all B vitamins.</td></tr>
+        <tr><td class="name">B3 (Niacin)</td><td>Energy metabolism via NAD+ production, DNA repair, skin health, cholesterol regulation</td><td>Meat, fish, peanuts, whole grains, mushrooms</td><td>Niacin flush activates lipid mobilisation. Niacinamide doesn't flush but has different applications. Understand which you're taking.</td></tr>
+        <tr><td class="name">B5 (Pantothenic acid)</td><td>Coenzyme A synthesis — central to energy metabolism and fat processing. Adrenal hormone production.</td><td>Liver, sunflower seeds, avocado, sweet potato, mushrooms</td><td>Deficiency uncommon but stress significantly depletes adrenal pantothenic acid reserves over time.</td></tr>
+        <tr><td class="name">B6 (Pyridoxine)</td><td>Amino acid metabolism, neurotransmitter synthesis (serotonin, dopamine), hormone regulation</td><td>Poultry, fish, potatoes, bananas, chickpeas</td><td>P5P (pyridoxal-5-phosphate) is the active form — recommended for supplementation over plain pyridoxine.</td></tr>
+        <tr><td class="name">B7 (Biotin)</td><td>Fatty acid synthesis, glucose metabolism, hair and nail integrity, gene expression</td><td>Egg yolk, liver, almonds, sweet potato, salmon</td><td>Raw egg whites contain avidin which blocks biotin absorption. Cook the white, eat the yolk — always.</td></tr>
+        <tr><td class="name">B9 (Folate)</td><td>DNA synthesis and repair, cell division, red blood cell formation. Critical in pregnancy.</td><td>Leafy greens, liver, legumes, asparagus, avocado</td><td>Methylfolate (5-MTHF) is the active form. Folic acid (synthetic) cannot be used by those with MTHFR gene variants — a significant portion of the population.</td></tr>
+        <tr><td class="name">B12 (Cobalamin)</td><td>Nerve function, DNA synthesis, red blood cell formation, homocysteine metabolism</td><td>Meat, fish, shellfish, eggs, dairy. Entirely absent from plant foods.</td><td>Methylcobalamin preferred over cyanocobalamin. Vegetarians and vegans must supplement — deficiency causes irreversible neurological damage over time.</td></tr>
+        <tr><td class="name">Choline</td><td>Cell membrane structure, liver function, acetylcholine neurotransmitter, brain development</td><td>Egg yolk (richest source by far), liver, fish, roe</td><td>CDP-choline or alpha-GPC for targeted cognitive support. Most people chronically under-consume choline — particularly those who discard egg yolks.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="ptab-panel" id="pt-aminos">
+    <div class="prose">The 12 essential amino acids cannot be synthesised by the body in adequate quantities — they must come from food. They are the structural units of every protein: muscle, enzyme, hormone, antibody, neurotransmitter precursor. A diet that delivers all 12 consistently is built around complete protein sources.</div>
+    <div class="two-col">
+      <div class="ib">
+        <div class="ib-title">The 12 essential amino acids</div>
+        <div class="ib-item"><strong>Histidine</strong> — tissue repair, immune function, myelin sheath integrity</div>
+        <div class="ib-item"><strong>Isoleucine</strong> — muscle metabolism, immune function, haemoglobin production</div>
+        <div class="ib-item"><strong>Leucine</strong> — the primary driver of muscle protein synthesis. The most anabolic amino acid.</div>
+        <div class="ib-item"><strong>Lysine</strong> — collagen synthesis, calcium absorption, immune function, antiviral activity</div>
+        <div class="ib-item"><strong>Methionine</strong> — sulphur metabolism, detoxification support, glutathione precursor</div>
+        <div class="ib-item"><strong>Phenylalanine</strong> — precursor to dopamine, norepinephrine, epinephrine, thyroid hormones</div>
+        <div class="ib-item"><strong>Threonine</strong> — collagen and elastin structure, fat metabolism, gut lining integrity</div>
+        <div class="ib-item"><strong>Tryptophan</strong> — serotonin and melatonin precursor. Sleep quality and mood regulation.</div>
+        <div class="ib-item"><strong>Valine</strong> — muscle growth and repair, tissue regeneration, exercise energy production</div>
+        <div class="ib-item"><strong>Arginine</strong> — nitric oxide production, blood vessel dilation, wound healing, hormone release</div>
+        <div class="ib-item"><strong>Cysteine</strong> — glutathione synthesis (master antioxidant), keratin for hair and nails</div>
+        <div class="ib-item"><strong>Tyrosine</strong> — precursor to dopamine, adrenaline, and thyroid hormone. Critical in the stress response.</div>
+      </div>
+      <div class="ib">
+        <div class="ib-title">Complete protein sources</div>
+        <div class="ib-item"><strong>Eggs — biological value 100.</strong> All 12 essential amino acids in near-perfect ratios. The gold standard. Every other protein source is measured against it.</div>
+        <div class="ib-item"><strong>Meat and poultry</strong> — complete. High leucine content makes these particularly effective for muscle protein synthesis.</div>
+        <div class="ib-item"><strong>Fish and shellfish</strong> — complete, and high in taurine, which is conditionally essential under high stress and training loads.</div>
+        <div class="ib-item"><strong>Dairy</strong> — complete. Whey absorbs fast (good post-training). Casein absorbs slowly (cottage cheese before sleep delivers overnight amino acid availability).</div>
+        <div class="ib-item"><strong>Quinoa</strong> — one of very few complete plant proteins. Combine with legumes for reinforced coverage.</div>
+        <div class="ib-item"><strong>Rice and lentils together</strong> — traditional cultures solved complete amino acid coverage centuries before science named the mechanism.</div>
+        <div class="ib-item"><strong>Glycine</strong> — not among the strict 12 but conditionally essential. Bone broth is the richest source. Supports sleep, gut lining, and collagen synthesis.</div>
+      </div>
+    </div>
+  </div>
+  <div class="ptab-panel" id="pt-efa">
+    <div class="prose">The three essential fatty acids are among the most impactful nutrients in the entire list — and among the most imbalanced in the modern diet. The ratio of omega-6 to omega-3 in industrialised eating is estimated at 15:1 to 20:1. The evolutionarily appropriate ratio is believed to be closer to 4:1. Chronic excess of omega-6 relative to omega-3 drives systemic inflammation — the common thread in virtually every modern degenerative disease.</div>
+    <div class="two-col">
+      <div class="ib">
+        <div class="ib-title">The three essential fatty acids</div>
+        <div class="ib-item"><strong>ALA (Alpha-linolenic acid) — omega-3, plant source.</strong> Found in flaxseed, chia, walnuts. Converts to EPA and DHA in the body but conversion rate is poor — typically 5–10%. Do not rely on ALA as your primary omega-3 source.</div>
+        <div class="ib-item"><strong>EPA (Eicosapentaenoic acid) — omega-3, marine source.</strong> Anti-inflammatory. Cardiovascular health, mood regulation, joint protection. Oily fish and algae oil are the direct sources — this is where primary omega-3 intake should come from.</div>
+        <div class="ib-item"><strong>DHA (Docosahexaenoic acid) — omega-3, marine source.</strong> Brain structure — 60% of the brain's fat is DHA. Vision, nerve function, foetal brain development. Oily fish and algae oil. Fish get their DHA from algae in the first place.</div>
+      </div>
+      <div class="ib">
+        <div class="ib-title">The omega-6 imbalance and the correction</div>
+        <div class="ib-item"><strong>Linoleic acid (LA)</strong> — the dietary omega-6. Found in vegetable oils, seeds, nuts. Not harmful in moderation. The problem is overconsumption by an enormous margin through industrial seed oils used in almost all processed food.</div>
+        <div class="ib-item"><strong>What excess omega-6 does</strong> — the same enzymes that convert ALA to EPA and DHA are hijacked by excess omega-6. Omega-3 conversion drops. Inflammatory signalling rises. The balance is the issue, not either fatty acid in isolation.</div>
+        <div class="ib-item"><strong>The practical correction</strong> — reduce industrial seed oils (vegetable, sunflower, rapeseed). Increase oily fish to three or more portions per week. Supplement with fish oil or algae oil. The ratio improves remarkably quickly when addressed deliberately and consistently.</div>
+        <div class="ib-item"><strong>On saturated fat</strong> — not among the 3 essential fatty acids, but worth stating: the demonisation of saturated fat led directly to its replacement with vegetable oil — which is categorically worse for the omega-6 to omega-3 ratio and for oxidative stability at cooking temperatures.</div>
+      </div>
+    </div>
+    <div class="folly">
+      <div class="folly-hd">Common Folly — The Mighty 90</div>
+      <div class="folly-item">Taking a cheap multivitamin and assuming all 90 essentials are covered.<div class="folly-fix">A standard supermarket multivitamin contains perhaps 20 of the 90, in synthetic forms with variable bioavailability, at doses below therapeutic significance. Know what you are taking and why.</div></div>
+      <div class="folly-item">Assuming that eating well makes supplementation unnecessary in the modern era.<div class="folly-fix">In depleted soils, with long supply chains and food grown for yield rather than nutrient density — even an excellent diet cannot reliably deliver all 60 minerals. The McCance and Widdowson data is published government data, not alternative health opinion.</div></div>
+      <div class="folly-item">Choosing supplement forms without understanding bioavailability.<div class="folly-fix">Magnesium oxide has roughly 4% absorption. Magnesium glycinate absorbs at roughly 80%. The form is not a minor detail — it determines whether the supplement does anything at all.</div></div>
+    </div>
+  </div>
+  <div class="pg-foot"><span>Being HAware — Going Deeper · Section One: The Mighty 90</span><span>Give the body the full spectrum. It knows what to do with it.</span></div>
+</div>
+<!-- CIRCADIAN BIOLOGY -->
+<div class="chapter" id="ch-circadian">
+  <div class="sec-hd"><div class="sec-n">02</div><div><div class="sec-t">CIRCADIAN BIOLOGY</div><div class="sec-st">The body's internal clock in full — light, hormones, the Sun, the Moon, and the 24-hour cascade</div></div></div>
+  <div class="prose">In 2017, the Nobel Prize in Physiology or Medicine was awarded for the discovery of the molecular mechanisms governing circadian clocks. The finding: every cell in the body contains its own timekeeping mechanism, and these clocks are synchronised by light, feeding time, temperature, and social cues. This confirmed what traditional peoples, farmers, and anyone who has experienced severe jet lag already knew intuitively — the body has a preferred schedule, and disrupting it carries a measurable and cumulative price.</div>
+  <div class="prose">The circadian rhythm is not merely about sleep and waking. It governs the timing of hormone release, immune function, metabolic rate, body temperature, cognitive performance, muscle repair, cardiovascular function, and gut motility. Every system in the body has a peak performance window. Those windows are set by the clock. Ignore the clock and you are working against your own biology with every decision you make.</div>
+  <div class="pull-q"><p>"Every cell in your body has a clock. When those clocks fall out of sync, the body ages faster, repairs slower, and performs worse at everything it tries to do."</p><cite>Synthesised from the Nobel Committee's 2017 scientific background</cite></div>
+  <div class="circ-strip">
+    <div class="cc"><div class="cc-time">05:00–06:00</div><div class="cc-icon">&#127749;</div><div class="cc-lbl">Cortisol peak</div><div class="cc-desc">Natural wake signal. Light exposure here locks the clock for the entire day that follows.</div></div>
+    <div class="cc"><div class="cc-time">07:00–09:00</div><div class="cc-icon">&#129370;</div><div class="cc-lbl">Peak insulin sensitivity</div><div class="cc-desc">Best window to eat. Carbohydrates processed more efficiently in the morning than at any other time.</div></div>
+    <div class="cc"><div class="cc-time">10:00–14:00</div><div class="cc-icon">&#128170;</div><div class="cc-lbl">Peak alertness + strength</div><div class="cc-desc">Highest body temperature, reaction time, and muscular output. Optimal training window.</div></div>
+    <div class="cc"><div class="cc-time">14:00–16:00</div><div class="cc-icon">&#128336;</div><div class="cc-lbl">Post-lunch dip</div><div class="cc-desc">Biological — not caused by food. A 20-minute nap here is ancestrally normal and restores afternoon performance.</div></div>
+    <div class="cc"><div class="cc-time">17:00–19:00</div><div class="cc-icon">&#127939;</div><div class="cc-lbl">Second peak</div><div class="cc-desc">Body temperature peaks again. Lung function, coordination, and cardiovascular efficiency all high. Afternoon training is valid.</div></div>
+    <div class="cc"><div class="cc-time">20:00–22:00</div><div class="cc-icon">&#127769;</div><div class="cc-lbl">Melatonin rises</div><div class="cc-desc">Blue light suppresses melatonin. Dim lights. Screens down. The repair window opens. Late eating disrupts this process.</div></div>
+    <div class="cc"><div class="cc-time">22:00–05:00</div><div class="cc-icon">&#128295;</div><div class="cc-lbl">Repair and rebuild</div><div class="cc-desc">Growth hormone released in deepest sleep. Tissue rebuilt. Memory consolidated. All the training pays off here.</div></div>
+  </div>
+  <div class="prose"><strong>Light is the master signal.</strong> The suprachiasmatic nucleus — roughly 20,000 neurons in the hypothalamus — receives light signals directly from the retina and synchronises every other clock in the body. Morning light exposure is not a lifestyle preference. It is the act of setting the biological clock for the entire day. Bright outdoor light within the first hour of waking — even on an overcast day — is the single most powerful circadian anchor available. It costs nothing. It takes five minutes. It changes everything downstream.</div>
+  <div class="prose"><strong>The Sun and the Moon.</strong> Before artificial light, the human circadian rhythm was governed entirely by the solar cycle — dawn cortisol, midday peak, evening wind-down, overnight repair. Moonlight — far dimmer than any artificial source and carrying insufficient blue-spectrum energy to suppress melatonin — was the only nocturnal light. The body still expects this. The cells that read light signals do not know what century they are in. They respond to the wavelength they receive. Give them the right signal at the right time and every downstream system functions with less resistance. The majesty of the Sun and the Moon is not merely poetic — it is biological.</div>
+  <div class="two-col">
+    <div class="ib">
+      <div class="ib-title">The hormone cascade — 24 hours</div>
+      <div class="ib-item"><strong>Cortisol</strong> — peaks at dawn, falls through the day. Drives alertness, anti-inflammation, and blood sugar regulation. Chronically elevated cortisol from sleep deprivation degrades muscle, impairs immunity, and disrupts every downstream hormone in the cascade.</div>
+      <div class="ib-item"><strong>Testosterone</strong> — peaks in the early morning. Declines through the day. One week of sleep restriction reduces testosterone by 15–25% in healthy young men — equivalent in hormonal terms to ageing a decade.</div>
+      <div class="ib-item"><strong>Growth hormone</strong> — released in pulses during deep sleep, primarily in the first two cycles before midnight. The primary driver of tissue repair. Training without adequate sleep is training without the recovery signal.</div>
+      <div class="ib-item"><strong>Melatonin</strong> — rises after dark, suppressed by blue-spectrum light. The timing of melatonin onset determines sleep architecture and depth. Phones, screens, and LED lighting suppress it reliably and measurably — even brief evening exposure is enough to delay onset by an hour.</div>
+      <div class="ib-item"><strong>Insulin</strong> — sensitivity varies dramatically by time of day. The same meal at 8am has a significantly different metabolic effect than the same meal at 8pm. Late eating is not merely a caloric question — it is a timing question.</div>
+    </div>
+    <div class="ib">
+      <div class="ib-title">What disrupts the clock</div>
+      <div class="ib-item"><strong>Artificial light after dark</strong> — blue-spectrum light from screens signals the SCN that it is still daytime. Melatonin is suppressed. Sleep onset is delayed. Sleep depth is reduced. Blue-light filtering after sunset is not a preference — it is maintenance of the body's most fundamental repair window.</div>
+      <div class="ib-item"><strong>Irregular sleep timing</strong> — different sleep and wake times on different days creates social jet lag. The clock cannot anchor. Every system dependent on timed hormone release is disrupted.</div>
+      <div class="ib-item"><strong>Eating late</strong> — the gut has its own circadian rhythm. Eating in the two to three hours before sleep forces digestive activity into the repair window. Insulin and melatonin actively oppose each other at the molecular level — they cannot both peak simultaneously without consequence.</div>
+      <div class="ib-item"><strong>No morning light exposure</strong> — waking in a dark room and spending the morning indoors leaves the clock unset. By midday, the entire hormone cascade is running without its anchor. Step outside within the first hour of waking — even briefly, even in overcast weather.</div>
+      <div class="ib-item"><strong>Shift work</strong> — consistently misaligning the social clock with the biological clock is associated with significantly elevated risk of metabolic disorder, cardiovascular disease, depression, and certain cancers. If unavoidable, deliberate light management and consistent meal timing can partially mitigate the damage.</div>
+    </div>
+  </div>
+  <div class="folly">
+    <div class="folly-hd">Common Folly — Circadian Biology</div>
+    <div class="folly-item">Staying up late regularly and framing it as being a "night owl" — treating a disrupted rhythm as a personality trait.<div class="folly-fix">True night owls exist but are far rarer than claimed. Most late chronotypes are trained not born — shaped by years of artificial light and irregular schedules. The clock is adjustable. Consistent morning light exposure shifts it reliably over weeks.</div></div>
+    <div class="folly-item">Treating sleep as the variable to sacrifice when life gets busy — planning to "catch up at the weekend."<div class="folly-fix">Sleep debt does not clear cleanly on weekends. Cognitive and physical performance deficits from chronic short sleep accumulate and persist. Weekend recovery sleep partially addresses acute debt but does not restore the hormonal cascade of consistent, well-timed sleep.</div></div>
+    <div class="folly-item">Training intensely late at night and wondering why sleep quality is poor.<div class="folly-fix">Intense exercise raises core body temperature, cortisol, and adrenaline — all of which actively oppose melatonin onset. The body needs 2–4 hours to return to sleep-ready temperature. Train before 7pm where possible.</div></div>
+    <div class="folly-item">Using caffeine to override the afternoon dip rather than working with it.<div class="folly-fix">Caffeine blocks adenosine receptors — it does not eliminate adenosine, merely delays its signal. When caffeine clears, accumulated adenosine hits at once. A 20-minute nap before 3pm is physiologically superior. Caffeine after 2pm measurably degrades sleep quality in most people — even those who believe they are unaffected.</div></div>
+  </div>
+  <div class="pg-foot"><span>Being HAware — Going Deeper · Section Two: Circadian Biology</span><span>Work with the clock. Everything else follows.</span></div>
+</div>
+
+<!-- DETOXIFICATION -->
+<div class="chapter" id="ch-detox">
+  <div class="sec-hd"><div class="sec-n">03</div><div><div class="sec-t">DETOXIFICATION</div><div class="sec-st">The liver, the lymph, the pathways — and the crucial warning about mobilising without clearing</div></div></div>
+  <div class="prose">Detoxification is among the most misunderstood concepts in health. Captured by the wellness industry and reduced to green juices and three-day cleanses — which is not merely ineffective but occasionally counterproductive — genuine detoxification is a continuous biological process the body conducts around the clock. The liver, kidneys, lymphatic system, skin, and lungs are running detoxification processes at this moment, as they always are. Understanding how they work — and what supports or undermines them — is the honest version of this conversation.</div>
+  <div class="prose">The modern body faces an environmental burden entirely absent from pre-industrial human experience: heavy metals from industry and dental materials, pesticide residues in food and water, pharmaceutical compounds in water supplies, plasticisers from packaging, air pollutants, endocrine-disrupting chemicals in everyday products. The body's detoxification systems evolved for a different world. They are not broken — they are overwhelmed. Supporting them is not a fringe idea. It is a rational response to an unprecedented situation.</div>
+  <div class="wisdom"><p>"The dose makes the poison — but the body's ability to clear the dose makes the difference between burden and damage."</p><cite>Paracelsus — updated for the present century</cite></div>
+  <div class="qf-row">
+    <div class="qf"><div class="qf-n">500+</div><div class="qf-l">Liver functions</div><div class="qf-d">The liver synthesises proteins, metabolises hormones, produces bile, stores glycogen, and runs two full phases of detoxification chemistry. It is not merely a filter.</div></div>
+    <div class="qf"><div class="qf-n">3</div><div class="qf-l">Phases of liver detox</div><div class="qf-d">Phase I activates toxins — temporarily making them more reactive. Phase II conjugates them for removal. Phase III exports them. All three must work or toxins recirculate.</div></div>
+    <div class="qf"><div class="qf-n">!</div><div class="qf-l">The crucial warning</div><div class="qf-d">Mobilising toxins from storage without clear elimination pathways allows them to recirculate and deposit elsewhere — potentially causing more damage than leaving them stored.</div></div>
+  </div>
+  <div class="prose" style="border:1px solid var(--accent);border-left:4px solid var(--accent);padding:14px 18px;background:#fff8f5"><strong>The most important thing to understand about detoxification:</strong> toxins mobilised from tissue storage — fat cells, bone, organs — must have a clear exit route. If the liver is congested, the lymph is sluggish, bowels are not moving daily, and hydration is inadequate, mobilised toxins simply redistribute to other tissues. Cilantro mobilises heavy metals effectively. Without simultaneously supporting elimination — good hydration, active lymph, daily bowel movement, liver support, chlorella to bind metals in the gut — those metals can redeposit. <strong>Mobilise and clear. Always in that order. Always simultaneously.</strong></div>
+  <div class="two-col">
+    <div class="ib">
+      <div class="ib-title">Phase I — Liver activation</div>
+      <div class="ib-item">Cytochrome P450 enzymes convert fat-soluble toxins into water-soluble intermediates — temporarily making them more chemically reactive. If Phase II cannot keep pace, these intermediates accumulate and cause damage.</div>
+      <div class="ib-item"><strong>Supports Phase I</strong> — B vitamins (B2, B3, B6, B12, folate), vitamin C, magnesium, iron, cruciferous vegetables via indole-3-carbinol, adequate dietary protein.</div>
+      <div class="ib-item"><strong>Inhibits Phase I</strong> — grapefruit (naringenin), certain medications, alcohol, nutritional deficiency. This is why grapefruit interacts with so many pharmaceuticals — it inhibits the very enzyme that metabolises them.</div>
+      <div class="ib-item"><strong>Phase I without Phase II</strong> — the dangerous scenario. Aggressive detox protocols that activate Phase I without supporting Phase II create a backlog of reactive intermediates. This is how poorly designed detox programmes cause harm.</div>
+    </div>
+    <div class="ib">
+      <div class="ib-title">Phase II — Conjugation pathways</div>
+      <div class="ib-item">Six conjugation pathways bind Phase I intermediates to carrier molecules — making them water-soluble and export-ready. The six pathways: glutathione conjugation, sulphation, glucuronidation, methylation, acetylation, amino acid conjugation.</div>
+      <div class="ib-item"><strong>Glutathione conjugation</strong> — the master pathway. Requires cysteine (eggs, cruciferous vegetables), glycine (bone broth), and glutamate. NAC directly supports glutathione production and is the most accessible Phase II support available.</div>
+      <div class="ib-item"><strong>Sulphation</strong> — requires sulphur amino acids (methionine, cysteine) and adequate molybdenum. Relevant to oestrogen metabolism, neurotransmitter clearance, and certain food chemical processing.</div>
+      <div class="ib-item"><strong>Methylation</strong> — requires methyl donors: folate (methylfolate form), B12 (methylcobalamin), B6, betaine. Genetic variants (MTHFR) can impair this pathway significantly — a reason why active-form vitamins matter.</div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="ib">
+      <div class="ib-title">Key detox supports — herbal and nutritional</div>
+      <div class="ib-item"><strong>Milk thistle (silymarin)</strong> — most researched liver-protective herb. Protects liver cells from toxic damage and supports cellular regeneration. Decades of clinical evidence across multiple populations and conditions.</div>
+      <div class="ib-item"><strong>Dandelion root</strong> — supports bile production and liver function. Mildly diuretic supporting kidney elimination. Often overlooked because it grows freely in gardens and costs nothing.</div>
+      <div class="ib-item"><strong>NAC (N-acetyl cysteine)</strong> — directly precedes glutathione synthesis. Protects liver from oxidative damage. Used clinically for paracetamol overdose — which tells you precisely how potent its liver-protective capacity is.</div>
+      <div class="ib-item"><strong>CoQ10 (Coenzyme Q10)</strong> — essential to mitochondrial energy production and a powerful antioxidant protecting the liver and heart during detoxification. Statin drugs deplete CoQ10 dramatically — a fact insufficiently communicated to those prescribed them.</div>
+      <div class="ib-item"><strong>Alpha lipoic acid</strong> — both water and fat soluble. Regenerates glutathione, vitamin C, and vitamin E. Chelates certain heavy metals including mercury and arsenic. An unusually versatile antioxidant.</div>
+    </div>
+    <div class="ib">
+      <div class="ib-title">Heavy metal clearance — in the correct order</div>
+      <div class="ib-item"><strong>Step 1 — Open elimination pathways first.</strong> Daily bowel movement through fibre and hydration. Good kidney function through water and potassium. Active lymph through movement and dry brushing. Regular sweating.</div>
+      <div class="ib-item"><strong>Step 2 — Bind metals in the gut.</strong> Chlorella — demonstrated binding capacity for mercury, lead, and cadmium in the intestine. Zeolite (clinoptilolite). Modified citrus pectin. Bind before recirculation occurs.</div>
+      <div class="ib-item"><strong>Step 3 — Mobilise from tissues.</strong> Cilantro and coriander mobilise heavy metals from tissues — only once elimination pathways are open and binding agents are already in place. Never mobilise without the exit route prepared.</div>
+      <div class="ib-item"><strong>Step 4 — Hydration and skin clearance.</strong> Clean water with a pinch of sea salt per litre for electrolyte balance. Wash sweat from skin promptly after exercise or sauna — do not allow excreted compounds to be reabsorbed through the skin surface.</div>
+      <div class="ib-item"><strong>Step 5 — Restore minerals.</strong> Chelation protocols remove essential minerals alongside toxic ones. Replenish with mineral-rich food and quality supplementation throughout the entire protocol.</div>
+    </div>
+  </div>
+  <div class="prose"><strong>The lymphatic system</strong> has no pump of its own. Unlike the cardiovascular system driven by the heart, lymph moves only through muscle contraction, breathing, and deliberate stimulation. A sedentary lifestyle means sluggish lymph — accumulated cellular waste, compromised immunity, and reduced toxin clearance. Movement is not optional for lymphatic health. Walking, jumping, rebounding on a mini-trampoline, and deep diaphragmatic breathing move more lymph than any supplement. The simplest lymphatic protocol in existence: move daily, breathe deeply, stay hydrated.</div>
+  <div class="folly">
+    <div class="folly-hd">Common Folly — Detoxification</div>
+    <div class="folly-item">Beginning an aggressive detox protocol without first ensuring elimination pathways are open and functioning.<div class="folly-fix">Mobilise and clear — always simultaneously. A congested liver, sluggish bowel, and inadequate hydration mean mobilised toxins have nowhere to go. Start with the basics before adding mobilising agents of any kind.</div></div>
+    <div class="folly-item">Confusing a "detox tea" containing senna or laxative herbs with genuine detoxification.<div class="folly-fix">These products produce bowel movement, creating a sensation of cleansing. They do not touch Phase I or Phase II liver chemistry, the lymphatic system, or tissue-stored toxins. They are laxatives. Call them that honestly.</div></div>
+    <div class="folly-item">Dismissing detoxification entirely as pseudoscience because the wellness industry has sensationalised it.<div class="folly-fix">Phase I and Phase II liver biotransformation is biochemistry taught in medical schools — not alternative medicine. The question is not whether the body detoxifies but whether it is doing so adequately under an unprecedented toxic burden. Supporting an overloaded system is rational.</div></div>
+    <div class="folly-item">Allowing sweat to dry on the skin after exercise or sauna without washing it off.<div class="folly-fix">Sweat carries excreted compounds to the skin surface. Reabsorption through the skin is modest but real and cumulative. Shower after sweating. Do not let it sit and dry.</div></div>
+  </div>
+  <div class="pg-foot"><span>Being HAware — Going Deeper · Section Three: Detoxification</span><span>Mobilise and clear. Always in that order.</span></div>
+</div>
+<!-- POLYPHENOLS -->
+<div class="chapter" id="ch-polyphenols">
+  <div class="sec-hd"><div class="sec-n">04</div><div><div class="sec-t">POLYPHENOLS &amp; BIOFLAVONOIDS</div><div class="sec-st">The plant compounds the modern diet overlooks — and the body quietly misses</div></div></div>
+  <div class="prose">Polyphenols are a large family of naturally occurring plant compounds — more than 8,000 identified so far — that act as the plant's own defence system against UV radiation, pathogens, and oxidative stress. When we eat those plants, we absorb these compounds and they perform a remarkable range of protective functions in the human body: anti-inflammatory, antioxidant, anti-carcinogenic, cardioprotective, neuroprotective, and microbiome-supporting. Bioflavonoids are a major sub-family of polyphenols — the ones responsible for much of the colour in fruits and vegetables.</div>
+  <div class="prose">The instruction to eat a rainbow of colours is not aesthetic advice. It is a shorthand for polyphenol diversity. The modern diet, even when it includes vegetables, tends toward a narrow colour spectrum: pale lettuce, white potato, beige grain. The polyphenol density of industrially grown produce is also measurably lower than traditionally grown varieties. Colour intensity in fruit and vegetables is a direct indicator of polyphenol concentration. The deeper the colour, the more protective compounds are present.</div>
+  <div class="pull-q"><p>"Let food be thy medicine. The colour is the medicine."</p><cite>Hippocrates — updated for the molecular era</cite></div>
+  <div class="poly-grid">
+    <div class="poly-cell"><div class="poly-name">Quercetin</div><div class="poly-type">Flavonol — yellow/white pigment</div><div class="poly-role">Anti-inflammatory, antihistamine, antiviral. Inhibits mast cell degranulation reducing allergic response. Cardioprotective. Senolytic activity — selectively clears damaged senescent cells that accumulate with ageing.</div><div class="poly-food">Red onions, capers, apples with skin, broccoli, kale, berries</div></div>
+    <div class="poly-cell"><div class="poly-name">Resveratrol</div><div class="poly-type">Stilbenoid — red/purple pigment</div><div class="poly-role">Activates sirtuins — longevity-associated genes. Antioxidant, anti-inflammatory, cardioprotective. Mimics certain cellular effects of caloric restriction. One of the most studied longevity compounds currently in research.</div><div class="poly-food">Red grapes and their skin, blueberries, mulberries, dark chocolate, peanuts</div></div>
+    <div class="poly-cell"><div class="poly-name">Curcumin</div><div class="poly-type">Curcuminoid — deep yellow/orange pigment</div><div class="poly-role">Potent anti-inflammatory comparable to some NSAIDs (non-steroidal anti-inflammatory drugs) without the side effects. Liver support, raises BDNF for brain health, joint protection. Poor bioavailability alone — requires black pepper (piperine) and fat for meaningful absorption.</div><div class="poly-food">Turmeric root and powder. Always combine with black pepper and a fat source for absorption.</div></div>
+    <div class="poly-cell"><div class="poly-name">EGCG</div><div class="poly-type">Catechin — green tea compound</div><div class="poly-role">Epigallocatechin gallate — the primary active compound in green tea. Antioxidant, anti-carcinogenic, supports fat metabolism, neuroprotective, antimicrobial. One of the most extensively researched polyphenols in existence.</div><div class="poly-food">Green tea — matcha has highest concentration. White tea. Black tea to lesser extent.</div></div>
+    <div class="poly-cell"><div class="poly-name">Anthocyanins</div><div class="poly-type">Flavonoid — red/blue/purple pigment</div><div class="poly-role">Antioxidant, anti-inflammatory, cardioprotective, neuroprotective. Crosses the blood-brain barrier — directly supports cognitive function and memory consolidation. The compounds responsible for making blueberries blue and red cabbage purple.</div><div class="poly-food">Blueberries, blackberries, cherries, red cabbage, black beans, elderberries, red onion</div></div>
+    <div class="poly-cell"><div class="poly-name">Sulforaphane</div><div class="poly-type">Isothiocyanate — not a pigment</div><div class="poly-role">Activates Nrf2 — the master switch for the body's antioxidant and detoxification gene expression. Anti-carcinogenic, anti-inflammatory, neuroprotective. Among the most potent food-derived protective compounds identified by research.</div><div class="poly-food">Broccoli sprouts (50–100x more than mature broccoli). Broccoli, Brussels sprouts, cabbage. Chop and leave 40 min before cooking to allow sulforaphane formation.</div></div>
+    <div class="poly-cell"><div class="poly-name">Fisetin</div><div class="poly-type">Flavonol — orange/red pigment</div><div class="poly-role">Potent senolytic — clears damaged senescent cells. Neuroprotective. Extends lifespan in animal models more consistently than most other studied compounds. Significantly under-discussed relative to its research profile and potential.</div><div class="poly-food">Strawberries (highest known dietary source), apples, persimmon, lotus root, cucumber skin</div></div>
+    <div class="poly-cell"><div class="poly-name">Apigenin</div><div class="poly-type">Flavone — pale yellow pigment</div><div class="poly-role">Anti-inflammatory, anxiolytic via GABA receptor binding. Inhibits CD38 — an enzyme that depletes NAD+, the molecule central to cellular energy and repair. Research interest growing rapidly in the longevity space.</div><div class="poly-food">Chamomile tea (very high concentration), parsley, celery, artichoke, oregano</div></div>
+    <div class="poly-cell"><div class="poly-name">Luteolin</div><div class="poly-type">Flavone — yellow pigment</div><div class="poly-role">Anti-inflammatory, neuroprotective. Inhibits inflammatory cytokines. Stabilises mast cells — particularly relevant for those with inflammatory or allergic conditions. Often found alongside apigenin in the same food sources.</div><div class="poly-food">Celery, parsley, artichoke, thyme, chamomile tea, red and green peppers</div></div>
+  </div>
+  <hr class="ruled">
+  <div class="prose"><strong>The gut microbiome connection.</strong> Many polyphenols are not absorbed in the small intestine but travel to the large intestine where gut bacteria transform them into bioactive metabolites — often more potent than the original polyphenol compound. This means gut microbiome diversity directly determines how much benefit a polyphenol-rich diet actually delivers to the body. A diverse microbiome, fed by a diverse plant diet, creates a virtuous cycle: more polyphenols feed more diverse bacteria, which produce more protective metabolites, which support the gut lining, which protects the microbiome. The starting point is simply eating a wider variety of plants than you currently do — every week, consistently.</div>
+  <div class="two-col">
+    <div class="ib">
+      <div class="ib-title">Practical polyphenol strategy</div>
+      <div class="ib-item"><strong>Eat by colour</strong> — every week include red, orange, yellow, green, blue/purple, and white plant foods. Each colour band represents different polyphenol families with different protective mechanisms and targets in the body.</div>
+      <div class="ib-item"><strong>Prioritise intensity</strong> — deeper colours indicate higher polyphenol density. Wild blueberries beat cultivated. Dark leafy greens beat iceberg. A deep red tomato beats a pale one every time.</div>
+      <div class="ib-item"><strong>Broccoli sprouts weekly</strong> — the most potent sulforaphane source available without specialised supplementation. Three to four days from seed in a jar on any windowsill. Eat raw or very lightly steamed to preserve the compound.</div>
+      <div class="ib-item"><strong>Green tea daily</strong> — quality green tea delivers EGCG and L-theanine, which moderates caffeine's edge and supports calm focus. Matcha delivers significantly higher concentration than brewed leaf tea of the same weight.</div>
+      <div class="ib-item"><strong>Seasonal and local where possible</strong> — polyphenol content peaks at harvest and declines with time, distance, and cold-storage duration. Seasonal produce eaten close to its source has measurably higher concentrations than the same food shipped internationally out of season.</div>
+    </div>
+    <div class="ib">
+      <div class="ib-title">Bioflavonoids — the honourable mention</div>
+      <div class="ib-item">Bioflavonoids are a specific and numerous sub-group of polyphenols. They were originally classified as "Vitamin P" in the 1930s before the classification was revised. The name was dropped; the importance was not.</div>
+      <div class="ib-item"><strong>Vitamin C synergy</strong> — bioflavonoids dramatically enhance vitamin C absorption and stability in the body. Whole citrus fruit delivers bioflavonoids alongside vitamin C in the white pith. Ascorbic acid supplement alone does not replicate this synergy.</div>
+      <div class="ib-item"><strong>Rutin</strong> — found in buckwheat, asparagus, and apple skin. Strengthens capillary walls, reduces inflammation, supports circulation. Particularly relevant for those with varicose veins, easy bruising, or poor peripheral circulation.</div>
+      <div class="ib-item"><strong>Hesperidin</strong> — concentrated in citrus pith and peel. Anti-inflammatory, supports lymphatic function, neuroprotective. Mostly discarded when people juice citrus or eat only the flesh, removing the most medicinally valuable part of the fruit.</div>
+      <div class="ib-item"><strong>The pith is the medicine</strong> — the white spongy layer between citrus skin and flesh that most people remove is where the highest bioflavonoid concentration resides. Eat the whole fruit. The inconvenience is trivial. The benefit is not.</div>
+    </div>
+  </div>
+  <div class="folly">
+    <div class="folly-hd">Common Folly — Polyphenols &amp; Bioflavonoids</div>
+    <div class="folly-item">Juicing fruit and discarding the fibre and pith to "get the nutrients."<div class="folly-fix">The juice delivers sugar and some vitamins. The fibre slows sugar absorption. The pith delivers bioflavonoids. The pulp feeds the microbiome. Juicing discards most of the therapeutic value and leaves you with essentially a sweet drink.</div></div>
+    <div class="folly-item">Relying on a single "superfood" rather than dietary diversity.<div class="folly-fix">No single food delivers the full polyphenol spectrum. Diversity of plant intake is the single strongest dietary predictor of microbiome health — and microbiome health determines how much benefit polyphenols actually deliver to the body.</div></div>
+    <div class="folly-item">Boiling broccoli at high heat and expecting significant sulforaphane benefit.<div class="folly-fix">Sulforaphane forms when myrosinase enzyme contacts glucoraphanin. Myrosinase is destroyed above 60 degrees celsius. Chop broccoli and leave it 40 minutes before cooking — sulforaphane forms during this window and is then heat-stable. Or eat it raw. Or grow the sprouts, which have 50–100 times more to begin with.</div></div>
+  </div>
+  <div class="pg-foot"><span>Being HAware — Going Deeper · Section Four: Polyphenols &amp; Bioflavonoids</span><span>The colour is the medicine. Eat the full spectrum.</span></div>
+</div>
+
+<!-- MIND WORKS -->
+<div class="chapter" id="ch-mindworks">
+  <div class="sec-hd"><div class="sec-n">05</div><div><div class="sec-t">MIND WORKS</div><div class="sec-st">A taster — the neuroscience of habit, stress, and becoming</div></div></div>
+  <div class="prose">The physical body and the mind are not two separate systems operating in parallel. They are one system — profoundly, inextricably connected — and the evidence for this is no longer philosophical. Chronic psychological stress elevates cortisol, suppresses the immune system, degrades muscle tissue, disrupts sleep, and accelerates cellular ageing. Deliberate mental states — Intention, Expectation, Attention — measurably alter neurochemistry and, through neurochemistry, alter physical performance and recovery. The mind is not the passenger in this journey. It is the driver.</div>
+  <div class="prose">This section is a taster. The full exploration of mind, emotion, identity, and the psychology of becoming lives in Being HAware: Intermediate Level — where the physical foundation built in Foundation Level meets the interior landscape that determines whether that foundation is ever fully used. What follows here is enough to make the connection visible and to prepare the ground for what comes next.</div>
+  <div class="wisdom"><p>"It is like a finger pointing away to the moon. Don't concentrate on the finger, or you will miss all that heavenly glory."</p><cite>Bruce Lee — Enter the Dragon, 1973 · On the danger of mistaking the instruction for the thing itself</cite></div>
+  <div class="prose">Bruce Lee's finger pointing at the moon is among the most useful metaphors in this entire body of work. The exercises, the nutrition protocols, the circadian anchors, the supplementation — these are the finger. They point toward something: a capable, aware, long-lived body inhabited by a conscious and deliberate mind. <strong>The danger is in confusing the pointing with the destination.</strong> Someone who masters every movement progression and eats their polyphenols but remains unaware of their internal states — their fears, their resistances, their habitual patterns of thought — has followed the finger without looking at the moon. Intermediate Level turns the gaze inward.</div>
+  <div class="two-col">
+    <div class="ib">
+      <div class="ib-title">The neuroscience of habit</div>
+      <div class="ib-item"><strong>Habit formation</strong> — every repeated behaviour creates and reinforces a neural pathway. The more frequently a pathway is used, the more myelin — the insulating sheath that speeds neural transmission — is laid down around it. Habits are literally wired in at the cellular level. This works in both directions: helpful and harmful habits are equally structural and equally persistent.</div>
+      <div class="ib-item"><strong>The habit loop</strong> — cue, routine, reward. Identifying the cue that triggers an unwanted routine and replacing only the routine (keeping the cue and the reward intact) is far more effective than attempting elimination through willpower alone. The architecture of the loop is the leverage point.</div>
+      <div class="ib-item"><strong>Neuroplasticity</strong> — the brain rewires throughout life, not only in childhood. New pathways form in response to new experience and deliberate practice. The formation of beneficial habits is a literal act of self-reconstruction at the neural level. The body follows the brain's map.</div>
+      <div class="ib-item"><strong>The 66-day figure</strong> — habit automaticity typically develops over 66 days of consistent practice, not the commonly cited 21. Foundation Level's 90-day structure accounts for this with room to establish the habit before the programme ends.</div>
+    </div>
+    <div class="ib">
+      <div class="ib-title">Stress and the body</div>
+      <div class="ib-item"><strong>Acute stress is useful</strong> — the fight-or-flight response sharpens focus, mobilises energy, and heightens physical performance in the short term. The body designed for a world of acute stressors handles this beautifully and efficiently.</div>
+      <div class="ib-item"><strong>Chronic stress is corrosive</strong> — cortisol elevated continuously suppresses immune function, degrades muscle protein, impairs memory consolidation, disrupts sleep architecture, and promotes visceral fat accumulation. The body was not designed for this. Modern life frequently provides it without pause.</div>
+      <div class="ib-item"><strong>The HPA axis</strong> — the hypothalamic-pituitary-adrenal axis is the hormonal stress pathway. Chronic activation depletes adrenal reserves and disrupts the cortisol awakening response, creating the flat exhausted state commonly described as burnout or adrenal fatigue.</div>
+      <div class="ib-item"><strong>Recovery is not passive</strong> — the parasympathetic nervous system (rest and digest) must be deliberately activated to counteract chronic sympathetic (fight or flight) dominance. Slow breathing, nature contact, deliberate stillness, and adequate sleep all activate the parasympathetic response. These are not luxuries. They are maintenance for the system that runs everything else.</div>
+    </div>
+  </div>
+  <div class="pull-q"><p>Intention shapes what you expect. Expectation determines where your Attention goes. Where Attention goes, results follow — eventually, inevitably, like a ball set rolling until it carries the momentum of a juggernaut. The mind sets the direction. The body follows it — always.</p><cite>Being HAware — Foundation Level</cite></div>
+  <div class="prose"><strong>Intention, Expectation, and Attention — revisited through neuroscience.</strong> In Foundation Level these three words were introduced as a practical framework for becoming. In the context of neuroscience they become specific and measurable. Intention activates the prefrontal cortex — the seat of planning, impulse control, and goal-directed behaviour. A clear Intention literally primes the neural circuits that make consistent action more likely. Expectation shapes the reticular activating system's filter — what the brain notices and what it screens out. High Expectation primes the brain to detect evidence of progress, which reinforces the behaviour producing it. Attention, directed deliberately, strengthens the neural pathways being exercised — which is precisely why conscious, engaged repetition builds skill faster than mindless volume. This is not motivational language dressed in science. It is the science, plainly stated.</div>
+  <div class="folly">
+    <div class="folly-hd">Common Folly — Mind Works</div>
+    <div class="folly-item">Believing that willpower is a fixed character trait — something you either have or simply don't.<div class="folly-fix">Willpower is a resource that depletes with use and restores with rest — it behaves more like a muscle than a personality trait. It is also largely unnecessary when habits are well-established. The goal of the first 90 days is to reduce reliance on willpower by building automaticity. Design the environment. The character follows.</div></div>
+    <div class="folly-item">Treating mental and emotional health as entirely separate from physical health.<div class="folly-fix">The gut-brain axis alone — bidirectional communication between the enteric nervous system and the central nervous system — should dissolve this distinction. 90% of serotonin is produced in the gut. Gut health is mood health. Physical health is mental health. The division is administrative, not biological.</div></div>
+    <div class="folly-item">Dismissing meditation and breathwork as spiritual practices with no physiological relevance.<div class="folly-fix">Controlled breathing directly activates the vagus nerve and the parasympathetic nervous system. Heart rate variability, cortisol levels, and blood pressure all respond measurably and reliably to deliberate breath practice. The mechanism is physiology. The results are physical. Call it what it is and use it accordingly.</div></div>
+  </div>
+  <div class="prose" style="border-left:3px solid var(--purple);padding-left:16px;color:var(--ink2);font-style:italic;margin-top:16px">The full exploration — Emotional Scale, the complete Mind Works framework, the psychology of identity change, the neuroscience of sustained peak states, and the interior landscape of the person in the process of becoming — continues in Being HAware: Intermediate Level. Consider this section the finger. The moon is that way. And it is worth looking at.</div>
+  <div class="pg-foot"><span>Being HAware — Going Deeper · Section Five: Mind Works</span><span>The body follows where the mind points — always.</span></div>
+</div>
+<!-- BREAKING PLATEAU -->
+<div class="chapter" id="ch-plateau">
+  <div class="sec-hd"><div class="sec-n">06</div><div><div class="sec-t">BREAKING THROUGH PLATEAU</div><div class="sec-st">Why it comes to everyone — and why it separates those who become from those who almost did</div></div></div>
+  <div class="prose">The plateau will come. Not might — will. It is not a sign that the programme is broken. It is not a sign that you are broken. It is a sign that the body has done precisely what it was asked to do: it has adapted to the current stimulus. The ball is rolling. The question now is what you do with the momentum.</div>
+  <div class="prose">Most people experience the plateau as failure. Progress was happening — measurably, visibly, encouragingly — and then it stopped. The exercises that used to be hard became merely difficult, then routine, then easy. The body stopped changing. The common interpretation is that the approach has stopped working. The honest interpretation is that the approach has <em>finished</em> working at this level — and that the next level is now accessible precisely because this one has been fully mastered.</div>
+  <div class="wisdom"><p>"The impediment to action advances action. What stands in the way becomes the way."</p><cite>Marcus Aurelius — Meditations · Written nearly 2,000 years before sports science confirmed it</cite></div>
+  <div class="plateau-block">
+    <div class="plateau-hd">What the plateau actually is</div>
+    <div class="plateau-body">The body adapts to a training stimulus through a process called <strong>supercompensation</strong>. Apply a stress. The body is disrupted. It recovers. In recovering it overshoots the previous baseline — becoming slightly more capable than before. Apply the same stress again. The body recovers again, overshoots again. Progress accumulates. But if the same stress is applied repeatedly without variation, the body adapts to that specific stimulus and stops needing to overshoot. The stimulus has become the new baseline. This is the plateau — not failure, but successful adaptation demanding a new and greater challenge.</div>
+    <div class="plateau-fix">The body is not refusing to grow. It is telling you it has grown as far as this particular stimulus will take it. The plateau is the invitation to the next level. It always has been.</div>
+  </div>
+  <div class="qf-row">
+    <div class="qf"><div class="qf-n">4–6</div><div class="qf-l">Weeks to plateau onset</div><div class="qf-d">Most training adaptations plateau within 4–6 weeks of consistent identical stimulus. The body is efficient — it adapts faster than most people expect or plan for.</div></div>
+    <div class="qf"><div class="qf-n">3</div><div class="qf-l">Variables to change</div><div class="qf-d">Volume (sets times reps), intensity (difficulty of variation), and rest periods. Change any one and the stimulus is new. Change all three and the body has no map to work from.</div></div>
+    <div class="qf"><div class="qf-n">&#8800;</div><div class="qf-l">Plateau does not equal failure</div><div class="qf-d">The person who never hits a plateau has never pushed hard enough to fully adapt. The plateau is the view from the summit of one level, looking up toward the next.</div></div>
+  </div>
+  <div class="two-col">
+    <div class="ib">
+      <div class="ib-title">Why people fall back at the plateau</div>
+      <div class="ib-item"><strong>Misidentification</strong> — the plateau is read as failure rather than as successful adaptation. The emotional response to "it is not working" is to stop. The correct response is to change the stimulus and continue.</div>
+      <div class="ib-item"><strong>Comparison to early gains</strong> — the first weeks of a programme produce rapid visible change driven largely by neural adaptations, not structural ones. When these fast early gains naturally slow, it feels like regression. It is not. Neurological adaptation is simply complete. Structural change is slower, less dramatic, and far more durable.</div>
+      <div class="ib-item"><strong>Boredom dressed as wisdom</strong> — "this programme is not right for me" often means "I am no longer excited by results that were exciting when the programme was new." The excitement of novelty wears off. The work continues regardless. These are entirely different things.</div>
+      <div class="ib-item"><strong>Fear of the next level</strong> — progressing from inverted row to pull-up, from pike push-up to handstand push-up, from assisted pistol to full pistol — requires genuinely attempting something difficult again. Some people prefer the comfort of the plateau to the discomfort of being a beginner again at the next level. This is the most honest and the most common reason people fall back into insignificance after early progress.</div>
+    </div>
+    <div class="ib">
+      <div class="ib-title">How to break through — On-Purpose</div>
+      <div class="ib-item"><strong>Progress the variation</strong> — the programme already maps this precisely. When the current variation is genuinely comfortable for all sets, the next one is not optional. It is the programme doing its job.</div>
+      <div class="ib-item"><strong>Change the tempo</strong> — a 3-second controlled negative turns a familiar exercise into a new stimulus immediately. A 5-second negative harder still. A pause rep at the most difficult point of the movement hardest of all. The movement is the same. The time under tension is not.</div>
+      <div class="ib-item"><strong>Reduce rest intervals</strong> — the same exercise, the same reps, but 45 seconds rest instead of 90. The cardiovascular and metabolic demand changes significantly. The body must adapt to a genuinely different stimulus.</div>
+      <div class="ib-item"><strong>Introduce external load</strong> — a backpack with weight, a weighted vest. Even modest load on a bodyweight exercise is a meaningfully new stimulus the body has not encountered before.</div>
+      <div class="ib-item"><strong>Deload and return</strong> — sometimes the plateau is not a stimulus problem but a recovery deficit. The programme builds in three deload weeks precisely for this reason. A deliberate deload followed by a return to full training frequently breaks a plateau that adding more training was making progressively worse.</div>
+      <div class="ib-item"><strong>Address sleep and nutrition first</strong> — a training plateau that coincides with poor sleep or inadequate protein is a recovery problem, not a programming problem. No variation of stimulus repairs insufficient recovery. Address it in the correct order.</div>
+    </div>
+  </div>
+  <div class="plateau-block">
+    <div class="plateau-hd">The mental dimension of plateau</div>
+    <div class="plateau-body">The physical plateau and the psychological plateau are the same event experienced in two different languages. Physically, the stimulus is insufficient to drive further adaptation. Mentally, the Intention has softened — the original urgency has faded into familiarity. The Expectation has drifted — the initial belief that change was coming has been partially replaced by the assumption that change has finished. The Attention has become mechanical — the session is being completed rather than genuinely inhabited. <strong>Revisiting Intention at the plateau is not a motivational exercise. It is a technical one.</strong> What do you actually want now that the early gains have been made? What does the next level of capability mean to you? Where is your Attention during a working set — on the muscle contracting, on the count, or on what you are having for dinner? The answers to these questions are precisely where the breakthrough lives, waiting.</div>
+    <div class="plateau-fix">Reset the Intention. Raise the Expectation. Bring the Attention fully back into the room. Then change the stimulus. In that order. Every time.</div>
+  </div>
+  <div class="prose">There is a particular kind of person who pushes through the plateau. They are not more gifted. They are not more disciplined in any innate sense. They have simply developed — through experience or through being told early enough — the habit of interpreting the plateau correctly. As signal rather than verdict. They know that the plateau is precisely the place where almost everyone turns back toward comfort and familiarity. And that knowledge makes the path through it visible when it arrives. <strong>You are reading this because you now know. That changes what the plateau means when it comes — and it will come.</strong></div>
+  <div class="folly">
+    <div class="folly-hd">Common Folly — Breaking Through Plateau</div>
+    <div class="folly-item">Changing the programme entirely when the current one stops producing obvious visible results.<div class="folly-fix">Programme-hopping is the most reliable way to perpetually remain a beginner. The discomfort of the plateau is precisely where adaptation happens. Stay with the system long enough to outgrow it deliberately — then progress within it, not away from it.</div></div>
+    <div class="folly-item">Interpreting a training plateau as evidence that the body does not respond to this kind of exercise.<div class="folly-fix">Every body responds to an appropriate stimulus. The plateau is evidence that the current stimulus has been fully mastered. That is success. Change the stimulus and progress continues. The body's capacity is not the limit. The stimulus is.</div></div>
+    <div class="folly-item">Adding more volume to break a plateau that is actually being caused by a recovery deficit.<div class="folly-fix">More training on an under-recovered body produces injury and regression — not adaptation. If sleep is poor, protein is insufficient, and stress is chronically elevated, adding sessions makes the plateau worse with each session. Address recovery first. Always in that order.</div></div>
+  </div>
+  <div class="pull-q"><p>"Nobody has time to change — yet inevitably everyone will. On purpose, or by accident. The plateau is the moment where On-Purpose is tested for the first time in earnest. Everything before it was momentum from the beginning. This is where it genuinely counts."</p><cite>Being HAware — Foundation Level</cite></div>
+  <div class="pg-foot"><span>Being HAware — Going Deeper · Section Six: Breaking Through Plateau</span><span>The plateau is not the end. It is the gate.</span></div>
+</div>
+
+<!-- REFERENCES -->
+<div class="chapter" id="ch-references">
+  <div class="sec-hd"><div class="sec-n">07</div><div><div class="sec-t">REFERENCES</div><div class="sec-st">Where to go next — the sources behind what you have just read, annotated so you know why each one matters</div></div></div>
+  <div class="prose">This document stands on the shoulders of researchers and clinicians who spent lifetimes on these questions. What follows is annotated — each reference tells you why it matters before you commit the time to it. The curious mind that has reached this page has done the work. These are the next doors.</div>
+  <div style="border:1px solid var(--ink4)">
+    <div class="ref-item"><div class="ref-num">1</div><div><div class="ref-title">Dead Doctors Don't Lie — and Rare Earths: Forbidden Cures</div><div class="ref-auth">Dr Joel D. Wallach, DVM, ND</div><div class="ref-desc">The foundational works behind this entire volume. Wallach's identification of the 90 essential nutrients, his zoological research preserved in the Smithsonian Institution, and his clinical observations across four decades of practice in both veterinary and human medicine. Dense with data that mainstream medicine has been consistently slow to engage with. Read both. The original lecture recording of Dead Doctors Don't Lie is freely available online and worth hearing in Wallach's own words first — the data lands differently spoken than read.</div></div></div>
+    <div class="ref-item"><div class="ref-num">2</div><div><div class="ref-title">Epigenetics — How Environment Shapes Our Genes</div><div class="ref-auth">Dr Joel Wallach — later work building on the 90 essential nutrients framework</div><div class="ref-desc">Wallach's exploration of how nutritional status influences gene expression at the cellular level. The body's genes are instructions; the 90 essential nutrients are the materials required to execute them. Deficiency is not merely absence — it is miscommunication between the genetic instruction and the cellular machinery trying to carry it out. Reads naturally as a companion to Rare Earths.</div></div></div>
+    <div class="ref-item"><div class="ref-num">3</div><div><div class="ref-title">Composition of Foods — The McCance and Widdowson Study, 1940–1991</div><div class="ref-auth">R.A. McCance &amp; E.M. Widdowson / UK Ministry of Agriculture, Fisheries and Food</div><div class="ref-desc">Government data on the mineral content of UK foods tracked across fifty years. The documented decline in iron, calcium, magnesium, and trace minerals in staple vegetables and meats sits in the government's own published records — not in alternative health literature. The data is what it is. Available via the UK National Archives and the Royal Society of Chemistry archives.</div></div></div>
+    <div class="ref-item"><div class="ref-num">4</div><div><div class="ref-title">The Mineral Depletion of Foods Available to Us as a Nation — 1940 to 2002</div><div class="ref-auth">David Thomas — Nutrition and Health Journal, 2007</div><div class="ref-desc">Updates and extends the McCance and Widdowson data through to the early 2000s. Confirms the trend continues with more recent figures. Published in a peer-reviewed academic journal. The supplementation argument in this document does not rest on one study — this is the second independently published corroborating source. Available through academic databases.</div></div></div>
+    <div class="ref-item"><div class="ref-num">5</div><div><div class="ref-title">Why We Sleep</div><div class="ref-auth">Matthew Walker, PhD — 2017</div><div class="ref-desc">The most comprehensive and accessible account of sleep science currently available to the general reader. Directly relevant to the Circadian Biology section — the relationships between sleep architecture, growth hormone release, cortisol, testosterone, immune function, and every other system touched on in this document. If the circadian chapter lit your curiosity, this is the next book. It will change how you think about the third of your life spent sleeping.</div></div></div>
+    <div class="ref-item"><div class="ref-num">6</div><div><div class="ref-title">Circadian Rhythm Research — Nobel Prize in Physiology or Medicine, 2017</div><div class="ref-auth">Jeffrey C. Hall, Michael Rosbash, Michael W. Young — nobelprize.org</div><div class="ref-desc">The Nobel Committee's public summary is freely available and accessible to non-specialists without a scientific background. The full scientific background document goes considerably deeper into the molecular mechanisms. The central discovery — that every cell contains a molecular clock and that these clocks synchronise to environmental cues — is the foundational science beneath everything in Section Two of this document.</div></div></div>
+    <div class="ref-item"><div class="ref-num">7</div><div><div class="ref-title">Nutrition and Physical Degeneration</div><div class="ref-auth">Dr Weston A. Price, DDS — 1939</div><div class="ref-desc">Price's extraordinary global study of isolated populations eating traditional whole foods versus those who had adopted industrialised diets. The photographic evidence — dental architecture, facial structure, physical robustness, absence of degenerative disease — is remarkable and difficult to dismiss. Freely available via the Weston A. Price Foundation at westonaprice.org. The Real Food and polyphenol principles in both volumes of this programme are informed by his meticulous findings.</div></div></div>
+    <div class="ref-item"><div class="ref-num">8</div><div><div class="ref-title">Being HAware — Intermediate Level</div><div class="ref-auth">Being HAware Programme — forthcoming</div><div class="ref-desc">The next step in this body of work. Harder movement — ring work, weighted calisthenics, advanced skill progressions toward the planche and front lever. Deeper training. And the interior landscape explored in full — Mind Works complete, Emotional Scale, the psychology of identity change and sustained transformation, and the neuroscience of peak states. Two volumes have been pointing at the moon. Intermediate Level is where you look at it directly.</div></div></div>
+  </div>
+  <div class="wisdom" style="margin-top:20px"><p>"The more that you read, the more things you will know. The more that you learn, the more places you'll go."</p><cite>Dr Seuss — as true of biochemistry, circadian biology, and detoxification as it is of anywhere else</cite></div>
+  <div class="pg-foot"><span>Being HAware — Going Deeper · References</span><span>Standing on the shoulders of giants — so others may see further.</span></div>
+</div>
+
+</div><!-- end .page -->
+
+<script>
+const chapters = ['cover','mighty90','circadian','detox','polyphenols','mindworks','plateau','references'];
+let currentCh = 'cover';
+
+function setChapter(id, btn) {
+  document.querySelectorAll('.ch-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('.chapter').forEach(c => c.classList.toggle('visible', c.id === 'ch-'+id));
+  currentCh = id;
+  window.scrollTo(0,0);
+}
+function setChapterById(id) {
+  const btn = document.querySelector('.ch-btn[onclick*="' + id + '"]');
+  setChapter(id, btn);
+}
+function prevChapter() {
+  const i = chapters.indexOf(currentCh);
+  if(i > 0) setChapterById(chapters[i-1]);
+}
+function nextChapter() {
+  const i = chapters.indexOf(currentCh);
+  if(i < chapters.length-1) setChapterById(chapters[i+1]);
+}
+function setPTab(id, btn) {
+  document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.ptab-panel').forEach(p => p.classList.toggle('visible', p.id === 'pt-'+id));
+}
+function smartPrint() {
+  const snapshot = {};
+  document.querySelectorAll('.chapter').forEach(el => { snapshot[el.id] = el.classList.contains('visible'); });
+  document.querySelectorAll('.chapter').forEach(el => el.classList.add('visible'));
+  document.querySelectorAll('.ptab-panel').forEach(el => el.classList.add('visible'));
+  document.body.getBoundingClientRect();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.print();
+      setTimeout(() => {
+        document.querySelectorAll('.chapter').forEach(el => {
+          el.classList.toggle('visible', !!snapshot[el.id]);
+        });
+      }, 1000);
+    });
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Natural Athlete — Complete Programme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:#f5f2eb; --paper2:#ede9df; --paper3:#e4dfd3;
+  --ink:#1c1a16; --ink2:#4a4740; --ink3:#8a8780; --ink4:#c4bfb4;
+  --accent:#c4501a; --accent2:#e8a882;
+  --green:#2d6a4f; --green2:#d4ede3;
+  --amber:#9a6c10; --amber2:#f5e8c0;
+  --phase1:#2d6a4f; --phase2:#9a6c10; --phase3:#c4501a;
+  --folly:#7a1a1a; --folly2:#f5e0e0;
+  --display:'Bebas Neue',sans-serif;
+  --body:'Crimson Pro',Georgia,serif;
+  --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:300;background:var(--ink);height:48px;display:flex;align-items:center;padding:0 20px;gap:0}
+.nav-brand{font-family:var(--display);font-size:17px;letter-spacing:.06em;color:var(--paper);margin-right:16px;white-space:nowrap}
+.nav-brand span{color:var(--accent2)}
+.nav-chapters{display:flex;gap:1px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-chapters::-webkit-scrollbar{display:none}
+.ch-btn{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:0 12px;height:48px;background:transparent;border:none;color:var(--ink4);cursor:pointer;transition:all .2s;border-bottom:3px solid transparent;white-space:nowrap}
+.ch-btn:hover{color:var(--paper)}
+.ch-btn.active{color:var(--accent2);border-bottom-color:var(--accent2)}
+.nav-right{display:flex;gap:4px;margin-left:8px}
+.nav-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;background:rgba(255,255,255,.08);border:none;color:var(--ink4);cursor:pointer;transition:all .15s;white-space:nowrap}
+.nav-btn:hover{background:rgba(255,255,255,.16);color:var(--paper)}
+.nav-btn.print{background:var(--accent);color:white}
+.nav-btn.print:hover{opacity:.85}
+
+/* ── PAGE ── */
+.page{max-width:920px;margin:0 auto;padding:68px 28px 60px}
+.chapter{display:none}.chapter.visible{display:block}
+
+/* ── COVER ── */
+.cover-wrap{padding:40px 0 36px;border-bottom:1px solid var(--ink4);margin-bottom:32px}
+.cover-rule{height:4px;background:var(--ink);margin-bottom:20px}
+.cover-grid{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:24px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.cover-title{font-family:var(--display);font-size:78px;line-height:.92;color:var(--ink);letter-spacing:.02em;margin-bottom:14px}
+.cover-title span{color:var(--accent)}
+.cover-sub{font-size:16px;font-weight:300;font-style:italic;color:var(--ink2);max-width:480px;line-height:1.55;border-left:3px solid var(--accent);padding-left:16px}
+.cover-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);min-width:220px}
+.stat{background:var(--paper);padding:12px 14px}
+.stat-n{font-family:var(--display);font-size:30px;color:var(--ink);line-height:1;margin-bottom:2px}
+.stat-l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.contents{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink4);border:1px solid var(--ink4)}
+.toc-item{background:var(--paper);padding:12px 16px;cursor:pointer;transition:background .15s}
+.toc-item:hover{background:var(--paper2)}
+.toc-num{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--ink3);margin-bottom:3px}
+.toc-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.toc-desc{font-size:12px;color:var(--ink2);line-height:1.4;font-style:italic}
+
+/* ── SECTION HEADER ── */
+.sec-hd{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:end;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--ink4)}
+.sec-n{font-family:var(--display);font-size:68px;line-height:1;opacity:.1;letter-spacing:-.02em}
+.sec-t{font-family:var(--display);font-size:36px;letter-spacing:.04em;color:var(--ink);margin-bottom:3px}
+.sec-st{font-size:13px;font-style:italic;color:var(--ink2);font-weight:300}
+
+/* ── PHASE HEADER ── */
+.ph-hd{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--ink4)}
+.ph-n{font-family:var(--display);font-size:68px;line-height:1;opacity:.1}
+.ph-tag{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+.ph-tag.p1{color:var(--phase1)}.ph-tag.p2{color:var(--phase2)}.ph-tag.p3{color:var(--phase3)}
+.ph-name{font-family:var(--display);font-size:36px;letter-spacing:.04em;color:var(--ink);margin-bottom:4px}
+.ph-desc{font-size:13px;font-style:italic;color:var(--ink2);font-weight:300;max-width:460px;line-height:1.5}
+.ph-badge{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:8px 14px;border:1px solid;text-align:center;line-height:1.5}
+.ph-badge.p1{border-color:var(--phase1);color:var(--phase1)}
+.ph-badge.p2{border-color:var(--phase2);color:var(--phase2)}
+.ph-badge.p3{border-color:var(--phase3);color:var(--phase3)}
+
+/* ── WEEK CONTROLS ── */
+.week-bar{display:flex;gap:3px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.wk-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:4px 10px;border:1px solid var(--ink4);background:transparent;color:var(--ink3);cursor:pointer;border-radius:1px;transition:all .15s}
+.wk-btn:hover{border-color:var(--ink2);color:var(--ink)}
+.wk-btn.active{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.wk-btn.deload{border-style:dashed}
+.wk-btn.deload.active{background:var(--ink3);border-style:solid}
+.wk-panel{display:none}.wk-panel.visible{display:block}
+.wk-hd{display:grid;grid-template-columns:1fr auto;align-items:start;margin-bottom:12px;gap:12px}
+.wk-title{font-family:var(--display);font-size:24px;letter-spacing:.04em;color:var(--ink);margin-bottom:3px}
+.wk-focus{font-size:13px;font-style:italic;color:var(--ink2);font-weight:300}
+.wk-tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:1px}
+.tag-build{background:var(--green2);color:var(--green)}
+.tag-push{background:var(--amber2);color:var(--amber)}
+.tag-peak{background:#fde8df;color:var(--accent)}
+.tag-deload{background:var(--paper3);color:var(--ink3)}
+
+/* ── DAY GRID ── */
+.day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:12px}
+.day-col{background:var(--paper);min-height:240px;display:flex;flex-direction:column}
+.day-hd{padding:7px 7px 5px;border-bottom:1px solid var(--ink4)}
+.day-name{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:2px}
+.day-focus{font-size:10px;font-weight:600;color:var(--ink);line-height:1.2}
+.day-focus.rest{color:var(--ink3);font-weight:300;font-style:italic}
+.day-body{padding:5px 6px;flex:1;display:flex;flex-direction:column;gap:4px}
+.ex-b{padding:4px 6px;border-radius:1px;border-left:2px solid transparent}
+.ex-b.push{background:#fde8df;border-color:var(--accent)}
+.ex-b.pull{background:var(--green2);border-color:var(--green)}
+.ex-b.lower{background:var(--amber2);border-color:var(--amber)}
+.ex-b.core{background:var(--paper2);border-color:var(--ink3)}
+.ex-b.skill{background:#e8e4f8;border-color:#6b5cb8}
+.ex-n{font-size:9px;font-weight:600;color:var(--ink);line-height:1.25;margin-bottom:1px}
+.ex-s{font-family:var(--mono);font-size:8px;color:var(--ink3)}
+.rest-inner{flex:1;display:flex;align-items:center;justify-content:center}
+.rest-t{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);text-align:center}
+
+/* ── LEGEND ── */
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.leg-i{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--ink2)}
+.leg-sw{width:9px;height:9px;border-radius:1px}
+.sw-push{background:var(--accent)}.sw-pull{background:var(--green)}.sw-lower{background:var(--amber)}.sw-core{background:var(--ink3)}.sw-skill{background:#6b5cb8}
+
+/* ── NOTES ── */
+.notes-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.nb{border:1px solid var(--ink4);padding:12px 14px}
+.nb-title{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--ink4)}
+.nb-item{font-size:11px;color:var(--ink2);line-height:1.55;margin-bottom:4px;padding-left:12px;position:relative}
+.nb-item::before{content:'—';position:absolute;left:0;color:var(--ink4)}
+
+/* ── PROGRESS ── */
+.prog-wrap{margin-bottom:16px}
+.prog-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;margin-bottom:5px;display:flex;justify-content:space-between}
+.prog-track{height:3px;background:var(--ink4);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;transition:width .4s}
+.pf1{background:var(--phase1)}.pf2{background:var(--phase2)}.pf3{background:var(--phase3)}
+
+/* ── NUTRITION ── */
+.prose{font-size:14px;line-height:1.75;color:var(--ink2);margin-bottom:14px;max-width:640px}
+.prose strong{color:var(--ink);font-weight:600}
+.pull-q{border-left:4px solid var(--accent);padding:10px 18px;margin:16px 0;background:var(--paper2)}
+.pull-q p{font-size:16px;font-style:italic;color:var(--ink);line-height:1.5;margin-bottom:4px}
+.pull-q cite{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.wisdom{background:var(--ink);color:var(--paper);padding:16px 22px;margin:16px 0}
+.wisdom p{font-size:15px;font-style:italic;line-height:1.5;margin-bottom:6px}
+.wisdom cite{font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase}
+.qf-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:16px 0}
+.qf{background:var(--paper);padding:12px 14px}
+.qf-n{font-family:var(--display);font-size:28px;color:var(--accent);line-height:1;margin-bottom:3px}
+.qf-l{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+.qf-d{font-size:11px;color:var(--ink2);line-height:1.4}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.ib{border:1px solid var(--ink4);padding:12px 14px}
+.ib-title{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--ink4)}
+.ib-item{font-size:12px;color:var(--ink2);line-height:1.55;margin-bottom:5px;padding-left:12px;position:relative}
+.ib-item::before{content:'—';position:absolute;left:0;color:var(--ink4)}
+.ib-item strong{color:var(--ink)}
+
+/* ── FOOD TABLE ── */
+.food-t{width:100%;border-collapse:collapse;margin:16px 0;font-size:12px}
+.food-t th{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:7px 9px;border-bottom:1px solid var(--ink4);text-align:left;background:var(--paper2)}
+.food-t td{padding:7px 9px;border-bottom:1px solid var(--paper3);color:var(--ink2);vertical-align:top}
+.food-t tr:hover td{background:var(--paper2)}
+.food-t .star{color:var(--accent);font-weight:600}
+.food-t .prot{font-family:var(--mono);font-weight:500;color:var(--ink)}
+
+/* ── FOLLY ── */
+.folly{background:var(--folly2);border:1px solid #d4a0a0;border-left:4px solid var(--folly);padding:14px 18px;margin:16px 0}
+.folly-hd{font-family:var(--display);font-size:16px;letter-spacing:.06em;color:var(--folly);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.folly-hd::before{content:'✕';font-size:13px}
+.folly-item{font-size:12px;color:#5a2020;line-height:1.55;padding:5px 0 5px 14px;position:relative;border-bottom:1px solid #e8c0c0}
+.folly-item:last-child{border-bottom:none}
+.folly-item::before{content:'—';position:absolute;left:0;color:#c08080}
+.folly-fix{font-size:11px;color:var(--green);margin-top:2px;padding-left:14px;position:relative}
+.folly-fix::before{content:'→';position:absolute;left:0;color:var(--green)}
+
+/* ── MINERALS ── */
+.min-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:16px 0}
+.mc{background:var(--paper);padding:10px 13px}
+.mc-n{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:2px;font-weight:500}
+.mc-r{font-size:11px;color:var(--ink2);line-height:1.4;margin-bottom:2px}
+.mc-s{font-size:10px;color:var(--ink3);font-style:italic}
+
+/* ── CIRCADIAN ── */
+.circ-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:16px 0}
+.cc{background:var(--paper);padding:9px 8px 10px;text-align:center}
+.cc-time{font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--ink3);margin-bottom:3px}
+.cc-icon{font-size:16px;margin-bottom:3px}
+.cc-lbl{font-size:10px;color:var(--ink);font-weight:600;margin-bottom:2px}
+.cc-desc{font-size:9px;color:var(--ink2);line-height:1.3}
+
+/* ── REFERENCES ── */
+.ref-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:16px 0}
+.ref-item{background:var(--paper);padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.ref-num{font-family:var(--display);font-size:22px;color:var(--accent);opacity:.5;line-height:1;padding-top:2px}
+.ref-body{}
+.ref-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.ref-auth{font-family:var(--mono);font-size:9px;color:var(--ink3);letter-spacing:.06em;margin-bottom:4px}
+.ref-desc{font-size:12px;color:var(--ink2);line-height:1.5;font-style:italic}
+.ref-link{font-family:var(--mono);font-size:9px;color:var(--accent);margin-top:3px}
+
+/* ── TRACKER ── */
+.tracker-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:16px 0}
+.t-cell{background:var(--paper2);border:1px solid var(--ink4);padding:6px 4px;text-align:center;cursor:pointer;transition:all .15s;border-radius:1px;user-select:none}
+.t-cell:hover{border-color:var(--ink2)}
+.t-cell.done{background:var(--green2);border-color:var(--green)}
+.t-cell.rest-c{background:var(--paper3);border-color:var(--paper3);cursor:default}
+.t-cell .t-day{font-family:var(--mono);font-size:8px;color:var(--ink3)}
+.t-cell .t-check{font-size:14px;line-height:1;margin-top:2px}
+.t-cell.done .t-day{color:var(--green)}
+.t-cell.done .t-check::after{content:'✓'}
+.t-cell:not(.done):not(.rest-c) .t-check::after{content:'○'}
+.t-cell.rest-c .t-check::after{content:'—';font-size:10px}
+.tracker-legend{display:flex;gap:16px;font-size:11px;color:var(--ink2);margin-bottom:12px;font-family:var(--mono)}
+.t-stat{font-family:var(--display);font-size:28px;color:var(--accent)}
+.t-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:16px}
+.t-stat-cell{background:var(--paper);padding:10px 12px}
+.t-stat-n{font-family:var(--display);font-size:26px;color:var(--accent);line-height:1;margin-bottom:2px}
+.t-stat-l{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+
+/* ── RULED ── */
+hr.ruled{border:none;border-top:1px solid var(--ink4);margin:18px 0}
+
+/* ── FOOTER ── */
+.pg-foot{border-top:1px solid var(--ink4);padding-top:10px;margin-top:18px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--ink4)}
+
+/* ── PRINT ── */
+@media print{
+
+  /* Page setup */
+  @page { margin:10mm 8mm; size:A4 landscape; }
+  @page :first { margin-top:8mm; }
+  * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  /* Hide screen-only UI */
+  .nav,
+  .wk-btn,
+  .week-bar,
+  .week-selector,
+  .nav-btn,
+  #tr-message { display:none!important; }
+
+  /* Page layout */
+  body { background:white; }
+  .page { padding:8px 14px; max-width:100%; }
+
+  /* ── SHOW ALL HIDDEN PANELS ── */
+  .chapter              { display:block!important; }
+  .wk-panel             { display:block!important; }
+  .week-panel           { display:block!important; }
+  #ph-panels > *        { display:block!important; }
+
+  /* ── CHAPTER PAGE BREAKS ──
+     Each chapter starts on a fresh page.
+     Both old and new property for maximum browser compatibility. */
+  .chapter {
+    page-break-before: always;
+    break-before: page;
+  }
+  /* Cover is first — no break before it */
+  #ch-cover {
+    page-break-before: auto;
+    break-before: auto;
+  }
+
+  /* ── PROGRAMME: one page per week ── */
+  .wk-panel {
+    page-break-before: always;
+    break-before: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  /* First week panel of each phase — no extra break, chapter break handles it */
+  .wk-panel:first-of-type {
+    page-break-before: auto;
+    break-before: auto;
+  }
+
+  /* Phase headers stay with the first week */
+  .ph-hd {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* ── NUTRITION: one page per section ── */
+  #nut-longevity,
+  #nut-rhythm,
+  #nut-wholefood,
+  #nut-supp {
+    page-break-before: always;
+    break-before: page;
+  }
+  /* Protein is first — chapter break handles it */
+  #nut-protein {
+    page-break-before: auto;
+    break-before: auto;
+  }
+
+  /* ── SECTION HEADERS: always keep with content below ── */
+  .sec-hd,
+  .ph-hd,
+  .wk-hd,
+  .info-block-title,
+  .ib-title,
+  .nb-title,
+  .folly-hd,
+  .notes-title,
+  h2,h3,h4 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* ── BLOCKS THAT MUST NOT BE SLICED ── */
+  .day-grid,
+  .folly,
+  .pull-q,
+  .wisdom,
+  .qf-row,
+  .two-col,
+  .ib,
+  .nb,
+  .min-grid,
+  .circ-strip,
+  .circadian-strip,
+  .cover-stats,
+  .contents,
+  .ref-item,
+  .t-stats,
+  .tracker-grid,
+  .food-t,
+  .notes-row,
+  .mineral-grid,
+  .principles-row,
+  .cover-grid { 
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── TABLE ROWS: never orphan a row ── */
+  tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── EXERCISE BLOCK: keep name + sets together ── */
+  .ex-b,
+  .ex-block,
+  .day-col { 
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── REFERENCE ITEMS: keep each citation whole ── */
+  .ref-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 6px;
+  }
+
+  /* ── TRACKER: keep each phase grid whole ── */
+  .tracker-grid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── WARM-UP and FILLERS boxes ── */
+  .wk-panel > div[style*="background:var(--green2)"],
+  .wk-panel > div[style*="background:var(--paper2)"] {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ── PROSE: allow breaks within long prose blocks ── */
+  .prose { orphans:3; widows:3; }
+
+  /* ── REDUCE FONT SLIGHTLY FOR FIT ── */
+  body { font-size:13px; }
+  .cover-title { font-size:52px; }
+  .sec-t { font-size:30px; }
+  .ph-name { font-size:28px; }
+  .wk-title { font-size:20px; }
+  .day-grid { min-height:0; }
+  .day-col { min-height:180px; }
+  .ex-n { font-size:8px; }
+  .ex-s { font-size:7px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">BEING <span>HAware</span></div>
+  <div class="nav-chapters">
+    <button class="ch-btn active" onclick="setChapter('cover',this)">Cover</button>
+    <button class="ch-btn" onclick="setChapter('movement',this)">Movement Guide</button>
+    <button class="ch-btn" onclick="setChapter('programme',this)">90 Day Programme</button>
+    <button class="ch-btn" onclick="setChapter('nutrition',this)">Nutrition Matters</button>
+    <button class="ch-btn" onclick="setChapter('references',this)">References</button>
+  </div>
+  <div class="nav-right">
+    <a class="nav-btn" href="../index.html" style="text-decoration:none;display:inline-block">🏠 Home</a>
+    <button class="nav-btn" onclick="prevChapter()">← Back</button>
+    <button class="nav-btn" onclick="nextChapter()">Forward →</button>
+    <button class="nav-btn print" onclick="smartPrint()">Print / PDF</button>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ═══════════════════════════════════════════ COVER -->
+<div class="chapter visible" id="ch-cover">
+  <div class="cover-wrap">
+    <div class="cover-rule"></div>
+    <div class="cover-grid">
+      <div>
+        <div class="eyebrow">Movement · Nutrition · Rhythm · Awareness · Any Human</div>
+        <div class="cover-title">BEING<br><span>HAware</span><br><span style="font-size:0.45em;letter-spacing:.12em;color:var(--ink2)">FOUNDATION LEVEL</span></div>
+        <p class="cover-sub">Being HAware is a method of becoming. A way to practise betterment — not a workout, not a diet, not a fad. Between nutrition, natural rhythm, movement and simply being, lies the intention of your will. With greater expectation and attention paid towards your desired outcome, the door opens. It isn't wistful. It isn't impossible. It is inertia — a ball set rolling until it carries the momentum of a juggernaut. Health Awareness Is The Way.</p>
+      </div>
+      <div class="cover-stats">
+        <div class="stat"><div class="stat-n">90</div><div class="stat-l">Days</div></div>
+        <div class="stat"><div class="stat-n">3</div><div class="stat-l">Phases</div></div>
+        <div class="stat"><div class="stat-n">Min.</div><div class="stat-l">Equipment</div></div>
+        <div class="stat"><div class="stat-n">5</div><div class="stat-l">Nutrition principles</div></div>
+        <div class="stat"><div class="stat-n">26</div><div class="stat-l">Exercises</div></div>
+        <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Progressions</div></div>
+      </div>
+    </div>
+    <div style="background:var(--amber2);border:1px solid var(--amber);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0 14px">
+      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px">On Equipment — A Note</div>
+      <div style="font-size:13px;color:var(--ink2);line-height:1.65">Phase One requires nothing but your body and a floor. This is deliberate. The goal in the first four weeks is to earn motivation through personal gain — and the dopamine of a body beginning to respond is a more reliable incentive to invest in oneself than any piece of equipment. Once that motivation is established, the following additions offer genuine and measurable value: <strong>a pull-up bar · dip bars or parallel bars · resistance bands · an ab wheel · an aerobic step · a pair of dumbbells or kettlebells</strong>. None are expensive relative to the return. Chairs and sturdy tables can serve as makeshift equipment — with the caveat that stability must be verified before bodyweight is trusted to them. Common sense, not caution, is the standard here.</div>
+    </div>
+    <div class="contents">
+      <div class="toc-item" onclick="setChapterById('movement')"><div class="toc-num">Chapter One</div><div class="toc-title">Movement Guide</div><div class="toc-desc">26 exercises across three levels. Frame-by-frame form. Common mistakes. Coaching detail.</div></div>
+      <div class="toc-item" onclick="setChapterById('programme')"><div class="toc-num">Chapter Two</div><div class="toc-title">90 Day Programme</div><div class="toc-desc">Three phases. Thirteen weeks. Every session planned. Three built-in deloads.</div></div>
+      <div class="toc-item" onclick="setChapterById('nutrition')"><div class="toc-num">Chapter Three</div><div class="toc-title">Nutrition Matters</div><div class="toc-desc">Macro-nutrients. Longevity. Daily Rhythm. Real Food. Supplementation. Common folly throughout.</div></div>
+      <a class="toc-item" href="../workbooks/journal.html" style="display:block;text-decoration:none;color:inherit"><div class="toc-num">Companion Workbook</div><div class="toc-title">Track In The Journal</div><div class="toc-desc">Recording as you go beats trying to remember what happened last Tuesday. The daily tracker lives in the 90-Day Journal — built for this one job, properly. Two more focused workbooks exist alongside it: <a href="../workbooks/bite-it-write-it.html" style="color:var(--accent)">Bite It, Write It</a> for food alone, and the <a href="../workbooks/ippf-challenge.html" style="color:var(--accent)">IPPF Challenge</a> for testing specific foods deliberately.</div></a>
+    </div>
+  </div>
+
+  <div class="wisdom">
+    <p>"The doctor of the future will give no medicine, but will interest his patients in the care of the human frame, in diet, and in the cause and prevention of disease."</p>
+    <cite>Thomas Edison, 1903 — a prediction that has aged better than most</cite>
+  </div>
+
+  <div class="pull-q">
+    <p>You are the deciding factor in your success. The sum total of what you extract from this programme will be relative to your Intention, your Expectation, and the Attention you pay towards the outcome.</p>
+    <cite>Being HAware — Foundation Level</cite>
+  </div>
+
+  
+  <div style="border-top:3px solid var(--ink);margin-top:28px;padding-top:20px">
+    <div style="display:grid;grid-template-columns:1fr auto;align-items:start;gap:24px;margin-bottom:16px">
+      <div>
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:7px">Author</div>
+        <div style="font-family:var(--display);font-size:34px;letter-spacing:.04em;color:var(--ink);line-height:1;margin-bottom:8px">Martin Lord Morley</div>
+        <div style="font-size:14px;font-style:italic;color:var(--accent);line-height:1.5;margin-bottom:10px;border-left:3px solid var(--accent);padding-left:12px">"This is for you. With love and genuine intent."</div>
+        <div style="font-size:11px;color:var(--ink3);line-height:1.65;max-width:500px">Being HAware is an original work. The philosophy, programme structure, nutritional framework, and visual identity are the intellectual property of the author. HA stands for Health Aware — and for the universal human sound of joy and realisation. Reproduction for personal use is warmly encouraged. Commercial reproduction without permission is not.</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Foundation Level Series</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink2);line-height:2;text-align:right">
+          <strong style="color:var(--ink)">Volume One · Foundation Level</strong><br>
+          Volume Two · Going Deeper<br>
+          Volume Three · Exercise Key
+        </div>
+        <div style="margin-top:12px;font-family:var(--display);font-size:14px;letter-spacing:.08em;color:var(--ink4)">HEALTH AWARENESS IS THE WAY</div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--ink4);padding-top:8px;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)">&copy; Martin Lord Morley · Being HAware</div>
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)">Produced with AI collaboration · Claude by Anthropic</div>
+    </div>
+  </div>
+  <div class="pg-foot"><span>Being HAware — Foundation Level</span><span>Nobody has time to change — yet inevitably everyone will. On purpose, or by accident.</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════ MOVEMENT -->
+<div class="chapter" id="ch-movement">
+  <div class="sec-hd">
+    <div class="sec-n">01</div>
+    <div>
+      <div class="sec-t">MOVEMENT GUIDE</div>
+      <div class="sec-st">How the body is built to move — and how to know when it's working</div>
+    </div>
+  </div>
+  <div class="prose">Every exercise in this programme has a correct form — a position the body finds efficient and safe — and a set of common deviations that quietly cause harm or quietly waste effort. The frame-by-frame guides in the full interactive edition walk through each movement position by position. What follows is the concise reference: the key cue, the primary muscles engaged, and the single most important mistake to avoid.</div>
+  <div class="prose">The muscles column matters. If you're not feeling it where it says you should — something is compensating. That's useful information. The body doesn't lie, it just sometimes routes the work around weakness. Your job is to notice.</div>
+  <div class="prose">Print this page and keep it where you train. One good cue, held in mind for a set, is worth more than a page of instructions read once and forgotten. For the full frame-by-frame version of every exercise here — muscles, step-by-step form, and every Common Folly correction in depth — see the <a href="exercise-key.html" style="color:var(--accent)">complete Exercise Key</a>.</div>
+
+  <div style="background:var(--green2);border:1px solid var(--green);border-left:4px solid var(--green);padding:14px 18px;margin:16px 0">
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px"><a href="warmup-guide.html" style="color:var(--green);text-decoration:none">Warm-Up Guide — Begin Here →</a></div>
+    <div style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:10px">Before the programme begins — ideally one week prior — spend 10 minutes on this warm-up sequence daily. It will reveal tightness, asymmetry and vulnerability that would otherwise surface mid-session as something you'd prefer to blame on the workout. Better to know now.</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4)">
+      <div style="background:var(--paper);padding:10px 12px"><div style="font-family:var(--mono);font-size:9px;color:var(--green);margin-bottom:4px">Joints first</div><div style="font-size:11px;color:var(--ink2);line-height:1.4">Neck circles · Shoulder rolls · Wrist rotations · Hip circles · Ankle circles. 10 each direction. The joints wake up before the muscles do.</div></div>
+      <div style="background:var(--paper);padding:10px 12px"><div style="font-family:var(--mono);font-size:9px;color:var(--green);margin-bottom:4px">Hinge &amp; reach</div><div style="font-size:11px;color:var(--ink2);line-height:1.4">Cat-cow (10 reps) · Child's pose (30s) · Downward dog (30s) · Hip flexor stretch each side (30s). Notice where the body resists.</div></div>
+      <div style="background:var(--paper);padding:10px 12px"><div style="font-family:var(--mono);font-size:9px;color:var(--green);margin-bottom:4px">Activate</div><div style="font-size:11px;color:var(--ink2);line-height:1.4">Glute bridge 15 reps · Dead bug 8 each side · Scapular pulls 10 reps. Waking the muscles that support everything else.</div></div>
+      <div style="background:var(--paper);padding:10px 12px"><div style="font-family:var(--mono);font-size:9px;color:var(--green);margin-bottom:4px">Elevate</div><div style="font-size:11px;color:var(--ink2);line-height:1.4">Light jog or march on the spot 2 min · 10 arm swings · 10 bodyweight squats. Heart rate up gently. You're ready.</div></div>
+    </div>
+    <div style="font-size:12px;color:var(--green);margin-top:10px;font-style:italic">If something protests during this warm-up — note it. That's not a reason to stop. It's information about where the real work begins.</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:16px 0">
+    <!-- BEG -->
+    <div style="background:var(--paper);padding:0">
+      <div style="background:var(--green2);padding:8px 14px;border-bottom:1px solid var(--ink4)"><span style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--green)">Beginner</span></div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <tr style="background:var(--paper2)"><th style="padding:6px 10px;text-align:left;font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--ink3);border-bottom:1px solid var(--ink4)">Exercise</th><th style="padding:6px 10px;text-align:left;font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--ink3);border-bottom:1px solid var(--ink4)">Key cue</th><th style="padding:6px 10px;text-align:left;font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--ink3);border-bottom:1px solid var(--ink4)">Feel it here</th><th style="padding:6px 10px;text-align:left;font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--folly);border-bottom:1px solid var(--ink4)">Avoid</th></tr>
+        <tr style="border-bottom:1px solid var(--paper3)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Push-up</td><td style="padding:6px 10px;color:var(--ink2)">Elbows 45° back, whole body rigid</td><td style="padding:6px 10px;color:var(--ink3);font-size:10px">Chest · Triceps · Front shoulders</td><td style="padding:6px 10px;color:var(--folly)">Elbows flaring wide</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3);background:var(--paper2)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Pike push-up</td><td style="padding:6px 10px;color:var(--ink2)">Hips high, crown aims between hands</td><td style="padding:6px 10px;color:var(--ink3);font-size:10px">Front shoulders · Triceps · Upper traps</td><td style="padding:6px 10px;color:var(--folly)">Hips too low — becomes a push-up</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Glute bridge</td><td style="padding:6px 10px;color:var(--ink2)">Drive through heels, squeeze 2 seconds</td><td style="padding:6px 10px;color:var(--ink3);font-size:10px">Glutes · Hamstrings · Lower back</td><td style="padding:6px 10px;color:var(--folly)">Arching lower back instead of squeezing</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3);background:var(--paper2)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Bodyweight squat</td><td style="padding:6px 10px;color:var(--ink2)">Knees out, sit back, heels grounded</td><td style="padding:6px 10px;color:var(--ink3);font-size:10px">Quads · Glutes · Hamstrings</td><td style="padding:6px 10px;color:var(--folly)">Knees caving inward under load</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Reverse lunge</td><td style="padding:6px 10px;color:var(--ink2)">Front shin vertical, hover rear knee</td><td style="padding:6px 10px;color:var(--ink3);font-size:10px">Front quad · Glute · Hip flexors</td><td style="padding:6px 10px;color:var(--folly)">Front knee past toes</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3);background:var(--paper2)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Inverted row</td><td style="padding:6px 10px;color:var(--ink2)">Blades down first, then pull chest to bar</td><td style="padding:6px 10px;color:var(--ink3);font-size:10px">Lats · Rhomboids · Biceps · Rear delt</td><td style="padding:6px 10px;color:var(--folly)">Chin leading instead of chest</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Dead hang</td><td style="padding:6px 10px;color:var(--ink2)">Passive then active — blades DOWN</td><td style="padding:6px 10px;color:var(--ink3);font-size:10px">Lats · Grip · Shoulder stabilisers</td><td style="padding:6px 10px;color:var(--folly)">Permanent shrug throughout</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3);background:var(--paper2)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Hollow body</td><td style="padding:6px 10px;color:var(--ink2)">Lower back pinned to floor, zero gap</td><td style="padding:6px 10px;color:var(--ink3);font-size:10px">Deep core · Hip flexors · Lats</td><td style="padding:6px 10px;color:var(--folly)">Back arching off the floor</td></tr>
+        <tr><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Plank</td><td style="padding:6px 10px;color:var(--ink2)">Squeeze everything — not a rest</td><td style="padding:6px 10px;color:var(--ink3);font-size:10px">Core · Shoulders · Glutes</td><td style="padding:6px 10px;color:var(--folly)">Hips sagging or rising</td></tr>
+      </table>
+    </div>
+    <!-- INT + ADV -->
+    <div style="background:var(--paper);padding:0">
+      <div style="background:var(--amber2);padding:8px 14px;border-bottom:1px solid var(--ink4)"><span style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)">Intermediate</span></div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <tr style="background:var(--paper2)"><th style="padding:6px 10px;text-align:left;font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--ink3);border-bottom:1px solid var(--ink4)">Exercise</th><th style="padding:6px 10px;text-align:left;font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--ink3);border-bottom:1px solid var(--ink4)">Key cue</th><th style="padding:6px 10px;text-align:left;font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--folly);border-bottom:1px solid var(--ink4)">Avoid</th></tr>
+        <tr style="border-bottom:1px solid var(--paper3)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Dip</td><td style="padding:6px 10px;color:var(--ink2)">Lean forward, elbows track back</td><td style="padding:6px 10px;color:var(--folly)">Elbows flaring, shoulders shrugging</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3);background:var(--paper2)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Pull-up</td><td style="padding:6px 10px;color:var(--ink2)">Drive elbows down — chest leads</td><td style="padding:6px 10px;color:var(--folly)">Kipping, short-repping from partial hang</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Chin-up</td><td style="padding:6px 10px;color:var(--ink2)">Elbows to hip pockets</td><td style="padding:6px 10px;color:var(--folly)">Elbows flaring outward</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3);background:var(--paper2)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Bulgarian split squat</td><td style="padding:6px 10px;color:var(--ink2)">Descend straight down, shin vertical</td><td style="padding:6px 10px;color:var(--folly)">Knee caving, torso pitching forward</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Nordic curl (neg.)</td><td style="padding:6px 10px;color:var(--ink2)">Rigid plank fall — hips never hinge</td><td style="padding:6px 10px;color:var(--folly)">Hips bending, dropping too fast</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3);background:var(--paper2)"><td style="padding:6px 10px;font-weight:600;color:var(--ink)">L-sit tuck</td><td style="padding:6px 10px;color:var(--ink2)">Arms locked, blades depressed</td><td style="padding:6px 10px;color:var(--folly)">Arms bending, shoulders shrugging</td></tr>
+        <tr><td style="padding:6px 10px;font-weight:600;color:var(--ink)">Archer push-up</td><td style="padding:6px 10px;color:var(--ink2)">Extended arm passive — load on bent arm</td><td style="padding:6px 10px;color:var(--folly)">Both arms working equally</td></tr>
+      </table>
+      <div style="background:#fde8df;padding:8px 14px;border-top:1px solid var(--ink4);border-bottom:1px solid var(--ink4)"><span style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)">Advanced</span></div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <tr style="border-bottom:1px solid var(--paper3)"><td style="padding:5px 10px;font-weight:600;color:var(--ink)">Handstand push-up</td><td style="padding:5px 10px;color:var(--ink2)">Ribs in, hollow body — no banana</td><td style="padding:5px 10px;color:var(--folly)">Back arching, head past hands</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3);background:var(--paper2)"><td style="padding:5px 10px;font-weight:600;color:var(--ink)">Muscle-up</td><td style="padding:5px 10px;color:var(--ink2)">Elbows drive forward through transition</td><td style="padding:5px 10px;color:var(--folly)">Kipping, stalling at chin-over</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3)"><td style="padding:5px 10px;font-weight:600;color:var(--ink)">Pistol squat</td><td style="padding:5px 10px;color:var(--ink2)">Sit back, heel flat, knee over toe</td><td style="padding:5px 10px;color:var(--folly)">Heel rising, knee caving</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3);background:var(--paper2)"><td style="padding:5px 10px;font-weight:600;color:var(--ink)">Full Nordic curl</td><td style="padding:5px 10px;color:var(--ink2)">Pull back with hamstrings — not arms</td><td style="padding:5px 10px;color:var(--folly)">Hips hinging, arms pushing back</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3)"><td style="padding:5px 10px;font-weight:600;color:var(--ink)">Dragon flag</td><td style="padding:5px 10px;color:var(--ink2)">Rigid lever — no hip bend at all</td><td style="padding:5px 10px;color:var(--folly)">Hips bending, shoulders lifting</td></tr>
+        <tr style="border-bottom:1px solid var(--paper3);background:var(--paper2)"><td style="padding:5px 10px;font-weight:600;color:var(--ink)">One-arm PU (neg.)</td><td style="padding:5px 10px;color:var(--ink2)">Hips square — core welded to floor</td><td style="padding:5px 10px;color:var(--folly)">Hips rotating, hand too wide</td></tr>
+        <tr><td style="padding:5px 10px;font-weight:600;color:var(--ink)">Full L-sit</td><td style="padding:5px 10px;color:var(--ink2)">Push bars down — legs parallel</td><td style="padding:5px 10px;color:var(--folly)">Legs drooping, knees bending</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="folly" style="margin-top:16px">
+    <div class="folly-hd">Common Folly — Movement Edition</div>
+    <div class="folly-item">Rushing to the advanced movements before the beginner ones are genuinely solid.
+      <div class="folly-fix">A perfect push-up and a broken archer push-up produce roughly the same training effect. Earn the progressions.</div>
+    </div>
+    <div class="folly-item">Counting reps instead of feeling the target muscle working.
+      <div class="folly-fix">Twelve reps where the wrong muscle is doing the work is twelve wasted reps. One rep with full conscious engagement is worth six on autopilot.</div>
+    </div>
+    <div class="folly-item">Training through pain — not soreness, not burn, but actual pain.
+      <div class="folly-fix">The body signals injury differently to effort. Soreness the next day is adaptation. Sharp or joint pain during a set is a stop signal. Honour that distinction.</div>
+    </div>
+  </div>
+  <div style="background:var(--paper2);border:1px solid var(--ink4);border-left:4px solid var(--ink3);padding:14px 18px;margin:16px 0">
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Fillers — When The Day's Exercise Isn't Happening</div>
+    <div style="font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:10px">Sometimes the prescribed exercise is beyond reach — through injury, fatigue, or simply not being there yet. The answer is not to skip the session. The answer is a filler: an exercise of the same movement type that meets you where you are. These are not lesser exercises. They are the programme being honest about where the work actually starts.</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4)">
+      <div style="background:var(--paper);padding:10px 12px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Push</div><div style="font-size:11px;color:var(--ink2);line-height:1.5">Wall push-up<br>Knee push-up<br>Incline push-up<br>Negative push-up</div></div>
+      <div style="background:var(--paper);padding:10px 12px"><div style="font-family:var(--mono);font-size:9px;color:var(--green);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Pull</div><div style="font-size:11px;color:var(--ink2);line-height:1.5">Dead hang<br>Scapular pull<br>High inverted row<br>Band-assisted pull</div></div>
+      <div style="background:var(--paper);padding:10px 12px"><div style="font-family:var(--mono);font-size:9px;color:var(--amber);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Lower</div><div style="font-size:11px;color:var(--ink2);line-height:1.5">Glute bridge<br>Box squat<br>Step-up<br>Supported lunge</div></div>
+      <div style="background:var(--paper);padding:10px 12px"><div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Core</div><div style="font-size:11px;color:var(--ink2);line-height:1.5">Hollow tuck hold<br>Dead bug<br>Knee plank<br>Seated compression</div></div>
+      <div style="background:var(--paper);padding:10px 12px"><div style="font-family:var(--mono);font-size:9px;color:#6b5cb8;margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Skill</div><div style="font-size:11px;color:var(--ink2);line-height:1.5">Wall handstand hold<br>L-sit tuck<br>Assisted pistol<br>Balance work</div></div>
+    </div>
+    <div style="font-size:12px;color:var(--ink3);margin-top:10px;font-style:italic">The standard is not lowered. The starting point is simply found. Commitment and progression are the measures — not the specific exercise completed on any given day.</div>
+  </div>
+  <div class="pg-foot"><span>Being HAware — Foundation Level · Movement Guide</span><span>Form first. Always form first.</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PROGRAMME -->
+<div class="chapter" id="ch-programme">
+  <div class="sec-hd">
+    <div class="sec-n">02</div>
+    <div>
+      <div class="sec-t">90 DAY PROGRAMME</div>
+      <div class="sec-st">Three phases. Thirteen weeks. Every session accounted for.</div>
+    </div>
+  </div>
+  <div class="prose">Three phases, each with a distinct purpose. Foundation builds the patterns. Load accumulates the volume. Forge peaks the intensity and deepens the skill. A deload week closes each phase — not optional, not a sign of weakness. The body rebuilds during recovery, not during training.</div>
+
+  <div style="display:flex;gap:4px;margin-bottom:16px">
+    <button class="nav-btn" style="background:var(--green2);color:var(--green);border:1px solid var(--green)" onclick="setPhase(1,this)">Phase 1 — Foundation</button>
+    <button class="nav-btn" style="background:transparent;color:var(--ink3);border:1px solid var(--ink4)" onclick="setPhase(2,this)">Phase 2 — Load</button>
+    <button class="nav-btn" style="background:transparent;color:var(--ink3);border:1px solid var(--ink4)" onclick="setPhase(3,this)">Phase 3 — Forge</button>
+  </div>
+
+  <div id="ph-panels"></div>
+  <div class="pg-foot"><span>Being HAware — Foundation Level · 90 Day Programme</span><span>Three phases. One direction. Forward.</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════ NUTRITION -->
+<div class="chapter" id="ch-nutrition">
+  <div class="sec-hd">
+    <div class="sec-n">03</div>
+    <div>
+      <div class="sec-t">NUTRITION MATTERS</div>
+      <div class="sec-st">Five principles. No calorie counting. No meal plans. Just honest understanding.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:3px;margin-bottom:8px;flex-wrap:wrap">
+    <button class="wk-btn active" onclick="setNutSec('protein',this)">1 — Macro-Nutrients</button>
+    <button class="wk-btn" onclick="setNutSec('longevity',this)">2 — Longevity</button>
+    <button class="wk-btn" onclick="setNutSec('rhythm',this)">3 — Daily Rhythm</button>
+    <button class="wk-btn" onclick="setNutSec('wholefood',this)">4 — Real Food</button>
+    <button class="wk-btn" onclick="setNutSec('supp',this)">5 — Supplementation</button>
+  </div>
+  <div style="font-size:12px;color:var(--ink3);font-style:italic;margin-bottom:18px">Want the science underneath these five principles — the Mighty 90, circadian biology, detoxification, polyphenols? See <a href="going-deeper.html" style="color:var(--accent)">Going Deeper</a>.</div>
+
+  <!-- PROTEIN -->
+  <div class="wk-panel visible" id="nut-protein">
+    <div class="ph-hd"><div class="ph-n">1</div><div><div class="ph-tag p1">Section One</div><div class="ph-name">MACRO-NUTRIENTS</div><div class="ph-desc">The raw materials the body runs on. Fat and protein are the foundational two. Everything else is conditional.</div></div></div>
+    <div class="prose">There are three macronutrients — fat, protein, and carbohydrate. Of the three, two are essential: fat and protein. The body cannot function without them. Carbohydrates, by contrast, are not strictly essential — the body can produce the glucose it needs from fat and protein through a process called gluconeogenesis. That isn't to say carbohydrates are the enemy. It is to say they are conditional. Context-dependent. Optional in a way that fat and protein simply are not.</div>
+    <div class="prose"><strong>Fat is not the villain it was made out to be.</strong> It is the most calorie-dense macronutrient — 9 calories per gram against protein's and carbohydrate's 4 — and those calories come packaged with fat-soluble vitamins (A, D, E, and K), hormone precursors, and the raw material for every cell membrane in the body. A ratio of roughly 70–80% of calories from quality fat, with 20–30% from protein, reflects how many of the world's longest-lived and most physically capable traditional peoples have eaten. You won't find those words on a cereal box.</div>
+    <div class="prose">Complex carbohydrates — roots, legumes, colourful vegetables — earn their place at the table as conditional contributors: useful for training fuel, rich in fibre and micronutrients. But bread, pasta, processed grains? These are engineering solutions to the problem of making cheap food palatable. They are not nutrition. They are filler. And there is a meaningful difference.</div>
+    <div class="prose">When you train, you create microscopic damage in muscle tissue. The body repairs that damage and builds back slightly stronger. The material it uses is dietary protein. Without adequate protein, training produces stress without adaptation. It is the building material. Treat it accordingly.</div>
+    <div class="qf-row">
+      <div class="qf"><div class="qf-n">1.6g</div><div class="qf-l">Per kg bodyweight / day</div><div class="qf-d">80kg person needs ~128g daily. This is the evidence-based floor for active adults.</div></div>
+      <div class="qf"><div class="qf-n">12</div><div class="qf-l">Essential amino acids</div><div class="qf-d">Dr Wallach identifies 12 essential amino acids the body cannot synthesise. Complete proteins deliver all of them. Source matters as much as quantity.</div></div>
+      <div class="qf"><div class="qf-n">100</div><div class="qf-l">Biological value — egg</div><div class="qf-d">The egg is the gold standard. Every other protein source is measured against it.</div></div>
+    </div>
+    <div class="pull-q"><p>"The egg is the gold standard of protein. Every other food source is measured against it."</p><cite>The biological value scale — eggs score 100. The benchmark by which all others are judged.</cite></div>
+    <div class="prose"><strong>The egg deserves its reputation.</strong> One large egg: 6–7g of complete protein, all twelve essential amino acids in near-perfect ratios, choline for brain function, vitamin D, B12, selenium, and lutein. It is arguably the most nutritionally dense food per calorie available to us. Eat the yolk. The yolk contains half the protein, all the fat-soluble vitamins, and most of the nutrition. Discarding it to avoid fat is discarding most of the food.</div>
+    <table class="food-t">
+      <thead><tr><th>Food</th><th>Protein/100g</th><th>Quality</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="star">★ Eggs (whole)</td><td class="prot">13g</td><td>Complete — BV 100</td><td>The benchmark. All essential amino acids. Always eat the yolk.</td></tr>
+        <tr><td>Chicken breast</td><td class="prot">31g</td><td>Complete</td><td>High protein, versatile. Thigh has broader micronutrient profile.</td></tr>
+        <tr><td>Sardines / mackerel</td><td class="prot">25g</td><td>Complete + omega-3</td><td>Cheap, overlooked, anti-inflammatory. Bones add calcium.</td></tr>
+        <tr><td>Beef (lean, grass-fed)</td><td class="prot">26g</td><td>Complete + iron/B12</td><td>Grass-fed meaningfully higher in omega-3 and CLA.</td></tr>
+        <tr><td>Greek yoghurt (full-fat)</td><td class="prot">10g</td><td>Complete</td><td>Probiotics and calcium alongside. Full-fat preferred.</td></tr>
+        <tr><td>Lentils (cooked)</td><td class="prot">9g</td><td>Incomplete</td><td>Combine with rice or dairy for complete amino acid profile.</td></tr>
+        <tr><td>Cottage cheese</td><td class="prot">11g</td><td>Complete</td><td>Slow-digesting casein — useful before sleep for overnight repair.</td></tr>
+        <tr><td>Quinoa (cooked)</td><td class="prot">4g</td><td>Complete (rare plant)</td><td>One of very few complete plant proteins.</td></tr>
+      </tbody>
+    </table>
+    <div class="folly"><div class="folly-hd">Common Folly — Protein</div>
+      <div class="folly-item">Discarding the egg yolk to avoid fat.<div class="folly-fix">The yolk contains half the protein, all the fat-soluble vitamins, and most of the nutrition. You're throwing away the food.</div></div>
+      <div class="folly-item">Assuming plant and animal protein are equivalent because the numbers look similar.<div class="folly-fix">Bioavailability differs significantly. Plant proteins are generally less completely absorbed. Vegetarians need more total protein and deliberate food combining.</div></div>
+      <div class="folly-item">Relying on protein shakes as the primary source rather than whole food.<div class="folly-fix">Whole food protein comes packaged with micronutrients, enzymes, and co-factors a shake cannot replicate. A supplement supplements. It does not replace.</div></div>
+    </div>
+  </div>
+
+  <!-- LONGEVITY -->
+  <div class="wk-panel" id="nut-longevity">
+    <div class="ph-hd"><div class="ph-n">2</div><div><div class="ph-tag p2">Section Two</div><div class="ph-name">LONGEVITY</div><div class="ph-desc">Health throughout a long life is made from consistent self-awareness — correction of form and function — with adherence to one simple principle: <em>Health Is Worth Preserving.</em></div></div></div>
+    <div class="prose">This programme exists for a different reason than most fitness systems. It is not designed to produce a particular appearance by a particular date. It is designed to make you capable, robust, and functional for as long as possible. After early adulthood, the body is not trying to grow indefinitely — it is trying to maintain, repair, and defend. <strong>Feed it for what it is actually doing.</strong></div>
+    <div class="wisdom"><p>"To lengthen thy life, lessen thy meals."</p><cite>Benjamin Franklin — ahead of the research by roughly 250 years</cite></div>
+    <div class="prose">A grown adult does not need as much food as they think. The appetite system evolved in an environment of scarcity and enormous physical output. We live in an environment of abundance and largely sedentary days. Only growing bodies and genuinely healing bodies have a physiological need for caloric surplus. For everyone else, the surplus becomes storage.</div>
+    <div class="qf-row">
+      <div class="qf"><div class="qf-n">Less</div><div class="qf-l">Is often more</div><div class="qf-d">In practice: a smaller plate of genuinely nourishing food outperforms a full plate of poor food every time. Eat until satisfied — not stuffed. The body knows the difference.</div></div>
+      <div class="qf"><div class="qf-n">16:8</div><div class="qf-l">Intermittent fasting</div><div class="qf-d">16 hours without food gives the gut and liver meaningful recovery time. Ancestrally normal — not extreme.</div></div>
+      <div class="qf"><div class="qf-n">80%</div><div class="qf-l">Hara Hachi Bu</div><div class="qf-d">Okinawan practice: eat until 80% full. One of Earth's longest-lived populations has observed this for centuries.</div></div>
+    </div>
+    <div class="two-col">
+      <div class="ib"><div class="ib-title">Eat for repair</div>
+        <div class="ib-item"><strong>Anti-inflammatory foods</strong> — oily fish, olive oil, turmeric, berries, leafy greens. Chronic inflammation is the common thread in virtually all age-related disease.</div>
+        <div class="ib-item"><strong>Fermented foods</strong> — yoghurt, kefir, sauerkraut. Gut health is immune health. The two are not separate systems.</div>
+        <div class="ib-item"><strong>Colourful vegetables</strong> — variety of colour means variety of micronutrients. Half the plate, whenever possible.</div>
+        <div class="ib-item"><strong>Bone broth</strong> — collagen, glycine, trace minerals. Joint integrity and gut lining both benefit.</div>
+      </div>
+      <div class="ib"><div class="ib-title">Reduce To Nil As Soon As Possible</div>
+        <div class="ib-item"><strong>Ultra-processed food</strong> — more than five ingredients, none picturable from nature. The less of this, the better.</div>
+        <div class="ib-item"><strong>Industrial seed oils</strong> — vegetable, sunflower, rapeseed. High in omega-6 fatty acids and prone to oxidation under heat. These are a relatively recent addition to the human diet, and the body knows it.</div>
+        <div class="ib-item"><strong>Added sugar</strong> — displaces more useful food. Repeated insulin spikes accelerate cellular ageing.</div>
+        <div class="ib-item"><strong>Alcohol</strong> — has no safe minimum level. It is fermented sugar that places direct burden on the liver, disrupts sleep architecture, and leaves the body dehydrated. No quarter given here. That is your cross to bear — but bear it with open eyes.</div>
+      </div>
+    </div>
+    <div class="folly"><div class="folly-hd">Common Folly — Longevity</div>
+      <div class="folly-item">Eating frequently throughout the day to "keep the metabolism firing."<div class="folly-fix">The metabolism does not stall between meals. This idea was popularised by the snack food industry. The digestive system benefits from breaks.</div></div>
+      <div class="folly-item">Following a bulk-and-cut cycle designed for competitive bodybuilders.<div class="folly-fix">Deliberate surplus-and-deficit cycling suits people whose profession is their physique. For health and longevity, consistent moderate eating produces better outcomes with less systemic stress.</div></div>
+    </div>
+  </div>
+
+  <!-- RHYTHM -->
+  <div class="wk-panel" id="nut-rhythm">
+    <div class="ph-hd"><div class="ph-n">3</div><div><div class="ph-tag p1">Section Three</div><div class="ph-name">DAILY RHYTHM</div><div class="ph-desc">Circadian biology (the body's internal clock), rest, breath, and the water that runs everything.</div></div></div>
+    <div class="prose">The body is not a machine that runs continuously at a constant rate. It is a biological system with deep rhythms — daily cycles, hormonal pulses, repair windows. Work with those rhythms and almost everything else becomes easier. Work against them and no amount of good food or training will fully compensate.</div>
+    <div class="circ-strip">
+      <div class="cc"><div class="cc-time">06:00</div><div class="cc-icon">🌅</div><div class="cc-lbl">Cortisol peak</div><div class="cc-desc">Natural wake signal. Light exposure now sets the whole day's clock.</div></div>
+      <div class="cc"><div class="cc-time">07–09</div><div class="cc-icon">🥚</div><div class="cc-lbl">Eat breakfast</div><div class="cc-desc">Protein-rich. Insulin sensitivity is highest in the morning.</div></div>
+      <div class="cc"><div class="cc-time">10–14</div><div class="cc-icon">💪</div><div class="cc-lbl">Train</div><div class="cc-desc">Peak body temperature, reaction time, and output.</div></div>
+      <div class="cc"><div class="cc-time">14–18</div><div class="cc-icon">🥗</div><div class="cc-lbl">Eat well</div><div class="cc-desc">Second meal. Digestion still efficient. Avoid large meals after this.</div></div>
+      <div class="cc"><div class="cc-time">20:00</div><div class="cc-icon">🌙</div><div class="cc-lbl">Wind down</div><div class="cc-desc">Melatonin rising. Dim lights. Screens down. Repair window opens.</div></div>
+      <div class="cc"><div class="cc-time">22–06</div><div class="cc-icon">🔧</div><div class="cc-lbl">Repair</div><div class="cc-desc">Growth hormone released. Tissue rebuilt. Training pays off here.</div></div>
+    </div>
+    <div class="prose"><strong>Sleep is not passive.</strong> It is the most anabolic period in the 24-hour cycle. Growth hormone — the primary driver of muscle repair — is released predominantly during deep sleep. Eight hours is the most important session of the day. It cannot be out-trained.</div>
+    <div class="two-col">
+      <div class="ib"><div class="ib-title">Breathing</div>
+        <div class="ib-item"><strong>Nasal breathing</strong> — filters, humidifies, produces nitric oxide which dilates blood vessels. Default to nasal during training where possible.</div>
+        <div class="ib-item"><strong>Slow exhale</strong> — a 4-count inhale and 8-count exhale activates the parasympathetic nervous system. Use before sleep and after hard sessions.</div>
+        <div class="ib-item"><strong>CO2 tolerance</strong> — box breathing and breath-hold training improve oxygen delivery to tissues over time. A legitimate and free tool.</div>
+      </div>
+      <div class="ib"><div class="ib-title">Hydration and salt</div>
+        <div class="ib-item"><strong>Drink before thirst</strong> — dehydration of just 2% measurably degrades both cognitive and physical performance. Don't wait for the signal.</div>
+        <div class="ib-item"><strong>Salt is not the enemy</strong> — sodium is essential. The problem is processed-food salt paired with potassium deficiency. Real salt with adequate vegetables is not a problem.</div>
+        <div class="ib-item"><strong>Kidney health</strong> — the kidneys regulate fluid balance and electrolytes. Protect them: drink water, eat potassium-rich food, avoid chronic dehydration and overuse of NSAIDs (non-steroidal anti-inflammatory drugs such as ibuprofen and aspirin).</div>
+      </div>
+    </div>
+    <div class="folly"><div class="folly-hd">Common Folly — Rhythm</div>
+      <div class="folly-item">Training late at night and wondering why sleep quality suffers.<div class="folly-fix">Intense exercise raises core temperature and cortisol, both of which suppress melatonin. Train before 7pm where possible.</div></div>
+      <div class="folly-item">Drinking large volumes of plain water during heavy sweating without replacing electrolytes.<div class="folly-fix">Hyponatraemia — dangerously low sodium from over-dilution — is real and underappreciated. Sweat contains sodium. Replace it. A pinch of sea salt per litre is not a fad.</div></div>
+    </div>
+  </div>
+
+  <!-- WHOLE FOOD -->
+  <div class="wk-panel" id="nut-wholefood">
+    <div class="ph-hd"><div class="ph-n">4</div><div><div class="ph-tag p2">Section Four</div><div class="ph-name">REAL FOOD</div><div class="ph-desc">A framework that works across any culture, budget, or kitchen. Closer to the source — always the better choice.</div></div></div>
+    <div class="prose">A meal plan tells you what to eat on Tuesday. A framework tells you how to think about food for the rest of your life. One is useful for a fortnight. The other stays with you indefinitely.</div>
+    <div class="wisdom"><p>"Don't eat anything your great-grandmother wouldn't recognise as food."</p><cite>Michael Pollan — In Defence of Food</cite></div>
+    <div class="prose">The whole food framework has no forbidden foods and no points system. It is built around one principle: <strong>the closer food is to its original form, the more useful it is to the body.</strong> An apple is more useful than apple juice. A potato more useful than a crisp. An egg more useful than a protein bar. The further food travels from its origin, the more is lost along the way.</div>
+    <div class="two-col">
+      <div class="ib"><div class="ib-title">Build every meal around</div>
+        <div class="ib-item"><strong>A protein source</strong> — the anchor. Everything else is built around it.</div>
+        <div class="ib-item"><strong>Colourful vegetables</strong> — the range of colour is a map of different phytonutrients (plant compounds with health-protective properties). Red, orange, purple, dark green — variety of colour means variety of benefit. Half the plate, whenever possible.</div>
+        <div class="ib-item"><strong>A whole grain or root</strong> — rice, oats, sweet potato, lentils. Energy packaged with fibre.</div>
+        <div class="ib-item"><strong>A quality fat</strong> — olive oil, butter, avocado, nuts. Fat is required for absorbing vitamins A, D, E, and K.</div>
+      </div>
+      <div class="ib"><div class="ib-title">Around training</div>
+        <div class="ib-item"><strong>Before (1–2 hrs)</strong> — something light with carbohydrate and modest protein. Not a feast.</div>
+        <div class="ib-item"><strong>After (within 2 hrs)</strong> — protein and carbohydrate together. Eggs and sweet potato, chicken and rice, lentils and yoghurt.</div>
+        <div class="ib-item"><strong>Cultural variety is a strength</strong> — rice and dal, injera and lentils, fish and vegetables. Every culinary tradition has whole-food foundations. Return to yours.</div>
+        <div class="ib-item"><strong>Hydrate throughout</strong> — not just during training but the 24 hours preceding. Arriving dehydrated undermines everything.</div>
+      </div>
+    </div>
+    <div class="folly"><div class="folly-hd">Common Folly — Whole Food</div>
+      <div class="folly-item">"Health food" products in packets at premium prices.<div class="folly-fix">A protein bar with 23 ingredients is not whole food. An egg with one ingredient is. The health food industry profits from this confusion.</div></div>
+      <div class="folly-item">Drinking fruit juice as a substitute for eating fruit.<div class="folly-fix">Juice removes the fibre — the part that slows sugar absorption and feeds the gut microbiome. What remains spikes blood sugar and delivers a fraction of the food's benefit.</div></div>
+      <div class="folly-item">Avoiding all fat to manage weight or cholesterol.<div class="folly-fix">Fat is required for absorbing fat-soluble vitamins. Low-fat diets typically replace fat with sugar. That is the worse trade by a considerable margin.</div></div>
+    </div>
+  </div>
+
+  <!-- SUPPLEMENTATION -->
+  <div class="wk-panel" id="nut-supp">
+    <div class="ph-hd"><div class="ph-n">5</div><div><div class="ph-tag p3">Section Five</div><div class="ph-name">SUPPLEMENTATION</div><div class="ph-desc">What the depleted modern food chain cannot reliably provide — and how to address it honestly.</div></div></div>
+    <div class="prose">There is a version of this section that dismisses supplementation entirely. That version is intellectually dishonest. The soils that grow our food have been systematically depleted of minerals through decades of industrial agriculture. The food grown in those soils is measurably less nutritious than the same food grown in 1940. And the world we now inhabit — with its accumulated pollution, pharmaceutical residues in water supplies, and chronic low-grade stress — creates demands on the body that no ancestral diet was designed to address.</div>
+    <div class="prose">Dr Joel Wallach's foundational argument — rooted in 40 years of veterinary and human clinical research, and preserved in the Smithsonian through his zoological contributions — identifies 90 essential nutrients the body requires: 60 minerals, 16 vitamins, 12 amino acids, and 3 essential fatty acids. The modern diet, even a careful one, struggles to deliver reliably all 60 minerals. <strong>This is the honest case for supplementation: not as a shortcut, but as insurance against a depleted food chain.</strong></div>
+    <div class="pull-q"><p>"Every man, woman, and child needs 90 essential nutrients just to survive — let alone thrive."</p><cite>Dr Joel Wallach — Dead Doctors Don't Lie</cite></div>
+    <div class="wisdom"><p>"Know your source. In supplementation, the quality of what reaches the cell is everything. The label is not the product."</p><cite>Being HAware — Foundation Level</cite></div>
+    <div class="prose"><strong>A critical note first:</strong> no supplement protocol compensates for a poor diet. A cheap supermarket multivitamin cannot balance a diet of processed food, and the assumption that it can is among the most common and costly follies in modern health. The quality of a supplement — its source, its form, its bioavailability — determines whether it reaches the cell at all. Synthetic vitamins and organic mineral complexes are not the same thing.</div>
+    <div class="min-grid">
+      <div class="mc"><div class="mc-n">Magnesium</div><div class="mc-r">Over 300 enzymatic reactions. Muscle contraction, sleep quality, nerve function, blood pressure. Most adults are deficient.</div><div class="mc-s">Form matters: glycinate or malate absorb well. Oxide does not.</div></div>
+      <div class="mc"><div class="mc-n">Vitamin D3 + K2</div><div class="mc-r">D3 for calcium absorption, immunity, and mood. K2 directs calcium to bones not arteries. These two work together — always take them together.</div><div class="mc-s">Non-negotiable above 50° latitude for much of the year.</div></div>
+      <div class="mc"><div class="mc-n">Omega-3 (EPA/DHA)</div><div class="mc-r">Anti-inflammatory. Brain, joint, and cardiovascular health. The omega-6 to omega-3 ratio in modern diets is profoundly imbalanced.</div><div class="mc-s">Fish oil or algae oil. Flaxseed converts poorly — go to the source.</div></div>
+      <div class="mc"><div class="mc-n">Zinc</div><div class="mc-r">Immune function, wound healing, hormone production. Depleted by stress, exercise, and poor soil.</div><div class="mc-s">Picolinate or bisglycinate absorb well. Don't overdose — excess zinc depletes copper.</div></div>
+      <div class="mc"><div class="mc-n">Iodine</div><div class="mc-r">Thyroid hormone production — regulates metabolism, temperature, and energy. Widespread deficiency is underappreciated.</div><div class="mc-s">Seaweed, seafood, iodised salt. Inland populations historically short.</div></div>
+      <div class="mc"><div class="mc-n">Colloidal minerals</div><div class="mc-r">Broad-spectrum trace mineral complex covering the 60 minerals Wallach identifies — selenium, chromium, vanadium and others largely absent from modern diets.</div><div class="mc-s">Plant-derived from ancient deposits. Bioavailability far exceeds metallic mineral forms.</div></div>
+      <div class="mc"><div class="mc-n">Vitamin C (buffered)</div><div class="mc-r">Collagen synthesis, immune function, antioxidant protection. The body does not produce it. Training and stress both increase the requirement significantly.</div><div class="mc-s">Buffered ascorbate — gentler on the gut than straight ascorbic acid.</div></div>
+      <div class="mc"><div class="mc-n">Probiotics + Prebiotics</div><div class="mc-r">Gut microbiome health. The gut produces neurotransmitters, regulates immunity, and governs systemic inflammation. It is not a side issue.</div><div class="mc-s">Fermented foods first. Multi-strain probiotics when diet is disrupted.</div></div>
+    </div>
+    <hr class="ruled">
+    <div class="prose"><strong>On detoxification:</strong> the body we now inhabit is exposed to an unprecedented burden of environmental compounds — heavy metals, pesticide residues, plasticisers, pharmaceutical traces in water — that would have been entirely absent from pre-industrial human experience. The liver, kidneys, skin, and lymphatic system handle detoxification naturally when well supported. Supporting them is not a fringe position. It is a rational response to an environment our biology did not evolve for.</div>
+    <div class="two-col">
+      <div class="ib"><div class="ib-title">Support the detox pathways</div>
+        <div class="ib-item"><strong>Liver support</strong> — milk thistle (silymarin), dandelion root, adequate B vitamins, NAC (N-acetyl cysteine).</div>
+        <div class="ib-item"><strong>Heavy metal binding</strong> — chlorella and spirulina have demonstrated binding capacity in the gut. Cilantro mobilises metals from tissues.</div>
+        <div class="ib-item"><strong>Sweating</strong> — a genuinely underrated elimination pathway. Exercise-induced sweat, sauna, or hot baths all support toxin clearance through the skin.</div>
+        <div class="ib-item"><strong>Adequate fibre</strong> — ensures the bowel moves regularly, preventing reabsorption of gut-bound toxins. Non-negotiable.</div>
+      </div>
+      <div class="ib"><div class="ib-title">Know your source — always</div>
+        <div class="ib-item"><strong>Third-party tested</strong> — reputable brands publish independent lab results. If a brand doesn't, that is information in itself.</div>
+        <div class="ib-item"><strong>Form matters enormously</strong> — magnesium oxide vs glycinate. Cyanocobalamin vs methylcobalamin. Folic acid vs methylfolate. These are not interchangeable.</div>
+        <div class="ib-item"><strong>Price is a signal</strong> — a cheap supplement achieves cheapness somewhere. Usually in raw material quality or bioavailability.</div>
+        <div class="ib-item"><strong>Seek informed guidance</strong> — ideally from a practitioner familiar with functional and nutritional medicine. Therapeutic supplementation warrants professional input.</div>
+      </div>
+    </div>
+    <div class="folly"><div class="folly-hd">Common Folly — Supplementation</div>
+      <div class="folly-item">Buying the cheapest multivitamin and assuming the job is done.<div class="folly-fix">A budget supermarket multivitamin contains mostly synthetic vitamins in poorly absorbed forms at doses too small to matter. It is reassurance, not nutrition.</div></div>
+      <div class="folly-item">Taking a quality supplement protocol while eating a diet that actively harms the same systems.<div class="folly-fix">Supplementation cannot compensate for a diet of processed food. Nutrition first. Supplementation second. Always in that order.</div></div>
+      <div class="folly-item">Dismissing supplementation entirely because "you can get everything from food."<div class="folly-fix">In 1940, perhaps. Today, with demonstrably depleted soils and an unprecedented environmental burden, this position requires more evidence than it has. See the McCance and Widdowson data — 1940 to 1991.</div></div>
+    </div>
+  </div>
+  <div class="pg-foot"><span>Being HAware — Foundation Level · Nutrition Matters</span><span>Nutrition first. Supplementation second. Always in that order.</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════ REFERENCES -->
+<div class="chapter" id="ch-references">
+  <div class="sec-hd">
+    <div class="sec-n">05</div>
+    <div>
+      <div class="sec-t">REFERENCES</div>
+      <div class="sec-st">For those whose curiosity has been lit — this is where to go next</div>
+    </div>
+  </div>
+  <div class="prose">This programme stands on the shoulders of researchers, clinicians, and thinkers who spent lifetimes on these questions. What follows is not an exhaustive bibliography — it is a curated list of the works most directly relevant to what you've just read, annotated so you know why each one matters before you commit the time to it.</div>
+
+  <div class="ref-grid">
+    <div class="ref-item"><div class="ref-num">1</div><div class="ref-body"><div class="ref-title">Composition of Foods — The McCance and Widdowson Study, 1940–1991</div><div class="ref-auth">R.A. McCance &amp; E.M. Widdowson / UK Ministry of Agriculture, Fisheries and Food</div><div class="ref-desc">The foundational document on soil and food mineral depletion in the UK. Tracks the decline of minerals in staple foods over fifty years. The data on the reduction of iron, calcium, magnesium, and trace minerals in vegetables and meat is stark — and it is the evidence base for the supplementation argument in Chapter Three.</div><div class="ref-link">Available via the UK National Archives and Royal Society of Chemistry archives</div></div></div>
+
+    <div class="ref-item"><div class="ref-num">2</div><div class="ref-body"><div class="ref-title">Dead Doctors Don't Lie</div><div class="ref-auth">Dr Joel D. Wallach, DVM, ND — Lecture and subsequent book</div><div class="ref-desc">The most accessible entry point into Wallach's 40 years of research across veterinary and human medicine. The 90 essential nutrients framework, the mineral deficiency argument for chronic disease, and the case for colloidal mineral supplementation are all presented here. His zoological research contributions are held in the Smithsonian Institution.</div><div class="ref-link">Available widely — the original lecture recording is freely accessible online</div></div></div>
+
+    <div class="ref-item"><div class="ref-num">3</div><div class="ref-body"><div class="ref-title">Nutrition and Physical Degeneration</div><div class="ref-auth">Dr Weston A. Price, DDS — 1939</div><div class="ref-desc">Price's extraordinary study of isolated populations worldwide, comparing the health of those eating traditional whole foods to those who had adopted industrialised diets. The photographic evidence alone is remarkable. The findings on dental health, skeletal development, and disease resistance directly informed the whole food framework in Chapter Three.</div><div class="ref-link">Available freely online via the Weston A. Price Foundation — westonaprice.org</div></div></div>
+
+    <div class="ref-item"><div class="ref-num">4</div><div class="ref-body"><div class="ref-title">In Defence of Food</div><div class="ref-auth">Michael Pollan — 2008</div><div class="ref-desc">The clearest articulation of the whole food principle in popular writing. Pollan's seven-word summary — "Eat food. Not too much. Mostly plants." — encapsulates the longevity section of this programme with a precision this document aspires to. Accessible, well-referenced, and genuinely worth reading cover to cover.</div><div class="ref-link">Available in all major bookshops and libraries</div></div></div>
+
+    <div class="ref-item"><div class="ref-num">5</div><div class="ref-body"><div class="ref-title">Why We Sleep</div><div class="ref-auth">Matthew Walker, PhD — 2017</div><div class="ref-desc">The most comprehensive and readable account of sleep science available to the general reader. Directly relevant to the Rhythm section — particularly the relationship between sleep, growth hormone, muscle repair, and immune function. If you read one book as a companion to this programme, this is it.</div><div class="ref-link">Available in all major bookshops and libraries</div></div></div>
+
+    <div class="ref-item"><div class="ref-num">6</div><div class="ref-body"><div class="ref-title">Circadian Rhythm Research — Nobel Prize in Physiology or Medicine, 2017</div><div class="ref-auth">Jeffrey C. Hall, Michael Rosbash, Michael W. Young</div><div class="ref-desc">The Nobel Prize-winning work that established the molecular mechanisms of circadian clocks. The finding that every cell in the body contains a clock — and that those clocks are synchronised by light, feeding, and temperature — underpins the entire Rhythm section. The Nobel Committee's public summary is freely available and accessible to non-specialists.</div><div class="ref-link">nobelprize.org — freely available summary and press release</div></div></div>
+
+    <div class="ref-item"><div class="ref-num">7</div><div class="ref-body"><div class="ref-title">The Mineral Depletion of Foods Available to Us as a Nation — 1940 to 2002</div><div class="ref-auth">David Thomas — Nutrition and Health Journal, 2007</div><div class="ref-desc">An update and extension of the McCance and Widdowson data, tracking mineral decline in UK foods through to the early 2000s. Confirms the trend and extends it. A more recent and accessible companion to the original government data, making the supplementation argument harder to dismiss with the passing decades.</div><div class="ref-link">Published in Nutrition and Health Journal — available via academic databases</div></div></div>
+
+    <div class="ref-item"><div class="ref-num">8</div><div class="ref-body"><div class="ref-title">Going Deeper — Being HAware Volume II</div><div class="ref-auth">Being HAware Programme</div><div class="ref-desc">The companion volume to this programme, covering: the full 90 essential nutrients in detail, advanced circadian biology and its application to training, detoxification protocols for the modern environment, polyphenols and bioflavonoids, and Wallach's work in greater depth. For those whose appetite has been sharpened by what they've read here.</div><div class="ref-link"><a href="going-deeper.html" style="color:var(--accent)">Read Going Deeper</a></div></div></div>
+  </div>
+
+  <div class="wisdom"><p>"The more that you read, the more things you will know. The more that you learn, the more places you'll go."</p><cite>Dr Seuss — as applicable to nutrition science as to anywhere else</cite></div>
+
+  <div class="pg-foot"><span>Being HAware — Foundation Level · References</span><span>Standing on the shoulders of giants.</span></div>
+</div>
+
+</div><!-- end .page -->
+
+<script>
+// ── CHAPTER NAV ──
+const chapters = ['cover','movement','programme','nutrition','references'];
+let currentCh = 'cover';
+function setChapter(id, btn) {
+  document.querySelectorAll('.ch-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('.chapter').forEach(c=>c.classList.toggle('visible',c.id==='ch-'+id));
+  currentCh = id; window.scrollTo(0,0);
+}
+function setChapterById(id) {
+  const btn = document.querySelector(`.ch-btn[onclick*="'${id}'"]`);
+  setChapter(id, btn);
+}
+function prevChapter() {
+  const i = chapters.indexOf(currentCh);
+  if(i>0) setChapterById(chapters[i-1]);
+}
+function nextChapter() {
+  const i = chapters.indexOf(currentCh);
+  if(i<chapters.length-1) setChapterById(chapters[i+1]);
+}
+
+// ── PHASE SWITCHER ──
+const phaseColors = {1:['var(--green2)','var(--green)'],2:['var(--amber2)','var(--amber)'],3:['#fde8df','var(--accent)']};
+const phaseLabels = {1:'Phase 1 — Foundation',2:'Phase 2 — Load',3:'Phase 3 — Forge'};
+let currentPhase = 1;
+let currentWeek = {1:1,2:5,3:9};
+
+const programme = {
+  1:{weeks:[
+    {num:1,title:'Introduction — learn every pattern',tag:'build',days:[
+      {n:'Mon',f:'Push',e:[{n:'Incline push-up',s:'3×10–15',t:'push'},{n:'Pike push-up',s:'3×6–8',t:'push'},{n:'Hollow body tuck',s:'3×20s',t:'core'},{n:'Plank',s:'3×30s',t:'core'}]},
+      {n:'Tue',f:'Lower',e:[{n:'Bodyweight squat',s:'3×15–20',t:'lower'},{n:'Reverse lunge',s:'3×10 ea',t:'lower'},{n:'Glute bridge',s:'3×15',t:'lower'},{n:'Calf raise',s:'3×20',t:'lower'}]},
+      {n:'Wed',f:'Active Rest',r:true},{n:'Thu',f:'Pull',e:[{n:'Dead hang',s:'3×30s',t:'pull'},{n:'Scap pull',s:'3×10',t:'pull'},{n:'Inverted row',s:'3×8–10',t:'pull'},{n:'Knee tuck hang',s:'3×8',t:'core'}]},
+      {n:'Fri',f:'Full Body',e:[{n:'Push-up',s:'3×8–12',t:'push'},{n:'Split squat',s:'3×8 ea',t:'lower'},{n:'Inverted row',s:'3×8',t:'pull'},{n:'Dead bug',s:'3×8 ea',t:'core'}]},
+      {n:'Sat',f:'Skill + Core',e:[{n:'Wall handstand',s:'5×15s',t:'skill'},{n:'Hollow body hold',s:'3×20s',t:'core'},{n:'Single-leg bridge',s:'3×12 ea',t:'lower'},{n:'Plank shoulder tap',s:'3×8 ea',t:'core'}]},
+      {n:'Sun',f:'Full Rest',r:true}],notes:['Orientation week. Feel every movement — do not max out any of them.','If it hurts (not burns — hurts), stop. Soreness next day is expected. Pain is not.','Warm up 8 minutes before every session: joint circles, light walking, arm swings.','Sleep 8 hours. It is the most important session of the day.']},
+    {num:2,title:'Solidify the positions',tag:'build',days:[
+      {n:'Mon',f:'Push',e:[{n:'Push-up',s:'3×10–15',t:'push'},{n:'Pike push-up',s:'3×8–10',t:'push'},{n:'Bench dip',s:'3×8–12',t:'push'},{n:'Hollow hold',s:'3×25s',t:'core'}]},
+      {n:'Tue',f:'Lower',e:[{n:'Squat (pause 2s)',s:'3×12–15',t:'lower'},{n:'Reverse lunge',s:'3×12 ea',t:'lower'},{n:'Single-leg bridge',s:'3×12 ea',t:'lower'},{n:'Nordic neg (slow)',s:'3×4',t:'lower'}]},
+      {n:'Wed',f:'Active Rest',r:true},{n:'Thu',f:'Pull',e:[{n:'Dead hang',s:'3×40s',t:'pull'},{n:'Active hang',s:'3×10',t:'pull'},{n:'Inverted row',s:'3×10–12',t:'pull'},{n:'Hanging knee raise',s:'3×10',t:'core'}]},
+      {n:'Fri',f:'Full Body',e:[{n:'Push-up (3s neg)',s:'3×8',t:'push'},{n:'BSS',s:'3×8 ea',t:'lower'},{n:'Inverted row (elev)',s:'3×8',t:'pull'},{n:'Hollow rock',s:'3×25s',t:'core'}]},
+      {n:'Sat',f:'Skill + Core',e:[{n:'Wall handstand',s:'5×20s',t:'skill'},{n:'L-sit tuck',s:'4×8s',t:'skill'},{n:'Plank (RKC)',s:'3×20s',t:'core'},{n:'Dead bug',s:'3×10 ea',t:'core'}]},
+      {n:'Sun',f:'Full Rest',r:true}],notes:['Add 1–2 reps where Week 1 felt easy — not every exercise, the strongest ones.','The pause squat is not optional. Two seconds at the bottom, lower back neutral.','Nordic negatives: 5 seconds to lower. Faster than that and you\'re not doing them.']},
+    {num:3,title:'Volume increase — feel the load',tag:'push',days:[
+      {n:'Mon',f:'Push',e:[{n:'Push-up',s:'4×12–15',t:'push'},{n:'Pike push-up',s:'4×8–10',t:'push'},{n:'Bench dip',s:'3×10–14',t:'push'},{n:'Hollow hold',s:'3×30s',t:'core'}]},
+      {n:'Tue',f:'Lower',e:[{n:'Squat',s:'4×15–20',t:'lower'},{n:'BSS',s:'3×10 ea',t:'lower'},{n:'Nordic neg',s:'4×5',t:'lower'},{n:'Single-leg bridge',s:'3×15 ea',t:'lower'}]},
+      {n:'Wed',f:'Active Rest',r:true},{n:'Thu',f:'Pull',e:[{n:'Pull-up (or neg)',s:'4×3–6',t:'pull'},{n:'Inverted row (elev)',s:'3×10–12',t:'pull'},{n:'Dead hang',s:'3×45s',t:'pull'},{n:'Hanging leg raise',s:'3×8–10',t:'core'}]},
+      {n:'Fri',f:'Full Body',e:[{n:'Archer push-up',s:'3×5 ea',t:'push'},{n:'BSS (slow neg)',s:'3×8 ea',t:'lower'},{n:'Chin-up or neg',s:'3×4–6',t:'pull'},{n:'L-sit tuck',s:'4×10s',t:'skill'}]},
+      {n:'Sat',f:'Skill + Core',e:[{n:'Wall HSPU neg',s:'4×3–5',t:'skill'},{n:'Hanging leg raise',s:'3×10',t:'core'},{n:'Hollow rock',s:'3×30s',t:'core'},{n:'Assisted pistol',s:'3×4 ea',t:'lower'}]},
+      {n:'Sun',f:'Full Rest',r:true}],notes:['First week with real pulling volume. Can\'t do a pull-up? Jump to the top, lower in 5 seconds.','Archer push-ups reveal your weaker side. That\'s the point. Don\'t rush past it.']},
+    {num:4,title:'Deload — let the adaptation happen',tag:'deload',days:[
+      {n:'Mon',f:'Push (easy)',e:[{n:'Push-up',s:'2×10',t:'push'},{n:'Pike push-up',s:'2×8',t:'push'},{n:'Hollow hold',s:'2×20s',t:'core'}]},
+      {n:'Tue',f:'Lower (easy)',e:[{n:'Squat',s:'2×12',t:'lower'},{n:'Reverse lunge',s:'2×8 ea',t:'lower'},{n:'Glute bridge',s:'2×12',t:'lower'}]},
+      {n:'Wed',f:'Full Rest',r:true},{n:'Thu',f:'Pull (easy)',e:[{n:'Dead hang',s:'3×30s',t:'pull'},{n:'Inverted row',s:'2×8',t:'pull'},{n:'Active hang',s:'2×8',t:'pull'}]},
+      {n:'Fri',f:'Skill Play',e:[{n:'Wall handstand',s:'5×20s',t:'skill'},{n:'L-sit tuck',s:'4×10s',t:'skill'},{n:'Assisted pistol',s:'2×4 ea',t:'lower'}]},
+      {n:'Sat',f:'Mobility',r:true},{n:'Sun',f:'Full Rest',r:true}],notes:['Volume drops 40%. Intensity stays — but only 2 sets instead of 4.','This is not optional. The body rebuilds during recovery, not during training.','Use the extra time to review the movements that felt weakest. Film yourself if you can.']}
+  ]},
+  2:{weeks:[
+    {num:5,title:'Enter the intermediate movements',tag:'build',days:[
+      {n:'Mon',f:'Push',e:[{n:'Push-up (3s neg)',s:'4×10–12',t:'push'},{n:'Dip',s:'4×8–10',t:'push'},{n:'Elevated pike PU',s:'3×8',t:'push'},{n:'L-sit tuck',s:'4×12s',t:'skill'}]},
+      {n:'Tue',f:'Lower',e:[{n:'BSS',s:'4×10 ea',t:'lower'},{n:'Pistol (box)',s:'3×5 ea',t:'lower'},{n:'Nordic neg (4s)',s:'4×5',t:'lower'},{n:'Single-leg bridge',s:'3×15 ea',t:'lower'}]},
+      {n:'Wed',f:'Active Rest',r:true},{n:'Thu',f:'Pull',e:[{n:'Pull-up',s:'4×5–8',t:'pull'},{n:'Chin-up',s:'3×6–8',t:'pull'},{n:'Inverted row (elev)',s:'3×10',t:'pull'},{n:'Hanging leg raise',s:'3×10–12',t:'core'}]},
+      {n:'Fri',f:'Full Body',e:[{n:'Archer push-up',s:'3×6–8 ea',t:'push'},{n:'Assisted pistol',s:'3×5 ea',t:'lower'},{n:'Pull-up (3s neg)',s:'3×4–6',t:'pull'},{n:'Hollow rock',s:'3×35s',t:'core'}]},
+      {n:'Sat',f:'Skill + Core',e:[{n:'Wall HSPU',s:'4×4–6',t:'skill'},{n:'L-sit tuck',s:'4×15s',t:'skill'},{n:'Toes to bar',s:'3×6–8',t:'core'},{n:'Box pistol',s:'3×5 ea',t:'lower'}]},
+      {n:'Sun',f:'Full Rest',r:true}],notes:['First true dips. Two sturdy chairs work if no dip station is available. Test stability before trusting your weight.','Box pistol: sit to a chair at parallel height, stand back on one leg. Full control throughout.']},
+    {num:6,title:'Volume peaks — push through',tag:'push',days:[
+      {n:'Mon',f:'Push',e:[{n:'Push-up (slow)',s:'4×12–15',t:'push'},{n:'Dip',s:'4×10–12',t:'push'},{n:'Wall HSPU',s:'4×5–7',t:'skill'},{n:'L-sit tuck',s:'4×18s',t:'skill'}]},
+      {n:'Tue',f:'Lower',e:[{n:'BSS (pause)',s:'4×10 ea',t:'lower'},{n:'Squat jump',s:'3×10',t:'lower'},{n:'Nordic neg (5s)',s:'4×5',t:'lower'},{n:'Pistol (box low)',s:'3×6 ea',t:'lower'}]},
+      {n:'Wed',f:'Active Rest',r:true},{n:'Thu',f:'Pull',e:[{n:'Pull-up',s:'5×5–8',t:'pull'},{n:'Chin-up',s:'3×6–10',t:'pull'},{n:'Dead hang',s:'3×50s',t:'pull'},{n:'Toes to bar',s:'3×8–10',t:'core'}]},
+      {n:'Fri',f:'Full Body',e:[{n:'Archer PU (3s neg)',s:'4×6 ea',t:'push'},{n:'Pistol squat',s:'3×4–6 ea',t:'lower'},{n:'Weighted pull-up',s:'3×5',t:'pull'},{n:'Dragon flag tuck',s:'3×4–6',t:'core'}]},
+      {n:'Sat',f:'Skill + Core',e:[{n:'Wall HSPU',s:'5×5–8',t:'skill'},{n:'Hanging leg raise',s:'3×12',t:'core'},{n:'Dragon flag tuck',s:'3×5',t:'core'},{n:'Pistol squat',s:'3×5 ea',t:'lower'}]},
+      {n:'Sun',f:'Full Rest',r:true}],notes:['Highest volume week so far. Sleep becomes more important, not less.','Dragon flag tuck: rigid from shoulder to knee, legs tucked. Harder than it looks.']},
+    {num:7,title:'Intensity, not just volume',tag:'push',days:[
+      {n:'Mon',f:'Push',e:[{n:'One-arm PU neg',s:'3×4 ea',t:'push'},{n:'Dip',s:'4×10–12',t:'push'},{n:'Wall HSPU (deficit)',s:'3×4–6',t:'skill'},{n:'L-sit (extending)',s:'4×12s',t:'skill'}]},
+      {n:'Tue',f:'Lower',e:[{n:'Pistol squat',s:'4×5 ea',t:'lower'},{n:'Nordic neg (6s)',s:'4×5',t:'lower'},{n:'Depth jump',s:'3×5',t:'lower'},{n:'Shrimp squat (asst)',s:'3×4 ea',t:'lower'}]},
+      {n:'Wed',f:'Active Rest',r:true},{n:'Thu',f:'Pull',e:[{n:'Weighted pull-up',s:'4×5',t:'pull'},{n:'Chest-to-bar PU',s:'3×5–6',t:'pull'},{n:'One-arm neg',s:'3×3 ea',t:'pull'},{n:'Hanging leg raise',s:'3×12',t:'core'}]},
+      {n:'Fri',f:'Full Body',e:[{n:'Archer PU',s:'4×7 ea',t:'push'},{n:'Pistol (deficit)',s:'3×4 ea',t:'lower'},{n:'Muscle-up attempt',s:'4×2–3',t:'pull'},{n:'Dragon flag tuck',s:'3×6',t:'core'}]},
+      {n:'Sat',f:'Skill + Core',e:[{n:'Freestanding HS',s:'10 attempts',t:'skill'},{n:'Dragon flag',s:'3×4–5',t:'core'},{n:'Toes to bar',s:'3×12',t:'core'},{n:'Pistol squat',s:'3×6 ea',t:'lower'}]},
+      {n:'Sun',f:'Full Rest',r:true}],notes:['One-arm push-up negatives: lower on one arm, return on two. Correct method — not cheating.','No bar for muscle-ups? Do chest-to-bar pull-ups plus dips as a superset instead.']},
+    {num:8,title:"Deload — you've earned it",tag:'deload',days:[
+      {n:'Mon',f:'Push (easy)',e:[{n:'Push-up',s:'2×12',t:'push'},{n:'Dip',s:'2×8',t:'push'},{n:'Hollow hold',s:'2×30s',t:'core'}]},
+      {n:'Tue',f:'Lower (easy)',e:[{n:'Squat',s:'2×15',t:'lower'},{n:'BSS',s:'2×8 ea',t:'lower'},{n:'Glute bridge',s:'2×15',t:'lower'}]},
+      {n:'Wed',f:'Full Rest',r:true},{n:'Thu',f:'Pull (easy)',e:[{n:'Pull-up',s:'2×5',t:'pull'},{n:'Dead hang',s:'3×45s',t:'pull'},{n:'Inverted row',s:'2×10',t:'pull'}]},
+      {n:'Fri',f:'Skill Play',e:[{n:'Wall HSPU',s:'3×5',t:'skill'},{n:'L-sit tuck',s:'4×15s',t:'skill'},{n:'Pistol squat',s:'2×4 ea',t:'lower'}]},
+      {n:'Sat',f:'Mobility',r:true},{n:'Sun',f:'Full Rest',r:true}],notes:['Second deload. Compare to Week 4 — movements should feel noticeably easier. If not, something in recovery needs attention.']}
+  ]},
+  3:{weeks:[
+    {num:9,title:'Advanced movement introduction',tag:'peak',days:[
+      {n:'Mon',f:'Push',e:[{n:'Wall HSPU',s:'5×6–8',t:'skill'},{n:'One-arm PU neg',s:'4×4 ea',t:'push'},{n:'Weighted dip',s:'3×8',t:'push'},{n:'Full L-sit',s:'4×12s',t:'skill'}]},
+      {n:'Tue',f:'Lower',e:[{n:'Pistol squat',s:'4×6 ea',t:'lower'},{n:'Nordic curl (full)',s:'3×4–5',t:'lower'},{n:'Shrimp squat',s:'3×5 ea',t:'lower'},{n:'Depth jump',s:'4×5',t:'lower'}]},
+      {n:'Wed',f:'Active Rest',r:true},{n:'Thu',f:'Pull',e:[{n:'Muscle-up',s:'4×3–4',t:'pull'},{n:'Weighted pull-up',s:'4×5',t:'pull'},{n:'One-arm neg',s:'3×4 ea',t:'pull'},{n:'Windshield wiper',s:'3×5 ea',t:'core'}]},
+      {n:'Fri',f:'Full Body',e:[{n:'One-arm PU neg',s:'4×4 ea',t:'push'},{n:'Pistol (weighted)',s:'3×5 ea',t:'lower'},{n:'Chest-to-bar',s:'4×6',t:'pull'},{n:'Dragon flag',s:'3×5',t:'core'}]},
+      {n:'Sat',f:'Skill + Core',e:[{n:'Freestanding HS',s:'15 attempts',t:'skill'},{n:'Dragon flag',s:'3×6',t:'core'},{n:'Windshield wiper',s:'3×6 ea',t:'core'},{n:'Full L-sit',s:'4×15s',t:'skill'}]},
+      {n:'Sun',f:'Full Rest',r:true}],notes:['First full Nordic curls. Can\'t pull back up? Continue with negatives but aim for a 6-second descent.','Windshield wipers: hang from bar, legs up, rotate side to side. Core and shoulders both working.']},
+    {num:10,title:'Volume and skill together',tag:'peak',days:[
+      {n:'Mon',f:'Push',e:[{n:'HSPU (deficit)',s:'4×5–7',t:'skill'},{n:'One-arm PU neg',s:'4×5 ea',t:'push'},{n:'Weighted dip',s:'4×8–10',t:'push'},{n:'Full L-sit',s:'4×15s',t:'skill'}]},
+      {n:'Tue',f:'Lower',e:[{n:'Pistol (weighted)',s:'4×5 ea',t:'lower'},{n:'Nordic curl',s:'4×4–5',t:'lower'},{n:'Shrimp squat',s:'4×5 ea',t:'lower'},{n:'Squat jump',s:'3×8',t:'lower'}]},
+      {n:'Wed',f:'Active Rest',r:true},{n:'Thu',f:'Pull',e:[{n:'Muscle-up',s:'4×4–5',t:'pull'},{n:'Weighted pull-up',s:'4×6',t:'pull'},{n:'One-arm neg',s:'4×4 ea',t:'pull'},{n:'Toes to bar',s:'3×12',t:'core'}]},
+      {n:'Fri',f:'Full Body',e:[{n:'Deficit HSPU',s:'3×5',t:'skill'},{n:'Pistol (weighted)',s:'3×6 ea',t:'lower'},{n:'Muscle-up',s:'3×3',t:'pull'},{n:'Dragon flag',s:'4×5',t:'core'}]},
+      {n:'Sat',f:'Skill + Core',e:[{n:'Freestanding HSPU',s:'max sets',t:'skill'},{n:'Full L-sit',s:'5×18s',t:'skill'},{n:'Dragon flag',s:'4×6',t:'core'},{n:'Windshield wiper',s:'3×7 ea',t:'core'}]},
+      {n:'Sun',f:'Full Rest',r:true}],notes:['Deficit HSPU: hands on books so head descends below hand level. Deeper range, harder press.','Saturday is skill day — go fresh into it. Not a finisher. Not an afterthought.']},
+    {num:11,title:'Peak intensity — close to the limit',tag:'peak',days:[
+      {n:'Mon',f:'Push',e:[{n:'Freestanding HSPU',s:'4×max',t:'skill'},{n:'One-arm PU attempt',s:'3×2–3 ea',t:'push'},{n:'Weighted dip',s:'4×8',t:'push'},{n:'Full L-sit',s:'4×20s',t:'skill'}]},
+      {n:'Tue',f:'Lower',e:[{n:'Pistol (weighted)',s:'5×5 ea',t:'lower'},{n:'Nordic curl',s:'4×5–6',t:'lower'},{n:'Shrimp squat',s:'4×6 ea',t:'lower'},{n:'Depth jump',s:'4×6',t:'lower'}]},
+      {n:'Wed',f:'Active Rest',r:true},{n:'Thu',f:'Pull',e:[{n:'Muscle-up',s:'5×4–5',t:'pull'},{n:'One-arm neg',s:'4×4 ea',t:'pull'},{n:'Weighted pull-up',s:'4×5',t:'pull'},{n:'Windshield wiper',s:'4×7 ea',t:'core'}]},
+      {n:'Fri',f:'Full Body',e:[{n:'One-arm PU attempt',s:'4×3 ea',t:'push'},{n:'Pistol + BSS superset',s:'3×5+8 ea',t:'lower'},{n:'Muscle-up',s:'4×3',t:'pull'},{n:'Dragon flag',s:'4×6',t:'core'}]},
+      {n:'Sat',f:'Skill + Core',e:[{n:'Freestanding HSPU',s:'max quality',t:'skill'},{n:'Full L-sit',s:'5×20s',t:'skill'},{n:'Dragon flag',s:'4×7',t:'core'},{n:'Windshield wiper',s:'4×8 ea',t:'core'}]},
+      {n:'Sun',f:'Full Rest',r:true}],notes:['Peak week. Sleep 8–9 hours. Eat well. Pain (not burn) means rest.','One-arm push-up attempts may not succeed yet. The strength is being built even in the attempt.']},
+    {num:12,title:'Deload before the finale',tag:'deload',days:[
+      {n:'Mon',f:'Push (easy)',e:[{n:'Wall HSPU',s:'3×5',t:'skill'},{n:'Push-up',s:'2×15',t:'push'},{n:'Hollow hold',s:'2×30s',t:'core'}]},
+      {n:'Tue',f:'Lower (easy)',e:[{n:'Pistol squat',s:'2×5 ea',t:'lower'},{n:'Nordic neg',s:'2×4',t:'lower'},{n:'BSS',s:'2×8 ea',t:'lower'}]},
+      {n:'Wed',f:'Full Rest',r:true},{n:'Thu',f:'Pull (easy)',e:[{n:'Pull-up',s:'3×5',t:'pull'},{n:'Dead hang',s:'3×50s',t:'pull'},{n:'Muscle-up',s:'2×2',t:'pull'}]},
+      {n:'Fri',f:'Skill',e:[{n:'Freestanding HS',s:'10 attempts',t:'skill'},{n:'Full L-sit',s:'3×15s',t:'skill'},{n:'Dragon flag',s:'2×4',t:'core'}]},
+      {n:'Sat',f:'Mobility',r:true},{n:'Sun',f:'Full Rest',r:true}],notes:['Third deload. What you\'ve built over 11 weeks is not going anywhere in a recovery week.','Compare Day 1 to now. The movements that were impossible are no longer impossible.']},
+    {num:13,title:'The finish — leave nothing behind',tag:'peak',days:[
+      {n:'Mon',f:'Push — Finale',e:[{n:'Freestanding HSPU',s:'5×max',t:'skill'},{n:'One-arm PU neg',s:'5×5 ea',t:'push'},{n:'Weighted dip',s:'4×10',t:'push'},{n:'Full L-sit',s:'5×20s',t:'skill'}]},
+      {n:'Tue',f:'Lower — Finale',e:[{n:'Pistol (weighted)',s:'5×6 ea',t:'lower'},{n:'Nordic curl',s:'5×5',t:'lower'},{n:'Shrimp squat',s:'4×6 ea',t:'lower'},{n:'Depth jump',s:'4×6',t:'lower'}]},
+      {n:'Wed',f:'Active Rest',r:true},{n:'Thu',f:'Pull — Finale',e:[{n:'Muscle-up',s:'5×5',t:'pull'},{n:'Weighted pull-up',s:'5×6',t:'pull'},{n:'One-arm neg',s:'5×5 ea',t:'pull'},{n:'Windshield wiper',s:'4×8 ea',t:'core'}]},
+      {n:'Fri',f:'Full Body — Finale',e:[{n:'One-arm PU attempt',s:'5×max ea',t:'push'},{n:'Pistol superset',s:'4×6+10 ea',t:'lower'},{n:'Muscle-up',s:'5×4',t:'pull'},{n:'Dragon flag',s:'5×6',t:'core'}]},
+      {n:'Sat',f:'Skill Day — Finale',e:[{n:'Freestanding HSPU',s:'absolute max',t:'skill'},{n:'Full L-sit',s:'5×25s',t:'skill'},{n:'Dragon flag',s:'5×6',t:'core'},{n:'Windshield wiper',s:'5×8 ea',t:'core'}]},
+      {n:'Sun',f:'Rest — Programme Complete',r:true}],notes:['Day 90. You have done the work. Today is not about records — it is about completing what you started.','What comes next: every movement here has further progressions. The programme repeats — at a higher level.','The one-arm push-up, the full planche, the front lever. They are months further. In exactly this direction.']}
+  ]}
+};
+
+function buildPhase(ph) {
+  const container = document.getElementById('ph-panels');
+  programme[ph].weeks.forEach((wk,i) => {
+    const div = document.createElement('div');
+    div.className = 'wk-panel' + (i===0?' visible':'');
+    div.id = `phwp-${ph}-${wk.num}`;
+    div.innerHTML = buildWeekHTML(wk, ph);
+    container.appendChild(div);
+  });
+}
+
+function buildWeekHTML(wk, ph) {
+  const tagMap = {build:'tag-build',push:'tag-push',peak:'tag-peak',deload:'tag-deload'};
+  const tagLbl = {build:'Building',push:'Pushing',peak:'Peak',deload:'Deload ↓'};
+  let html = `<div class="wk-hd"><div><div class="wk-title">Week ${wk.num} — ${wk.title}</div></div><span class="wk-tag ${tagMap[wk.tag]}">${tagLbl[wk.tag]}</span></div>`;
+  html += `<div class="legend"><div class="leg-i"><div class="leg-sw sw-push"></div>Push</div><div class="leg-i"><div class="leg-sw sw-pull"></div>Pull</div><div class="leg-i"><div class="leg-sw sw-lower"></div>Lower</div><div class="leg-i"><div class="leg-sw sw-core"></div>Core</div><div class="leg-i"><div class="leg-sw sw-skill"></div>Skill</div></div>`;
+  html += `<div class="day-grid">`;
+  wk.days.forEach(d => {
+    html += `<div class="day-col"><div class="day-hd"><div class="day-name">${d.n}</div><div class="day-focus${d.r?' rest':''}">${d.f}</div></div><div class="day-body">`;
+    if(d.r || !d.e) {
+      html += `<div class="rest-inner"><div class="rest-t">${d.f.includes('Mobil')?'Stretch &<br>Mobility':d.f.includes('Active')?'Walk ·<br>Stretch':'Rest &<br>Recover'}</div></div>`;
+    } else {
+      d.e.forEach(ex => { html += `<div class="ex-b ${ex.t}"><div class="ex-n">${ex.n}</div><div class="ex-s">${ex.s}</div></div>`; });
+    }
+    html += `</div></div>`;
+  });
+  html += `</div>`;
+  if(wk.notes) {
+    const reminders=['Warm up 8 min. Joints first.','Form before reps. Always.','Progress when easy — not before.','Rest is training. Take it.','Sleep 8 hours. Non-negotiable.'];
+    const ri = (wk.num-1)%reminders.length;
+    html += `<div class="notes-row"><div class="nb"><div class="nb-title">Week ${wk.num} notes</div>${wk.notes.map(n=>`<div class="nb-item">${n}</div>`).join('')}</div><div class="nb"><div class="nb-title">Reminders</div><div class="nb-item">${reminders[ri]}</div><div class="nb-item">${reminders[(ri+1)%reminders.length]}</div></div></div>`;
+  }
+  return html;
+}
+
+function setPhase(ph, btn) {
+  // Reset all phase button styles
+  document.querySelectorAll('#ch-programme .nav-btn').forEach(b => {
+    b.style.background='transparent';
+    b.style.color='var(--ink3)';
+    b.style.border='1px solid var(--ink4)';
+  });
+  // Highlight active button
+  const [bg,fg] = phaseColors[ph];
+  btn.style.background=bg; btn.style.color=fg; btn.style.border=`1px solid ${fg}`;
+  currentPhase = ph;
+
+  // Hide everything currently in ph-panels
+  const container = document.getElementById('ph-panels');
+  Array.from(container.children).forEach(el => el.style.display='none');
+
+  // Check if this phase has already been built
+  const existingBar = document.getElementById('wbar-'+ph);
+  if (existingBar) {
+    // Phase already built — just show it and reset to first week
+    existingBar.style.display='flex';
+    const firstWk = programme[ph].weeks[0];
+    switchWeek(ph, currentWeek[ph] || firstWk.num);
+    // Show the week panels for this phase
+    programme[ph].weeks.forEach(wk => {
+      const wp = document.getElementById(`phwp-${ph}-${wk.num}`);
+      if(wp) wp.style.display = '';
+    });
+    switchWeek(ph, currentWeek[ph] || firstWk.num);
+  } else {
+    // First time building this phase
+    buildPhase(ph);
+    const weekBar = document.createElement('div');
+    weekBar.className='week-bar'; weekBar.id='wbar-'+ph;
+    programme[ph].weeks.forEach((wk,i) => {
+      const b = document.createElement('button');
+      b.className='wk-btn'+(wk.tag==='deload'?' deload':'')+(i===0?' active':'');
+      b.id=`wb-${ph}-${wk.num}`;
+      b.textContent=`Wk ${wk.num}${wk.tag==='deload'?' ↓':''}`;
+      b.onclick=()=>switchWeek(ph,wk.num);
+      weekBar.appendChild(b);
+    });
+    container.insertBefore(weekBar, container.firstChild);
+    currentWeek[ph] = programme[ph].weeks[0].num;
+    switchWeek(ph, currentWeek[ph]);
+  }
+}
+
+function switchWeek(ph, wkNum) {
+  programme[ph].weeks.forEach(wk => {
+    const wp = document.getElementById(`phwp-${ph}-${wk.num}`);
+    const wb = document.getElementById(`wb-${ph}-${wk.num}`);
+    if(wp) { wp.style.display=''; wp.classList.toggle('visible', wk.num===wkNum); }
+    if(wb) wb.classList.toggle('active', wk.num===wkNum);
+  });
+  currentWeek[ph] = wkNum;
+}
+
+// ── NUTRITION SECTION ──
+function setNutSec(id, btn) {
+  document.querySelectorAll('#ch-nutrition .wk-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#ch-nutrition .wk-panel').forEach(p=>p.classList.toggle('visible',p.id==='nut-'+id));
+}
+
+// ── SMART PRINT ──
+function smartPrint() {
+  // 1. Build all three phases if not already built
+  [1,2,3].forEach(ph => {
+    if(!document.getElementById('wbar-'+ph)) {
+      buildPhase(ph);
+      const weekBar = document.createElement('div');
+      weekBar.className='week-bar'; weekBar.id='wbar-'+ph;
+      programme[ph].weeks.forEach((wk,i) => {
+        const b = document.createElement('button');
+        b.className='wk-btn'+(wk.tag==='deload'?' deload':'')+(i===0?' active':'');
+        b.id=`wb-${ph}-${wk.num}`; b.textContent=`Wk ${wk.num}${wk.tag==='deload'?' ↓':''}`;
+        b.onclick=()=>switchWeek(ph,wk.num);
+        weekBar.appendChild(b);
+      });
+      document.getElementById('ph-panels').insertBefore(weekBar, document.getElementById('ph-panels').firstChild);
+    }
+  });
+
+  // 2. Snapshot current visible state so we can restore it
+  const snapshot = {
+    chapters: {},
+    wkPanels: {},
+    nutPanels: {},
+    phPanels: {}
+  };
+  document.querySelectorAll('.chapter').forEach(el => {
+    snapshot.chapters[el.id] = el.classList.contains('visible');
+  });
+  document.querySelectorAll('.wk-panel').forEach(el => {
+    snapshot.wkPanels[el.id] = { visible: el.classList.contains('visible'), display: el.style.display };
+  });
+  document.querySelectorAll('[id^="phwp-"]').forEach(el => {
+    snapshot.phPanels[el.id] = { visible: el.classList.contains('visible'), display: el.style.display };
+  });
+
+  // 3. Expand everything for print
+  document.querySelectorAll('.chapter').forEach(el => el.classList.add('visible'));
+  document.querySelectorAll('.wk-panel').forEach(el => {
+    el.classList.add('visible');
+    el.style.display = '';
+  });
+  document.querySelectorAll('[id^="phwp-"]').forEach(el => {
+    el.classList.add('visible');
+    el.style.display = '';
+  });
+  document.querySelectorAll('[id^="wbar-"]').forEach(el => {
+    el.style.display = '';
+  });
+
+  // 4. Force reflow so browser recalculates layout before printing
+  // then allow one animation frame for the DOM to settle
+  document.body.getBoundingClientRect();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.print();
+
+      // 5. Restore state after print dialog closes
+      setTimeout(() => {
+        document.querySelectorAll('.chapter').forEach(el => {
+          el.classList.toggle('visible', !!snapshot.chapters[el.id]);
+        });
+        document.querySelectorAll('.wk-panel').forEach(el => {
+          const s = snapshot.wkPanels[el.id];
+          if(s){ el.classList.toggle('visible', s.visible); el.style.display = s.display; }
+          else { el.classList.remove('visible'); }
+        });
+        document.querySelectorAll('[id^="phwp-"]').forEach(el => {
+          const s = snapshot.phPanels[el.id];
+          if(s){ el.classList.toggle('visible', s.visible); el.style.display = s.display; }
+          else { el.classList.remove('visible'); el.style.display='none'; }
+        });
+      }, 1000);
+    }); // end second rAF
+  }); // end first rAF
+} // end smartPrint
+
+// ── INIT ──
+const phBtns = document.querySelectorAll('#ch-programme .nav-btn');
+setPhase(1, phBtns[0]);
+</script>
+</body>
+</html>

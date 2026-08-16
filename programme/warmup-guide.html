@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Being HAware — Warm-Up Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f2eb;--paper2:#ede9df;--paper3:#e4dfd3;
+  --ink:#1c1a16;--ink2:#4a4740;--ink3:#8a8780;--ink4:#c4bfb4;
+  --accent:#c4501a;--accent2:#e8a882;
+  --green:#2d6a4f;--green2:#d4ede3;
+  --folly:#7a1a1a;--folly2:#f5e0e0;
+  --display:'Bebas Neue',sans-serif;
+  --body:'Crimson Pro',Georgia,serif;
+  --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+.nav{background:var(--ink);height:48px;display:flex;align-items:center;padding:0 20px;position:sticky;top:0;z-index:200;gap:0}
+.nav-brand{font-family:var(--display);font-size:16px;letter-spacing:.06em;color:var(--paper);margin-right:14px;white-space:nowrap}
+.nav-brand span{color:var(--accent2)}
+.nav-phases{display:flex;gap:1px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-phases::-webkit-scrollbar{display:none}
+.ph-btn{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:0 11px;height:48px;background:transparent;border:none;color:var(--ink4);cursor:pointer;transition:all .2s;border-bottom:3px solid transparent;white-space:nowrap}
+.ph-btn:hover{color:var(--paper)}
+.ph-btn.active{color:var(--green);border-bottom-color:var(--green)}
+.nav-right{display:flex;gap:4px;margin-left:8px}
+.nav-btn{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;background:rgba(255,255,255,.08);border:none;color:var(--ink4);cursor:pointer;white-space:nowrap;transition:all .15s}
+.nav-btn:hover{background:rgba(255,255,255,.16);color:var(--paper)}
+.nav-btn.print{background:var(--green);color:white}
+
+.page{max-width:960px;margin:0 auto;padding:36px 28px 60px}
+.chapter{display:none}.chapter.visible{display:block}
+
+/* COVER */
+.cover-rule{height:4px;background:var(--ink);margin-bottom:22px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.cover-title{font-family:var(--display);font-size:64px;line-height:.9;letter-spacing:.02em;color:var(--ink);margin-bottom:14px}
+.cover-title span{color:var(--green)}
+.cover-sub{font-size:15px;font-weight:300;font-style:italic;color:var(--ink2);border-left:4px solid var(--green);padding-left:16px;max-width:540px;line-height:1.55;margin-bottom:24px}
+
+/* PHASE OVERVIEW */
+.phase-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-bottom:24px;cursor:pointer}
+.phase-cell{background:var(--paper);padding:14px 15px;transition:background .15s}
+.phase-cell:hover{background:var(--paper2)}
+.phase-num{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.phase-name{font-family:var(--display);font-size:18px;letter-spacing:.04em;color:var(--ink);margin-bottom:4px}
+.phase-moves{font-family:var(--mono);font-size:9px;color:var(--green);line-height:1.5}
+.phase-time{font-family:var(--mono);font-size:8px;color:var(--ink3);margin-top:4px}
+
+/* SECTION HEADER */
+.sec-hd{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:end;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--ink4)}
+.sec-n{font-family:var(--display);font-size:64px;line-height:1;opacity:.08;letter-spacing:-.02em}
+.sec-t{font-family:var(--display);font-size:36px;letter-spacing:.04em;color:var(--ink);margin-bottom:2px}
+.sec-st{font-size:13px;font-style:italic;color:var(--ink2);font-weight:300}
+
+/* MOVEMENT CARD */
+.mv-card{border:1px solid var(--ink4);margin-bottom:24px;background:var(--paper);overflow:hidden}
+.mv-header{display:grid;grid-template-columns:4px 1fr}
+.mv-bar{width:4px}
+.mv-header-body{padding:13px 15px}
+.mv-eyebrow{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.mv-name{font-family:var(--display);font-size:30px;letter-spacing:.03em;color:var(--ink);line-height:1;margin-bottom:4px}
+.mv-sub{font-size:13px;font-style:italic;color:var(--ink2);margin-bottom:7px}
+.mv-tags{display:flex;gap:5px;flex-wrap:wrap}
+.mv-tag{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--ink4);color:var(--ink3)}
+
+/* FILM STRIP */
+.film-strip{display:grid;gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin:0}
+.frame{background:var(--paper);padding:6px 3px 7px;text-align:center;cursor:pointer;transition:background .12s;position:relative}
+.frame:hover,.frame.active{background:var(--paper2)}
+.frame.active::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--green)}
+.frame.folly-f.active::after{background:var(--folly)}
+.frame-n{font-family:var(--mono);font-size:7px;letter-spacing:.08em;color:var(--ink4);margin-bottom:2px}
+.frame-cue{font-size:8px;color:var(--ink2);line-height:1.2;margin-top:3px;border-top:1px solid var(--ink4);padding-top:3px}
+.frame-detail{padding:8px 12px;background:var(--paper2);border-top:1px solid var(--ink4);font-size:11px;color:var(--ink2);line-height:1.55}
+.frame-detail-lbl{font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+
+/* BODY GRID */
+.mv-body{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink4);border-top:1px solid var(--ink4)}
+.mv-col{background:var(--paper);padding:13px 14px}
+.col-label{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--ink4)}
+
+/* STEPS */
+.step{display:grid;grid-template-columns:20px 1fr;gap:7px;margin-bottom:9px;align-items:start}
+.step-n{font-family:var(--display);font-size:17px;color:var(--green);opacity:.6;line-height:1;padding-top:1px}
+.step-title{font-size:11px;font-weight:600;color:var(--ink);margin-bottom:1px}
+.step-desc{font-size:11px;color:var(--ink2);line-height:1.45}
+.step-cue{font-family:var(--mono);font-size:9px;letter-spacing:.04em;color:var(--green);margin-top:2px;padding-left:7px;border-left:2px solid var(--green)}
+
+/* WHAT IT DOES */
+.benefit-row{margin-bottom:6px}
+.benefit-label{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:2px}
+.benefit-text{font-size:11px;color:var(--ink2);line-height:1.45}
+
+/* FOLLY */
+.folly{background:var(--folly2);border-left:3px solid var(--folly);padding:9px 12px;margin-bottom:8px}
+.folly-hd{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--folly);margin-bottom:6px}
+.folly-item{font-size:11px;color:#5a2020;line-height:1.5;padding:3px 0 3px 13px;position:relative;border-bottom:1px solid #e8c0c0}
+.folly-item:last-child{border-bottom:none}
+.folly-item::before{content:"✕";position:absolute;left:0;color:var(--folly);font-size:9px;top:5px}
+.folly-fix{font-size:10px;color:var(--green);margin-top:2px;padding-left:11px;position:relative;line-height:1.4}
+.folly-fix::before{content:"→";position:absolute;left:0;color:var(--green)}
+
+/* PULL QUOTE */
+.pull-q{border-left:4px solid var(--green);padding:8px 14px;margin:12px 0;background:var(--paper2)}
+.pull-q p{font-size:13px;font-style:italic;color:var(--ink);line-height:1.5;margin-bottom:2px}
+.pull-q cite{font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+
+/* FOOTER */
+.pg-foot{border-top:1px solid var(--ink4);padding-top:10px;margin-top:24px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--ink4)}
+
+/* PRINT */
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .nav{position:static}
+  .chapter{display:block!important}
+  @page{margin:9mm;size:A4 portrait}
+  .mv-card{page-break-inside:avoid;break-inside:avoid}
+  body{font-size:12px}
+}
+@media(max-width:700px){.mv-body{grid-template-columns:1fr}.phase-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">BEING <span>HAware</span></div>
+  <div class="nav-phases">
+    <button class="ph-btn active" onclick="setChapter('cover',this)">Cover</button>
+    <button class="ph-btn" onclick="setChapter('joints',this)">Phase 1 · Joints</button>
+    <button class="ph-btn" onclick="setChapter('hinge',this)">Phase 2 · Hinge</button>
+    <button class="ph-btn" onclick="setChapter('activate',this)">Phase 3 · Activate</button>
+    <button class="ph-btn" onclick="setChapter('elevate',this)">Phase 4 · Elevate</button>
+  </div>
+  <div class="nav-right">
+    <a class="nav-btn" href="../index.html" style="text-decoration:none;display:inline-block">🏠</a>
+    <a class="nav-btn" href="foundation-level.html" style="text-decoration:none;display:inline-block">Foundation</a>
+    <button class="nav-btn" onclick="prevChapter()">&#8592;</button>
+    <button class="nav-btn" onclick="nextChapter()">&#8594;</button>
+    <button class="nav-btn print" onclick="window.print()">Print</button>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- COVER -->
+<div class="chapter visible" id="ch-cover">
+  <div class="cover-rule"></div>
+  <div class="eyebrow">Being HAware · Foundation Level · Companion Guide</div>
+  <div class="cover-title">THE<br>WARM-UP<br><span>GUIDE</span></div>
+  <p class="cover-sub">Every movement in the Foundation Level warm-up — explained in full, with frame sequences, step-by-step instruction, and Common Folly corrections. No assumptions. No guessing. Just the correct way to prepare the body for the work ahead.</p>
+
+  <div style="background:var(--ink);color:var(--paper);padding:18px 22px;margin-bottom:20px">
+    <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px">Why the warm-up matters</div>
+    <div style="font-size:13px;color:#d4d0c8;line-height:1.7">The warm-up is not optional and it is not a formality. It is the first ten minutes of every session — the period in which the joints lubricate, the nervous system wakes up, and the body reveals what it has been doing (or not doing) since the last session. A body that goes straight into working sets from cold is a body that will tell you about it eventually. Begin here. Every time.</div>
+  </div>
+
+  <div class="phase-grid">
+    <div class="phase-cell" onclick="setChapterById('joints')">
+      <div class="phase-num">Phase 01 · 3 min</div>
+      <div class="phase-name">JOINTS FIRST</div>
+      <div class="phase-moves">Neck circles<br>Shoulder rolls<br>Wrist rotations<br>Hip circles<br>Ankle circles</div>
+      <div class="phase-time">10 reps each direction</div>
+    </div>
+    <div class="phase-cell" onclick="setChapterById('hinge')">
+      <div class="phase-num">Phase 02 · 3 min</div>
+      <div class="phase-name">HINGE &amp; REACH</div>
+      <div class="phase-moves">Cat-cow<br>Child's pose<br>Downward dog<br>Hip flexor stretch</div>
+      <div class="phase-time">10 reps / 30s holds</div>
+    </div>
+    <div class="phase-cell" onclick="setChapterById('activate')">
+      <div class="phase-num">Phase 03 · 2 min</div>
+      <div class="phase-name">ACTIVATE</div>
+      <div class="phase-moves">Glute bridge<br>Dead bug<br>Scapular pulls</div>
+      <div class="phase-time">15 / 8 each side / 10 reps</div>
+    </div>
+    <div class="phase-cell" onclick="setChapterById('elevate')">
+      <div class="phase-num">Phase 04 · 2 min</div>
+      <div class="phase-name">ELEVATE</div>
+      <div class="phase-moves">March or light jog<br>Arm swings<br>Bodyweight squats</div>
+      <div class="phase-time">2 min / 10 / 10 reps</div>
+    </div>
+  </div>
+
+  <div class="pull-q">
+    <p>"The warm-up will reveal tightness, asymmetry and vulnerability that would otherwise surface mid-session as something you'd prefer to blame on the workout. Better to know now."</p>
+    <cite>Being HAware — Foundation Level</cite>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ink4);border:1px solid var(--ink4);margin-top:16px">
+    <div style="background:var(--paper);padding:12px 14px">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:5px">How to use this guide</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.6">Navigate through the four phases using the buttons at the top. Each movement has a frame sequence — tap any frame to read its description. The Common Folly block names what goes wrong and gives the fix immediately beneath it.</div>
+    </div>
+    <div style="background:var(--paper);padding:12px 14px">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:5px">If something protests</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.6">Note it. That is not a reason to stop — it is information about where the real work needs to happen. Tightness in the warm-up is the body communicating. Listen without alarm, and continue.</div>
+    </div>
+  </div>
+
+  <div class="pg-foot"><span>Being HAware — Warm-Up Guide · Foundation Level · beinghaware.github.io/Being-HAware</span><span>Joints first. Always joints first.</span></div>
+</div>
+
+<!-- PHASE 1: JOINTS FIRST -->
+<div class="chapter" id="ch-joints">
+<div class="sec-hd"><div class="sec-n" style="color:#2d6a4f">01</div><div><div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Phase One · 3 minutes</div><div class="sec-t">JOINTS FIRST</div><div class="sec-st">Synovial fluid, range of motion, and the five joints that need waking before anything else moves</div></div></div>
+<p style="font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:20px;max-width:640px">Joints move differently when warm. Synovial fluid — the lubricating liquid inside every joint — becomes less viscous with movement and heat, allowing the joint surfaces to glide more smoothly and with less resistance. Starting with joint circles before any muscular work is not ceremony. It is the body's own maintenance procedure, performed in the correct order.</p>
+
+<!-- NECK CIRCLES -->
+<div class="mv-card" id="mv-neck">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Joints First · Movement 01 of 05</div>
+    <div class="mv-name">NECK CIRCLES</div>
+    <div class="mv-sub">Slow, controlled rotation through the cervical spine — the joint most compressed by desk work, screens, and sleep position</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Cervical spine</span><span class="mv-tag">10 each direction</span><span class="mv-tag">Slow and controlled</span></div>
+  </div></div>
+  <div class="film-strip" id="fs-neck" style="grid-template-columns:repeat(4,1fr)"></div>
+  <div class="frame-detail" id="fd-neck"><div class="frame-detail-lbl" id="fdl-neck">Frame 1 — Starting Position</div><div id="fdt-neck">Sitting or standing tall. Shoulders relaxed and away from the ears. Eyes forward. The neck is in neutral — not pushed forward, not pulled back. This is the position you return to between each circle.</div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div class="benefit-row"><div class="benefit-label">Primary</div><div class="benefit-text">Lubricates the cervical (neck) joints with synovial fluid. Releases tension accumulated from sleep, screens, or a day of looking down. Restores the full range of motion the neck was designed to have.</div></div>
+      <div class="benefit-row" style="margin-top:8px"><div class="benefit-label">Secondary</div><div class="benefit-text">Gently activates the deep neck stabilisers. Creates proprioceptive awareness — the body beginning to understand where it is in space before the session begins.</div></div>
+      <div style="margin-top:10px"><div class="col-label">Step by Step</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-title">Sit or stand tall</div><div class="step-desc">Shoulders down and back, away from the ears. Spine long. Do not let the shoulders creep up as the neck moves — this is the most common compensation.</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-title">Drop the chin slowly to the chest</div><div class="step-desc">Let gravity do the work. No forcing. Feel the stretch along the back of the neck.</div><div class="step-cue">Feel it: gentle pull along the back of the neck and upper back</div></div></div>
+        <div class="step"><div class="step-n">3</div><div><div class="step-title">Roll slowly to one ear</div><div class="step-desc">The ear moves toward the shoulder — the shoulder does not move toward the ear. Slow. Controlled. Three seconds per quarter turn.</div></div></div>
+        <div class="step"><div class="step-n">4</div><div><div class="step-title">Continue the circle</div><div class="step-desc">Back of the head toward the upper back (a gentle backward tilt — not a full extension), across to the other ear, and back to chin-to-chest. That is one circle. Complete 10, then reverse direction for 10 more.</div><div class="step-cue">Feel it: each quadrant revealing where the stiffness lives</div></div></div>
+      </div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Neck Circles</div>
+        <div class="folly-item">Moving too fast — spinning through the range rather than exploring it.<div class="folly-fix">Slow down to the point where you can feel each degree of movement. The therapeutic value is in the slow exploration of range, not the completion of laps. Three seconds per quarter turn is the target.</div></div>
+        <div class="folly-item">Shoulders rising as the neck moves — the upper traps doing the work the neck should be doing.<div class="folly-fix">Consciously press the shoulders down before beginning and check them every few circles. If they've crept up, reset. The neck moves independently of the shoulders.</div></div>
+        <div class="folly-item">Forcing range at the stiff points — pushing through resistance rather than breathing into it.<div class="folly-fix">Tightness is information. Pause at the stiff point, breathe out, and let the release happen rather than pushing through it. Forcing creates guarding. Breathing creates opening.</div></div>
+      </div>
+      <div class="col-label" style="margin-top:10px">Note</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.5;padding:8px 10px;background:var(--paper2);border-left:3px solid var(--ink3)">If you experience dizziness, sharp pain, or any neurological sensation (tingling, numbness) during neck circles, stop immediately and reduce the range of motion to gentle side-to-side nods only. These sensations warrant attention from a healthcare professional before continuing full circles.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SHOULDER ROLLS -->
+<div class="mv-card" id="mv-shoulder">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Joints First · Movement 02 of 05</div>
+    <div class="mv-name">SHOULDER ROLLS</div>
+    <div class="mv-sub">The shoulder girdle — the most complex joint in the body, and the one most compressed by modern posture</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Shoulder girdle</span><span class="mv-tag">10 each direction</span><span class="mv-tag">Full range</span></div>
+  </div></div>
+  <div class="film-strip" id="fs-shoulder" style="grid-template-columns:repeat(4,1fr)"></div>
+  <div class="frame-detail" id="fd-shoulder"><div class="frame-detail-lbl" id="fdl-shoulder">Frame 1 — Starting Position</div><div id="fdt-shoulder">Standing or seated, arms relaxed by the sides. Shoulders in whatever position they naturally fall — for most people this will be slightly forward and elevated. The roll will correct this by moving through the full range.</div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div class="benefit-row"><div class="benefit-label">Primary</div><div class="benefit-text">Lubricates the glenohumeral (ball and socket) joint, the acromioclavicular joint, and the sternoclavicular joint — the three joints that make up the shoulder complex. All three need movement before load.</div></div>
+      <div class="benefit-row" style="margin-top:8px"><div class="benefit-label">Secondary</div><div class="benefit-text">Activates and reminds the lower trapezius — the muscle responsible for pulling the shoulder blades down, which is the initiating movement of every pull exercise in the programme.</div></div>
+      <div style="margin-top:10px"><div class="col-label">Step by Step</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-title">Lift both shoulders toward the ears</div><div class="step-desc">An exaggerated shrug — as high as the shoulders will go. This is the starting point of the forward roll.</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-title">Roll them forward and down</div><div class="step-desc">Draw the shoulders forward (hunching slightly), then down toward the floor. Feel the front of the chest opening as the shoulders descend.</div><div class="step-cue">Feel it: the shoulder blades spreading apart as the shoulders come forward</div></div></div>
+        <div class="step"><div class="step-n">3</div><div><div class="step-title">Draw them back and up to complete the circle</div><div class="step-desc">Pull the shoulder blades together and back, then lift back to the starting shrug position. That is one forward roll. Complete 10, then reverse — back, down, forward, up — for 10 more.</div><div class="step-cue">Feel it: the shoulder blades pinching together on the backward phase</div></div></div>
+      </div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Shoulder Rolls</div>
+        <div class="folly-item">Small, lazy rolls that barely move the joint — completing the number without earning the range.<div class="folly-fix">Make the roll as large as possible. Exaggerate each phase. The ears-to-shoulders shrug, the full forward hunch, the back-pinch, the full lift. Small rolls produce small benefit.</div></div>
+        <div class="folly-item">Rolling both shoulders at the same time in a way that doesn't actually move the shoulder blades.<div class="folly-fix">Focus on feeling the shoulder blades move — spreading apart on the forward phase, pinching together on the backward phase. If you can't feel the blades moving, slow down and make the movement bigger.</div></div>
+      </div>
+      <div class="col-label" style="margin-top:10px">Why This Matters</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.5">The shoulder roll is the warm-up movement most likely to be done correctly when someone is told to do it slowly — and most likely to be done uselessly when they're in a hurry. It takes thirty seconds done properly. It prepares the joint for every push, pull, and overhead movement in the session. The thirty seconds is not optional.</div>
+    </div>
+  </div>
+</div>
+
+<!-- WRIST ROTATIONS -->
+<div class="mv-card" id="mv-wrist">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Joints First · Movement 03 of 05</div>
+    <div class="mv-name">WRIST ROTATIONS</div>
+    <div class="mv-sub">The joint that bears the load in every push exercise — and the one most neglected before it is asked to work</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Wrist and forearm</span><span class="mv-tag">10 each direction</span><span class="mv-tag">Both hands</span></div>
+  </div></div>
+  <div class="film-strip" id="fs-wrist" style="grid-template-columns:repeat(4,1fr)"></div>
+  <div class="frame-detail" id="fd-wrist"><div class="frame-detail-lbl" id="fdl-wrist">Frame 1 — Starting Position</div><div id="fdt-wrist">Arms extended forward or hands clasped together in front of the chest. The wrist is in neutral — not flexed or extended. Both wrists will rotate together or separately depending on preference.</div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div class="benefit-row"><div class="benefit-label">Primary</div><div class="benefit-text">Lubricates the radiocarpal and intercarpal joints of the wrist. Warms the eight small carpal bones and the connective tissue that holds them together. Essential before any weight-bearing through the hands.</div></div>
+      <div class="benefit-row" style="margin-top:8px"><div class="benefit-label">Secondary</div><div class="benefit-text">Activates the forearm flexors and extensors. Identifies any existing tightness or restriction before it becomes a problem under load in the push-up or dip.</div></div>
+      <div style="margin-top:10px"><div class="col-label">Step by Step</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-title">Clasp the hands or extend arms forward</div><div class="step-desc">Fingers interlaced and palms facing away from you for the clasped version, or arms extended with hands open for the individual version. Either works.</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-title">Rotate slowly through the full range</div><div class="step-desc">Draw large, slow circles with the wrists — clockwise for 10 repetitions. The movement comes from the wrist, not the elbow or shoulder.</div><div class="step-cue">Feel it: the small joints of the wrist working through their full available range</div></div></div>
+        <div class="step"><div class="step-n">3</div><div><div class="step-title">Reverse for 10 more</div><div class="step-desc">Anti-clockwise. Same slow, full circles. Note whether one direction is more restricted than the other — this is useful information.</div></div></div>
+        <div class="step"><div class="step-n">4</div><div><div class="step-title">Finish with wrist flexion and extension</div><div class="step-desc">Hands open, fingers pointing up — press gently back with the other hand for a flexor stretch. Then fingers pointing down — press gently for an extensor stretch. Five seconds each. These are the positions the wrist will be in under load.</div><div class="step-cue">Feel it: the forearm muscles stretching in both directions</div></div></div>
+      </div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Wrist Rotations</div>
+        <div class="folly-item">Skipping wrist rotations entirely — treating them as optional because the wrists "feel fine."<div class="folly-fix">The wrist feels fine until it doesn't — and the moment it doesn't is usually mid-set in a push-up or dip. Thirty seconds of wrist circles costs nothing. A wrist injury costs weeks. Do the circles.</div></div>
+        <div class="folly-item">Rotating from the elbow rather than the wrist — the whole forearm rotating rather than just the wrist joint.<div class="folly-fix">Keep the forearm still. Only the wrist moves. If the whole arm is rotating, reduce the range and focus on the joint itself rather than the appearance of movement.</div></div>
+      </div>
+      <div class="col-label" style="margin-top:10px">Particularly Important For</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.5">Anyone whose work involves typing, gripping tools, or repetitive hand movements. The wrist tends to accumulate tension and restriction that is invisible until load is applied. The warm-up rotation makes it visible at a safe moment — before the session rather than during it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HIP CIRCLES -->
+<div class="mv-card" id="mv-hip">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Joints First · Movement 04 of 05</div>
+    <div class="mv-name">HIP CIRCLES</div>
+    <div class="mv-sub">The largest ball-and-socket joint in the body — restricted by sitting, loaded by every lower body movement in the programme</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Hip joint</span><span class="mv-tag">10 each direction</span><span class="mv-tag">Standing</span></div>
+  </div></div>
+  <div class="film-strip" id="fs-hip" style="grid-template-columns:repeat(4,1fr)"></div>
+  <div class="frame-detail" id="fd-hip"><div class="frame-detail-lbl" id="fdl-hip">Frame 1 — Starting Position</div><div id="fdt-hip">Standing with feet hip-width apart, hands on the hips. Slight softness in the knees — not locked out. This movement comes from the hip joint, not the lower back.</div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div class="benefit-row"><div class="benefit-label">Primary</div><div class="benefit-text">Lubricates the hip joint — the largest ball-and-socket joint in the body. Warms the acetabular labrum (the cartilage ring that deepens the hip socket) and the surrounding ligaments before they are loaded under the squat, lunge, and glute bridge.</div></div>
+      <div class="benefit-row" style="margin-top:8px"><div class="benefit-label">Secondary</div><div class="benefit-text">Reveals hip mobility restrictions early. A hip that catches, clicks, or resists in one direction of the circle during the warm-up is a hip that needs attention — not avoidance.</div></div>
+      <div style="margin-top:10px"><div class="col-label">Step by Step</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-title">Stand with feet hip-width apart</div><div class="step-desc">Hands on hips. Soft knees. Spine neutral. The movement originates at the hip — the pelvis moves, not the torso.</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-title">Draw a large circle with the hips</div><div class="step-desc">Push the hips forward, then to one side, then back (sticking the tailbone out), then to the other side, and back to forward. Think of stirring a large pot with the hips. 10 slow circles.</div><div class="step-cue">Feel it: the hip joint moving in all planes — forward, side, back, side</div></div></div>
+        <div class="step"><div class="step-n">3</div><div><div class="step-title">Reverse for 10 more</div><div class="step-desc">The reverse direction often feels more restricted. This is normal. The restriction is the reason you are doing this movement.</div><div class="step-cue">Feel it: note which direction and which point in the circle feels tightest</div></div></div>
+      </div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Hip Circles</div>
+        <div class="folly-item">Moving the torso rather than the hips — swaying from side to side from the waist rather than rotating the hip joint itself.<div class="folly-fix">Keep the shoulders still and let only the pelvis move. Place the hands on the hip bones and feel them moving in the circle — not the ribs, not the shoulders. Smaller movement from the right joint is better than large movement from the wrong one.</div></div>
+        <div class="folly-item">Making the circles too small to produce any joint lubrication.<div class="folly-fix">The circle should be as large as the hip joint's current range allows. Push to the edges — gently, with control — not to a comfortable small rotation that asks nothing of the joint. The edges are where the lubrication is needed most.</div></div>
+      </div>
+      <div class="col-label" style="margin-top:10px">For Those Who Sit for Long Periods</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.5">The hip flexors shorten and the posterior capsule of the hip joint tightens with prolonged sitting. Hip circles are the minimum daily maintenance for anyone who spends significant time at a desk. If the circles feel very restricted, consider adding the hip flexor stretch (Phase 2) before this movement as well as after it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ANKLE CIRCLES -->
+<div class="mv-card" id="mv-ankle">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Joints First · Movement 05 of 05</div>
+    <div class="mv-name">ANKLE CIRCLES</div>
+    <div class="mv-sub">The foundation of every squat, lunge, and step — and the joint most likely to be the hidden limit of lower body range</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Ankle joint</span><span class="mv-tag">10 each direction</span><span class="mv-tag">Both ankles</span></div>
+  </div></div>
+  <div class="film-strip" id="fs-ankle" style="grid-template-columns:repeat(4,1fr)"></div>
+  <div class="frame-detail" id="fd-ankle"><div class="frame-detail-lbl" id="fdl-ankle">Frame 1 — Seated or Standing</div><div id="fdt-ankle">Seated with one foot raised, or standing with the heel on the floor and the toes lifted. The ankle hangs freely enough to rotate through its full range. This can also be done standing on one leg with the other foot lifted.</div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div class="benefit-row"><div class="benefit-label">Primary</div><div class="benefit-text">Lubricates the talocrural joint (the main ankle joint) and the subtalar joint beneath it. Warms the Achilles tendon and the plantar fascia. Ankle dorsiflexion — the ability to bring the shin toward the foot — limits squat depth when restricted. This addresses it.</div></div>
+      <div class="benefit-row" style="margin-top:8px"><div class="benefit-label">Secondary</div><div class="benefit-text">Activates the small stabilising muscles of the lower leg and foot. Improves proprioception — the sense of where the foot is in space, which determines balance in every single-leg movement.</div></div>
+      <div style="margin-top:10px"><div class="col-label">Step by Step</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-title">Lift one foot off the floor</div><div class="step-desc">Seated, or standing and balancing on the other leg. The lifted foot hangs freely. The movement comes from the ankle — not the knee, not the hip.</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-title">Draw large slow circles with the foot</div><div class="step-desc">Clockwise for 10 repetitions. Think of drawing circles with the big toe — large circles, through the full available range. Point the toes fully at the bottom, flex them back at the top.</div><div class="step-cue">Feel it: the full range of the ankle — pointed, to the outside, flexed, to the inside</div></div></div>
+        <div class="step"><div class="step-n">3</div><div><div class="step-title">Reverse and repeat on the other side</div><div class="step-desc">Anti-clockwise for 10, then switch feet and repeat both directions. Note any difference between left and right — asymmetry here explains a great deal about what happens in the squat.</div></div></div>
+      </div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Ankle Circles</div>
+        <div class="folly-item">Rotating from the knee rather than the ankle — the whole lower leg swinging rather than just the foot.<div class="folly-fix">Keep the knee still. Only the foot moves. If the knee is swinging, the ankle is not doing the work. Hold the shin with one hand to stabilise if needed and feel the ankle rotating independently.</div></div>
+        <div class="folly-item">Ignoring the asymmetry between left and right ankles.<div class="folly-fix">If one ankle is significantly more restricted than the other, it will limit that side in every squat, lunge, and single-leg exercise. Note which side and spend an additional 10 circles on the restricted side. Over time, address the restriction with calf stretching and dorsiflexion mobility work.</div></div>
+      </div>
+      <div class="col-label" style="margin-top:10px">The Squat Connection</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.5">Restricted ankle dorsiflexion is one of the most common hidden causes of the heel rising in a squat. If the squat section of the programme reveals that your heels come up before you reach depth, the ankle circle warm-up is not optional — it is the beginning of solving the problem. Add wall ankle dorsiflexion stretches after the session as well.</div>
+    </div>
+  </div>
+</div>
+
+<div class="pg-foot"><span>Being HAware — Warm-Up Guide · Phase One: Joints First</span><span>Lubricate before you load.</span></div>
+</div>
+
+<!-- PHASE 2: HINGE AND REACH -->
+<div class="chapter" id="ch-hinge">
+<div class="sec-hd"><div class="sec-n" style="color:#2d6a4f">02</div><div><div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Phase Two · 3 minutes</div><div class="sec-t">HINGE &amp; REACH</div><div class="sec-st">Spine mobility, hip flexibility, and the positions that reveal where the body has been holding tension</div></div></div>
+<p style="font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:20px;max-width:640px">The hinge and reach phase takes the joints that were lubricated in Phase One and moves them through their full functional range. This is where the spine is mobilised, the hip flexors are addressed, and the body's accumulated stiffness from sitting, sleeping, and screen time begins to release. Move slowly. Breathe deliberately. Notice what you find.</p>
+
+<!-- CAT-COW -->
+<div class="mv-card" id="mv-catcow">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Hinge and Reach · Movement 01 of 04</div>
+    <div class="mv-name">CAT-COW</div>
+    <div class="mv-sub">Spinal flexion and extension in alternation — the spine's own morning routine, borrowed from yoga and earned by everyone</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Thoracic and lumbar spine</span><span class="mv-tag">10 full cycles</span><span class="mv-tag">On hands and knees</span></div>
+  </div></div>
+  <div class="film-strip" id="fs-catcow" style="grid-template-columns:repeat(5,1fr)"></div>
+  <div class="frame-detail" id="fd-catcow"><div class="frame-detail-lbl" id="fdl-catcow">Frame 1 — Neutral Table Position</div><div id="fdt-catcow">On hands and knees — wrists under shoulders, knees under hips. The spine is in neutral — not arched, not rounded. This is the starting and ending position of every cycle. It is also a position worth knowing on its own.</div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div class="benefit-row"><div class="benefit-label">Primary</div><div class="benefit-text">Mobilises the entire spine through flexion (the Cat — rounded back) and extension (the Cow — arched back). Pumps synovial fluid through the intervertebral discs. Releases the deep spinal muscles that have been held in one position during sleep or sitting.</div></div>
+      <div class="benefit-row" style="margin-top:8px"><div class="benefit-label">Secondary</div><div class="benefit-text">Develops awareness of the difference between a posteriorly tilted pelvis (Cat position) and an anteriorly tilted pelvis (Cow position). This awareness is directly relevant to the hollow body hold and every push exercise in the programme.</div></div>
+      <div style="margin-top:10px"><div class="col-label">Step by Step</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-title">Begin on hands and knees — neutral spine</div><div class="step-desc">Wrists directly under shoulders. Knees directly under hips. Spine neither arched nor rounded. Head in line with the spine, eyes looking at the floor.</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-title">CAT — exhale and round the spine</div><div class="step-desc">Breathe out, tuck the tailbone under, round the lower back, pull the navel toward the spine, and let the upper back dome upward. The head drops naturally. Think of an angry cat arching its back.</div><div class="step-cue">Feel it: the entire spine rounding from tailbone to neck — one continuous curve</div></div></div>
+        <div class="step"><div class="step-n">3</div><div><div class="step-title">COW — inhale and arch the spine</div><div class="step-desc">Breathe in, let the belly drop toward the floor, lift the tailbone, and allow the lower back to arch gently. The head rises to look forward. Think of a cow's sagging belly.</div><div class="step-cue">Feel it: the front of the spine lengthening, the lower back gently arching</div></div></div>
+        <div class="step"><div class="step-n">4</div><div><div class="step-title">Flow between Cat and Cow</div><div class="step-desc">Move continuously from one to the other, led by the breath. Exhale into Cat. Inhale into Cow. Let the breath dictate the pace rather than counting. 10 full cycles.</div></div></div>
+      </div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Cat-Cow</div>
+        <div class="folly-item">Moving only the lower back — the thoracic spine (upper and mid back) staying stiff and uninvolved.<div class="folly-fix">Think of the movement beginning at the tailbone and travelling all the way to the base of the skull, one vertebra at a time. The upper back must participate. If it feels stuck, slow down and breathe into the stiff area — the thoracic spine is often the most immobile section in people who sit at desks.</div></div>
+        <div class="folly-item">Rushing through the movement without connecting the breath to the position.<div class="folly-fix">The breath is the movement. Exhale drives Cat, inhale drives Cow. When the breath is disconnected, the movement becomes mechanical and loses most of its therapeutic value. Slow down until the breath leads and the body follows.</div></div>
+        <div class="folly-item">Forcing the Cow position into an excessive lower back arch.<div class="folly-fix">Cow is a gentle extension — the belly softly dropping, the tailbone lifting. It is not a maximum lumbar hyperextension. If the lower back feels compressed in Cow, reduce the range. A modest arch is enough.</div></div>
+      </div>
+      <div class="col-label" style="margin-top:10px">The Hollow Body Connection</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.5">The Cat position is the spinal shape that the hollow body hold works to create. The ability to round the lower back deliberately — to feel the difference between an arched and a flat lumbar spine — is the foundational skill of the hollow body hold. Cat-cow teaches this distinction clearly, in a low-load position, before any demand is placed on the core.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CHILD'S POSE -->
+<div class="mv-card" id="mv-childs">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Hinge and Reach · Movement 02 of 04</div>
+    <div class="mv-name">CHILD'S POSE</div>
+    <div class="mv-sub">The resting extension that decompresses the lower back and opens the hips simultaneously — 30 seconds of genuine recovery</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Lower back and hips</span><span class="mv-tag">Hold 30 seconds</span><span class="mv-tag">On the floor</span></div>
+  </div></div>
+  <div class="film-strip" id="fs-childs" style="grid-template-columns:repeat(4,1fr)"></div>
+  <div class="frame-detail" id="fd-childs"><div class="frame-detail-lbl" id="fdl-childs">Frame 1 — Starting Position</div><div id="fdt-childs">From the cat-cow table position — on hands and knees, neutral spine. Child's pose begins from here, so it flows naturally from the previous movement without getting up.</div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div class="benefit-row"><div class="benefit-label">Primary</div><div class="benefit-text">Passively lengthens the lumbar erectors (lower back muscles), the latissimus dorsi (the large back muscle used in all pulling), and the hip flexors simultaneously. Decompresses the intervertebral discs of the lower back through gentle traction.</div></div>
+      <div class="benefit-row" style="margin-top:8px"><div class="benefit-label">Secondary</div><div class="benefit-text">Provides a moment of genuine stillness before the session begins. The parasympathetic nervous system activates briefly, reducing baseline tension in the muscles that are about to be worked.</div></div>
+      <div style="margin-top:10px"><div class="col-label">Step by Step</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-title">From hands and knees, sit the hips back toward the heels</div><div class="step-desc">Let the hips descend slowly toward the heels. The arms remain extended forward, hands on the floor. The forehead rests on the floor or hovers just above it.</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-title">Let the body relax completely into the position</div><div class="step-desc">The lower back softens and releases. The chest moves gently toward the floor with each exhale. Do not hold tension anywhere in the body. This is a passive stretch — gravity does the work.</div><div class="step-cue">Feel it: the lower back releasing, the lats lengthening along the sides of the torso</div></div></div>
+        <div class="step"><div class="step-n">3</div><div><div class="step-title">Hold for 30 seconds and breathe</div><div class="step-desc">Breathe slowly and deeply. With each exhale, allow the body to sink slightly further into the position. Do not force or bounce. 30 seconds of genuine release.</div><div class="step-cue">Feel it: each exhale allowing a little more release in the lower back and hips</div></div></div>
+      </div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Child's Pose</div>
+        <div class="folly-item">Hips not reaching the heels — staying in a half-way position that stretches nothing.<div class="folly-fix">If the hips won't reach the heels — common with tight hip flexors or knees that protest — place a folded blanket or cushion between the hips and the heels to close the gap. The hips should be resting on something, not hovering in mid-air under muscular tension.</div></div>
+        <div class="folly-item">Holding muscular tension throughout — treating it as an active exercise rather than a passive release.<div class="folly-fix">Let go. Completely. The arms are on the floor, the forehead is on the floor, the hips are moving toward the heels under gravity. Nothing should be working. If something is working, find it and release it.</div></div>
+      </div>
+      <div class="col-label" style="margin-top:10px">Modification</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.5">Wide-knee child's pose: instead of knees together, take the knees wide (toward the edges of the mat) and bring the big toes to touch. The hips sink between the knees rather than on top of them. This variation is significantly more accessible for people with tight hips and produces a deeper inner groin stretch alongside the lower back release.</div>
+    </div>
+  </div>
+</div>
+
+<!-- DOWNWARD DOG -->
+<div class="mv-card" id="mv-downdog">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Hinge and Reach · Movement 03 of 04</div>
+    <div class="mv-name">DOWNWARD DOG</div>
+    <div class="mv-sub">The whole-body stretch that is also the starting position of the pike push-up — two purposes, one movement</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Full posterior chain</span><span class="mv-tag">Hold 30 seconds</span><span class="mv-tag">Floor</span></div>
+  </div></div>
+  <div class="film-strip" id="fs-downdog" style="grid-template-columns:repeat(4,1fr)"></div>
+  <div class="frame-detail" id="fd-downdog"><div class="frame-detail-lbl" id="fdl-downdog">Frame 1 — From Child's Pose</div><div id="fdt-downdog">Coming up from child's pose — hands still on the floor, toes curling under. The body will press back and up into the inverted V of downward dog from here. This transition is itself a movement worth doing slowly.</div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div class="benefit-row"><div class="benefit-label">Primary</div><div class="benefit-text">Stretches the entire posterior chain simultaneously — hamstrings, calves, Achilles, and spinal erectors. Also stretches the lats and the axilla (armpit area) as the arms reach overhead in the inverted position.</div></div>
+      <div class="benefit-row" style="margin-top:8px"><div class="benefit-label">Secondary</div><div class="benefit-text">Activates the shoulder stabilisers in a weight-bearing overhead position — preparation for every push exercise. Also introduces a mild inversion (heart above head) which briefly increases blood flow to the upper body.</div></div>
+      <div style="margin-top:10px"><div class="col-label">Step by Step</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-title">From child's pose, tuck the toes under</div><div class="step-desc">Curl the toes so the balls of the feet are on the floor. Hands remain shoulder-width apart, fingers spread, weight distributed across the whole palm.</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-title">Press the floor away and lift the hips</div><div class="step-desc">Push through the hands and straighten the arms as the hips rise toward the ceiling. The body forms an inverted V — hips at the apex, hands and feet as the two base points.</div><div class="step-cue">Feel it: the hamstrings beginning to stretch as the hips rise</div></div></div>
+        <div class="step"><div class="step-n">3</div><div><div class="step-title">Press the heels toward the floor</div><div class="step-desc">The heels do not need to touch the floor — they probably won't at first. The intention of pressing them down is enough to stretch the calves and Achilles. Do not force the heels down by rounding the lower back.</div><div class="step-cue">Feel it: the calf stretch and Achilles lengthening as the heel reaches toward the floor</div></div></div>
+        <div class="step"><div class="step-n">4</div><div><div class="step-title">Hold 30 seconds and breathe</div><div class="step-desc">With each exhale, let the hips rise slightly and the heels drop slightly further. The arms stay straight, the head hangs freely between the arms, the back of the neck relaxes.</div></div></div>
+      </div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Downward Dog</div>
+        <div class="folly-item">Rounding the lower back to get the heels closer to the floor — prioritising the appearance over the purpose.<div class="folly-fix">Keep the lower back long and the hips hinging at the top of the V. Bent knees are completely acceptable if they allow the back to stay straight. A straight-back downward dog with bent knees stretches the right things. A rounded-back version with straight legs stretches the wrong things.</div></div>
+        <div class="folly-item">Arms bending — weight collapsing into the shoulders rather than being pressed away through straight arms.<div class="folly-fix">Push the floor actively away from you throughout the hold. The arms stay straight and the shoulders push up and back away from the hands. This is also the shoulder preparation for the push-up — practise it here before load is applied.</div></div>
+        <div class="folly-item">Head dropping too far — neck craning downward under its own weight.<div class="folly-fix">The head hangs freely between the arms — ears in line with the biceps, same as in the hollow body hold overhead position. It should feel like an extension of the spine, not a separate heavy object pulling downward.</div></div>
+      </div>
+      <div class="col-label" style="margin-top:10px">The Pike Push-Up Connection</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.5">Downward dog is precisely the starting position of the pike push-up. Familiarising the body with this shape in the warm-up — the high hips, the straight arms, the shoulder loading — means the pike push-up begins from a position the body already knows rather than one it is discovering under load.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HIP FLEXOR STRETCH -->
+<div class="mv-card" id="mv-hipflex">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Hinge and Reach · Movement 04 of 04</div>
+    <div class="mv-name">HIP FLEXOR STRETCH</div>
+    <div class="mv-sub">The most shortened muscle group in modern life — and the one whose tightness explains the most about lower back pain, anterior pelvic tilt, and squat restriction</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Hip flexors and psoas</span><span class="mv-tag">30 seconds each side</span><span class="mv-tag">Kneeling lunge</span></div>
+  </div></div>
+  <div class="film-strip" id="fs-hipflex" style="grid-template-columns:repeat(4,1fr)"></div>
+  <div class="frame-detail" id="fd-hipflex"><div class="frame-detail-lbl" id="fdl-hipflex">Frame 1 — Kneeling Lunge Position</div><div id="fdt-hipflex">One knee on the floor, one foot forward with the shin vertical. The rear knee is directly below the rear hip. This is the starting position — the stretch begins from here as the hips are driven gently forward.</div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div class="benefit-row"><div class="benefit-label">Primary</div><div class="benefit-text">Stretches the iliopsoas — the deepest and most powerful hip flexor, connecting the lumbar spine to the femur. Shortened iliopsoas is the primary cause of anterior pelvic tilt (the forward-tilted pelvis that creates a pronounced lower back arch) and contributes significantly to lower back pain.</div></div>
+      <div class="benefit-row" style="margin-top:8px"><div class="benefit-label">Secondary</div><div class="benefit-text">Stretches the rectus femoris (the quad muscle that also crosses the hip). Also familiarises the body with the lunge position that appears in the reverse lunge and Bulgarian split squat exercises.</div></div>
+      <div style="margin-top:10px"><div class="col-label">Step by Step</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-title">Take a kneeling lunge position</div><div class="step-desc">One knee on the floor, one foot forward. Front shin vertical. Both hips facing forward. Place the hands on the front knee for balance if needed.</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-title">Tuck the tailbone under</div><div class="step-desc">Before driving the hips forward, posteriorly tilt the pelvis — the same movement as the hollow body hold. This is crucial: without the pelvic tuck, the stretch goes to the lower back rather than the hip flexor.</div><div class="step-cue">Feel it: the lower back flattening as the tailbone tucks</div></div></div>
+        <div class="step"><div class="step-n">3</div><div><div class="step-title">Drive the hips forward and down</div><div class="step-desc">Maintaining the pelvic tuck, shift the whole body forward until the stretch is felt in the front of the rear hip and thigh. The front knee tracks over the toes. Hold 30 seconds.</div><div class="step-cue">Feel it: the deep front-of-hip stretch in the rear leg — the iliopsoas releasing</div></div></div>
+        <div class="step"><div class="step-n">4</div><div><div class="step-title">Switch sides and repeat</div><div class="step-desc">30 seconds each side. If one side is significantly tighter than the other, add a second hold on the tighter side. The asymmetry is worth addressing — it will show up in every lower body exercise.</div></div></div>
+      </div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Hip Flexor Stretch</div>
+        <div class="folly-item">Not tucking the pelvis — going straight into the forward drive with an anteriorly tilted pelvis.<div class="folly-fix">The pelvic tuck is the whole point. Without it, the stretch goes to the lumbar spine rather than the iliopsoas. Tuck the tailbone first, feel the lower back flatten, then drive forward. The stretch you feel will be completely different — deeper in the front of the hip, absent in the lower back.</div></div>
+        <div class="folly-item">The front knee drifting inward or forward past the toes.<div class="folly-fix">The front shin stays vertical throughout. If the knee drifts forward, step the front foot further forward. The same rule applies here as in the reverse lunge — vertical shin, planted heel.</div></div>
+        <div class="folly-item">Rushing through — treating 30 seconds as too long.<div class="folly-fix">The hip flexor is a slow-twitch, deeply embedded muscle. It requires time to release. 30 seconds is the minimum. For people who sit for long periods, 60 seconds per side is more appropriate. The tight hip flexor is one of the most consequential restrictions in the entire musculoskeletal system. Give it the time it deserves.</div></div>
+      </div>
+      <div class="col-label" style="margin-top:10px">Why This Matters So Much</div>
+      <div style="font-size:11px;color:var(--ink2);line-height:1.5">Chronically shortened hip flexors pull the lumbar spine into extension and the pelvis into anterior tilt — the forward-tilted, protruding-lower-back position that is endemic in desk workers. This creates lower back pain, inhibits glute activation, and restricts squat depth. The hip flexor stretch is the single most important warm-up movement for anyone who sits for significant periods of the day. It deserves more than a perfunctory 10 seconds.</div>
+    </div>
+  </div>
+</div>
+
+<div class="pg-foot"><span>Being HAware — Warm-Up Guide · Phase Two: Hinge and Reach</span><span>Notice where the body resists. That is information.</span></div>
+</div>
+
+<!-- PHASE 3: ACTIVATE -->
+<div class="chapter" id="ch-activate">
+<div class="sec-hd"><div class="sec-n" style="color:#2d6a4f">03</div><div><div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Phase Three · 2 minutes</div><div class="sec-t">ACTIVATE</div><div class="sec-st">Waking the muscles that support everything else — glutes, deep core, and the scapular stabilisers</div></div></div>
+<p style="font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:20px;max-width:640px">The activation phase takes the joints and tissues prepared in Phases One and Two and begins to fire the specific muscles that the session demands. Three movements — glute bridge, dead bug, and scapular pulls — each targeting a muscle group that commonly underperforms when called upon suddenly in a working set. Activating them here costs two minutes. The alternative is discovering mid-session that they weren't ready.</p>
+
+<!-- GLUTE BRIDGE ACTIVATION -->
+<div class="mv-card" id="mv-gb-act">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Activate · Movement 01 of 03</div>
+    <div class="mv-name">GLUTE BRIDGE</div>
+    <div class="mv-sub">15 reps in the warm-up — not for strength, but to ensure the glutes are firing before any lower body exercise demands them</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Glute activation</span><span class="mv-tag">15 reps</span><span class="mv-tag">2-second hold at top</span></div>
+  </div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">Why It Is Here</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.65">The glutes are the largest and most powerful muscle group in the lower body. They are also the muscle group most likely to be inhibited — switched off — by prolonged sitting. A glute that is not firing in a squat, lunge, or hip extension exercise means the lower back, hamstrings, or knees are compensating. Fifteen glute bridge reps in the warm-up, with the deliberate two-second squeeze at the top, ensures the glutes are communicating with the nervous system before the session demands them.</div>
+      <div class="pull-q" style="margin-top:10px"><p>"Feel it in the glutes. If you don't feel it in the glutes, adjust until you do — then continue."</p><cite>Being HAware — Exercise Key</cite></div>
+      <div style="margin-top:10px;font-size:12px;color:var(--ink2);line-height:1.6"><strong>In the warm-up context:</strong> the same movement as the full exercise, but lighter in intention. Focus entirely on the sensation of the glutes contracting at the top. This is not a strength set — it is a conversation with the nervous system. Each rep asks the glute to fire. Each squeeze confirms it is listening.</div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Warm-Up Glute Bridge</div>
+        <div class="folly-item">Treating the warm-up glute bridge as a strength exercise — going heavy on the squeeze and fatiguing the muscle before the session.<div class="folly-fix">This is an activation movement, not a working set. The squeeze should be firm enough to confirm the glute is firing — not a maximum-effort contraction. Think 60% effort, full attention.</div></div>
+        <div class="folly-item">Skipping the two-second hold and bouncing through the reps.<div class="folly-fix">The hold is the activation. A glute bridge without the hold at the top is a hip flexor exercise. The glute needs to be held in contraction briefly for the nervous system to register the pattern. Two seconds, every rep, no exceptions.</div></div>
+      </div>
+      <div style="margin-top:10px"><div class="col-label">Full Guide</div><div style="font-size:11px;color:var(--ink2)">See the Glute Bridge entry in the Foundation Level Exercise Key for the complete frame sequence, all Common Folly corrections, and the single-leg progression.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DEAD BUG ACTIVATION -->
+<div class="mv-card" id="mv-db-act">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Activate · Movement 02 of 03</div>
+    <div class="mv-name">DEAD BUG</div>
+    <div class="mv-sub">8 each side in the warm-up — waking the deep core stabilisers that protect the spine throughout every exercise that follows</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Deep core activation</span><span class="mv-tag">8 each side</span><span class="mv-tag">Slow</span></div>
+  </div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">Why It Is Here</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.65">The dead bug activates the transverse abdominis — the deepest layer of the core, the one responsible for creating intra-abdominal pressure that stabilises the spine under load. This muscle is not recruited by sit-ups, crunches, or most conventional core exercises. It is recruited by the specific challenge of keeping the lower back flat against the floor while the limbs create an extending force. Eight slow reps each side in the warm-up ensures it is engaged before the session asks it to work.</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--ink2);line-height:1.6"><strong>The one rule:</strong> lower back flat against the floor throughout. If it lifts, the activation has stopped. Reduce the range of the limbs until the back stays down, then continue.</div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Warm-Up Dead Bug</div>
+        <div class="folly-item">Moving too quickly to feel anything — the warm-up dead bug becoming a mechanical leg-waving exercise.<div class="folly-fix">Four seconds per extension. Feel the back on the floor before each rep. Feel it staying there as the limbs move. Slow is the exercise.</div></div>
+      </div>
+      <div style="margin-top:10px"><div class="col-label">Full Guide</div><div style="font-size:11px;color:var(--ink2)">See the Dead Bug entry in the Foundation Level Exercise Key for the complete frame sequence, full step-by-step, and progressions.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCAPULAR PULLS ACTIVATION -->
+<div class="mv-card" id="mv-sc-act">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Activate · Movement 03 of 03</div>
+    <div class="mv-name">SCAPULAR PULLS</div>
+    <div class="mv-sub">10 reps from a hang — the shoulder blade depression that initiates every pull exercise and protects the shoulder joint</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Scapular stabilisers</span><span class="mv-tag">10 reps</span><span class="mv-tag">Pull-up bar</span></div>
+  </div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">Why It Is Here</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.65">The scapular pull — depressing the shoulder blades from a dead hang without bending the elbows — is the initiating movement of every pull exercise: the inverted row, the chin-up, and the pull-up. Performing 10 slow reps in the warm-up achieves two things simultaneously. It activates the lower trapezius and serratus anterior — the muscles responsible for pulling the shoulder blades down and stabilising them against the ribcage. And it reminds the nervous system of the correct pulling pattern before heavier pulling begins.</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--ink2);line-height:1.6"><strong>If no pull-up bar is available:</strong> substitute with a resistance band pull-apart (hold the band at shoulder width and pull it apart to chest width, squeezing the shoulder blades together) for 10–15 reps. The scapular activation is the goal — the bar is the preferred tool, not the only one.</div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Warm-Up Scapular Pulls</div>
+        <div class="folly-item">Bending the elbows — turning the scapular pull into a partial pull-up.<div class="folly-fix">Arms stay completely straight throughout. The movement is only in the shoulder blades — down and back, then releasing back to the passive shrug. If the elbows bend, the wrong muscles are doing the work.</div></div>
+      </div>
+      <div style="margin-top:10px"><div class="col-label">Full Guide</div><div style="font-size:11px;color:var(--ink2)">See the Scapular Pull entry in the Foundation Level Exercise Key for the complete frame sequence and full instruction.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="pg-foot"><span>Being HAware — Warm-Up Guide · Phase Three: Activate</span><span>Wake the muscles before the session demands them.</span></div>
+</div>
+
+<!-- PHASE 4: ELEVATE -->
+<div class="chapter" id="ch-elevate">
+<div class="sec-hd"><div class="sec-n" style="color:#2d6a4f">04</div><div><div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:4px">Phase Four · 2 minutes</div><div class="sec-t">ELEVATE</div><div class="sec-st">Heart rate up, blood moving, body temperature rising — the transition from preparation to work</div></div></div>
+<p style="font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:20px;max-width:640px">The final phase of the warm-up elevates the heart rate gently and raises core body temperature. A warmer muscle is a more pliable, faster-contracting, and more injury-resistant muscle. Two minutes here is the difference between a body that starts cold and a body that starts ready. Three movements — none of them complicated, all of them effective.</p>
+
+<!-- MARCH OR LIGHT JOG -->
+<div class="mv-card" id="mv-march">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Elevate · Movement 01 of 03</div>
+    <div class="mv-name">MARCH OR LIGHT JOG</div>
+    <div class="mv-sub">2 minutes on the spot — the simplest cardiovascular primer available, requiring nothing except the willingness to begin</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Cardiovascular primer</span><span class="mv-tag">2 minutes</span><span class="mv-tag">On the spot</span></div>
+  </div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.65">Raises the heart rate from resting to light aerobic activity. Increases blood flow to the working muscles. Elevates core body temperature — which increases the speed of metabolic processes in the muscles and reduces the viscosity of both synovial fluid and intramuscular connective tissue. A warmer muscle generates force more quickly, absorbs force more safely, and recovers more efficiently.</div>
+      <div style="margin-top:10px"><div class="col-label">March vs Jog</div><div style="font-size:12px;color:var(--ink2);line-height:1.6"><strong>March:</strong> knees driving up to hip height, arms swinging opposite to the legs. Low impact, suitable for any fitness level, appropriate for sessions immediately after waking or on very fatigued days.<br><br><strong>Light jog:</strong> easy pace, feet just clearing the floor, breathing comfortable throughout. A gentle conversation should still be possible. If breathless after 30 seconds, drop back to a march.</div></div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — March or Jog</div>
+        <div class="folly-item">Going too hard — treating this as a cardio session rather than a primer.<div class="folly-fix">The Elevate phase should leave the body warm and ready — not fatigued. If the legs are heavy by the end of the warm-up, the working sets will suffer. Light means light. The target is a gentle increase in heart rate and temperature, not cardiovascular training.</div></div>
+        <div class="folly-item">Skipping this phase because it feels unnecessary after the previous three phases.<div class="folly-fix">The joints are lubricated and the muscles are activated — but the heart rate has not yet elevated and the core temperature has not yet risen. These are different systems. The march or jog addresses specifically what the first three phases do not.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARM SWINGS -->
+<div class="mv-card" id="mv-armswing">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Elevate · Movement 02 of 03</div>
+    <div class="mv-name">ARM SWINGS</div>
+    <div class="mv-sub">10 front-to-back and 10 cross-body — the dynamic shoulder warm-up that adds movement range to the static preparation of the rolls</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Shoulder dynamic mobility</span><span class="mv-tag">10 each pattern</span><span class="mv-tag">Standing</span></div>
+  </div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">What It Does</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.65">Takes the shoulder through its full dynamic range using momentum rather than static holding. This is distinct from the shoulder rolls (which lubricated the joint) and prepares the shoulder for the dynamic demands of push and pull exercises — movements that require the joint to decelerate and accelerate through range under load.</div>
+      <div style="margin-top:10px"><div class="col-label">Step by Step</div>
+        <div class="step"><div class="step-n">1</div><div><div class="step-title">Front-to-back swings</div><div class="step-desc">Stand with feet shoulder-width. Swing both arms forward to chest height then back behind the body, allowing the chest to open on the backswing. Let momentum carry the arms — no muscular forcing. 10 swings.</div><div class="step-cue">Feel it: the chest opening and the shoulder joint moving freely through its sagittal range</div></div></div>
+        <div class="step"><div class="step-n">2</div><div><div class="step-title">Cross-body swings</div><div class="step-desc">Arms swing out to the sides then cross in front of the chest — one arm over the other, alternating which arm crosses on top. 10 swings. The shoulder blades spread apart on the cross and pinch together on the open.</div><div class="step-cue">Feel it: the posterior shoulder and upper back opening as the arms cross in front</div></div></div>
+      </div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">Common Folly</div>
+      <div class="folly">
+        <div class="folly-hd">Common Folly — Arm Swings</div>
+        <div class="folly-item">Swinging too vigorously — creating impact and jarring at the end range of each swing.<div class="folly-fix">Dynamic mobility means controlled momentum — not uncontrolled flinging. The arms accelerate through the middle of the swing and decelerate at the end range. If the shoulder is jolting at the end of each swing, reduce the amplitude.</div></div>
+      </div>
+      <div style="margin-top:10px"><div class="col-label">Note</div><div style="font-size:11px;color:var(--ink2);line-height:1.5">Arm swings are particularly useful before sessions that emphasise push or pull movements. On lower-body focused sessions, they can be reduced to 5 of each pattern. On upper-body days, 15 of each is appropriate.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- BODYWEIGHT SQUATS -->
+<div class="mv-card" id="mv-bwsq-act">
+  <div class="mv-header"><div class="mv-bar" style="background:#2d6a4f"></div><div class="mv-header-body">
+    <div class="mv-eyebrow">Elevate · Movement 03 of 03</div>
+    <div class="mv-name">BODYWEIGHT SQUATS</div>
+    <div class="mv-sub">10 deliberate reps — not for strength, but to confirm that everything prepared in the previous three phases is working together correctly</div>
+    <div class="mv-tags"><span class="mv-tag" style="border-color:#2d6a4f;color:#2d6a4f">Full lower body primer</span><span class="mv-tag">10 reps</span><span class="mv-tag">Slow and deliberate</span></div>
+  </div></div>
+  <div class="mv-body">
+    <div class="mv-col">
+      <div class="col-label">Why It Closes the Warm-Up</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.65">The bodyweight squat uses every joint mobilised and every muscle activated in the previous three phases simultaneously. The ankles dorsiflex. The hips hinge. The glutes engage. The deep core stabilises. The thoracic spine stays upright. Ten slow, deliberate reps at the end of the warm-up is a full-system check — confirming that the joints are ready, the muscles are firing, and the body is prepared to begin working.</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--ink2);line-height:1.6"><strong>Warm-up squat vs working squat:</strong> the warm-up squat is slower and more exploratory. Pause at the bottom. Feel the glutes. Feel the ankle. Feel where the weight sits through the foot. These are the cues you bring into the working sets. The warm-up squats are where you find them, not where you prove them.</div>
+    </div>
+    <div class="mv-col">
+      <div class="col-label">What to Notice</div>
+      <div style="font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:10px">Use these 10 reps as a diagnostic. The warm-up squat tells you what today's session will reveal.</div>
+      <div class="folly">
+        <div class="folly-hd">What the squat reveals</div>
+        <div class="folly-item">Heels rising — ankle dorsiflexion is still restricted. More ankle circles and calf stretching needed before lower body work.<div class="folly-fix">Elevate the heels slightly for working sets today, and add ankle mobility work at the end of the session.</div></div>
+        <div class="folly-item">Knees caving inward — glutes not yet firing despite the activation phase.<div class="folly-fix">Add 10 more glute bridge reps with a 3-second hold at the top before beginning working sets.</div></div>
+        <div class="folly-item">Forward trunk lean — hip flexors still tight or ankle restriction compensating.<div class="folly-fix">Return to the hip flexor stretch for an additional 30 seconds each side. Then retest.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--ink);color:var(--paper);padding:18px 22px;margin-top:24px">
+  <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px">You are ready</div>
+  <div style="font-size:13px;color:#d4d0c8;line-height:1.7">Ten minutes. Joints lubricated. Spine mobilised. Hip flexors addressed. Glutes firing. Core active. Scapulae ready. Heart rate elevated. Temperature rising. The session begins from here — from a body that has been asked to prepare, and has done so. Every working set that follows is better for these ten minutes. Every session skipped without them carries a small and accumulating cost. Begin the warm-up. Every time.</div>
+</div>
+
+<div class="pg-foot"><span>Being HAware — Warm-Up Guide · Phase Four: Elevate</span><span>You are ready. Begin.</span></div>
+</div>
+
+</div><!-- end .page -->
+
+<script>
+var chapters = ['cover','joints','hinge','activate','elevate'];
+var current = 'cover';
+
+function setChapter(id, btn) {
+  document.querySelectorAll('.ph-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  document.querySelectorAll('.chapter').forEach(function(c){ c.classList.toggle('visible', c.id === 'ch-'+id); });
+  current = id;
+  window.scrollTo(0,0);
+}
+function setChapterById(id) {
+  var btn = document.querySelector('.ph-btn[onclick*="\''+id+'\'"]');
+  setChapter(id, btn);
+}
+function prevChapter() {
+  var i = chapters.indexOf(current);
+  if (i > 0) setChapterById(chapters[i-1]);
+}
+function nextChapter() {
+  var i = chapters.indexOf(current);
+  if (i < chapters.length-1) setChapterById(chapters[i+1]);
+}
+
+/* FILM STRIP BUILDER */
+var G = '#2d6a4f';
+var F = '#7a1a1a';
+
+function ln(x1,y1,x2,y2,col,w){ return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+(col||G)+'" stroke-width="'+(w||2)+'" stroke-linecap="round"/>'; }
+function el(cx,cy,rx,ry,col){ return '<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+ry+'" fill="none" stroke="'+(col||G)+'" stroke-width="2"/>'; }
+function pt(d,col,w){ return '<path d="'+d+'" fill="none" stroke="'+(col||G)+'" stroke-width="'+(w||2)+'" stroke-linecap="round" stroke-linejoin="round"/>'; }
+function tx(x,y,t,col){ return '<text x="'+x+'" y="'+y+'" text-anchor="middle" font-family="DM Mono,monospace" font-size="7" fill="'+(col||F)+'" letter-spacing="1">'+t+'</text>'; }
+function sv(body){ return '<svg viewBox="0 0 120 96" width="100%" height="54" xmlns="http://www.w3.org/2000/svg">'+body+'</svg>'; }
+
+/* Standing figure */
+function stand(c){ return el(60,16,9,9,c)+ln(60,25,60,50,c)+ln(60,36,42,44,c)+ln(60,36,78,44,c)+ln(60,50,48,70,c)+ln(60,50,72,70,c); }
+
+var strips = {
+  neck: [
+    {cue:'Tall',lbl:'Frame 1 — Starting Position',desc:'Sitting or standing tall. Shoulders relaxed and away from the ears. Eyes forward. Neck in neutral.',
+     body:stand(G)},
+    {cue:'Chin',lbl:'Frame 2 — Chin to Chest',desc:'Let the chin drop slowly toward the chest under gravity. No forcing. Feel the stretch along the back of the neck.',
+     body:el(60,22,9,9,G)+ln(60,31,60,50,G)+ln(60,38,42,46,G)+ln(60,38,78,46,G)+ln(60,50,48,70,G)+ln(60,50,72,70,G)},
+    {cue:'Side',lbl:'Frame 3 — Ear to Shoulder',desc:'The ear moves toward the shoulder — the shoulder does not move toward the ear. Three seconds per quarter turn.',
+     body:el(54,20,9,9,G)+ln(58,29,60,50,G)+ln(60,38,42,46,G)+ln(60,38,78,46,G)+ln(60,50,48,70,G)+ln(60,50,72,70,G)},
+    {cue:'Wrong',lbl:'Frame 4 — Common Folly: Shoulders Rising',desc:'The shoulders have crept up toward the ears — the upper traps are compensating. The neck is no longer moving independently.',
+     body:el(60,16,9,9,F)+ln(60,25,60,50,F)+ln(60,36,38,30,F)+ln(60,36,82,30,F)+ln(60,50,48,70,F)+ln(60,50,72,70,F)+tx(60,88,'SHOULDERS UP',F)},
+  ],
+  shoulder: [
+    {cue:'Start',lbl:'Frame 1 — Arms by Sides',desc:'Arms relaxed, shoulders in their natural resting position. Note where they sit before the roll reveals the full range.',
+     body:stand(G)},
+    {cue:'Lift',lbl:'Frame 2 — Shrug to Ears',desc:'An exaggerated shrug — shoulders as high toward the ears as possible. This is the starting point of the forward roll.',
+     body:el(60,16,9,9,G)+ln(60,25,60,48,G)+ln(60,34,38,30,G)+ln(60,34,82,30,G)+ln(60,48,48,68,G)+ln(60,48,72,68,G)},
+    {cue:'Forward',lbl:'Frame 3 — Roll Forward and Down',desc:'Shoulders draw forward and down — the chest rounds slightly and the shoulder blades spread apart.',
+     body:el(60,18,9,9,G)+pt('M60 27 Q55 42 58 54',G)+ln(58,38,40,46,G)+ln(58,38,76,46,G)+ln(58,54,46,72,G)+ln(58,54,72,72,G)},
+    {cue:'Back',lbl:'Frame 4 — Draw Back and Together',desc:'Shoulders pull back, shoulder blades pinch together. The chest opens. Complete the circle back up to the shrug.',
+     body:el(60,16,9,9,G)+pt('M60 25 Q66 38 62 52',G)+ln(62,38,44,44,G)+ln(62,38,80,44,G)+ln(62,52,50,70,G)+ln(62,52,74,70,G)},
+  ],
+  wrist: [
+    {cue:'Neutral',lbl:'Frame 1 — Wrists in Neutral',desc:'Arms extended forward, wrists in neutral. This is the starting position before the rotation begins.',
+     body:stand(G)+ln(42,44,22,44,G)+ln(78,44,98,44,G)},
+    {cue:'Circle',lbl:'Frame 2 — Rotating Clockwise',desc:'Drawing large slow circles with the wrists. Clockwise for 10. The movement comes from the wrist joint — not the elbow.',
+     body:stand(G)+pt('M22 44 Q22 30 36 36 Q50 42 42 50 Q34 58 22 54 Q10 50 22 44',G)},
+    {cue:'Flex',lbl:'Frame 3 — Wrist Flexion Stretch',desc:'Fingers pointing upward, gently pressing back with the other hand. Stretching the forearm flexors — the position used in the push-up bottom position.',
+     body:stand(G)+ln(42,44,22,30,G)+ln(22,30,28,44,G)},
+    {cue:'Wrong',lbl:'Frame 4 — Common Folly: Rotating from Elbow',desc:'The whole forearm is rotating rather than just the wrist joint. The elbow is moving — the wrist is not doing the work.',
+     body:el(60,16,9,9,F)+ln(60,25,60,50,F)+ln(60,36,42,44,F)+pt('M78,44 Q98,30 98,44 Q98,58 78,44',F)+ln(60,50,48,70,F)+ln(60,50,72,70,F)+tx(60,88,'FROM ELBOW',F)},
+  ],
+  hip: [
+    {cue:'Stand',lbl:'Frame 1 — Hands on Hips',desc:'Feet hip-width apart, hands on the hip bones. Soft knees. The movement originates at the hip — the pelvis moves, not the torso.',
+     body:stand(G)+ln(42,44,36,44,G)+ln(78,44,84,44,G)},
+    {cue:'Forward',lbl:'Frame 2 — Hips Forward',desc:'Pelvis tilts forward — hips push toward the front. One point of the circle. The torso stays upright throughout.',
+     body:el(60,16,9,9,G)+ln(60,25,62,52,G)+ln(62,38,44,44,G)+ln(62,38,80,44,G)+ln(62,52,50,70,G)+ln(62,52,74,70,G)},
+    {cue:'Side',lbl:'Frame 3 — Hips to the Side',desc:'Pelvis shifts to one side. Think of stirring a large pot with the hip bones. The circle should be as large as the joint allows.',
+     body:el(58,16,9,9,G)+ln(58,25,55,52,G)+ln(55,38,38,42,G)+ln(55,38,74,42,G)+ln(55,52,44,70,G)+ln(55,52,68,70,G)},
+    {cue:'Wrong',lbl:'Frame 4 — Common Folly: Torso Moving Not Hips',desc:'The torso is swaying from side to side rather than the pelvis rotating at the hip joint. The wrong thing is moving.',
+     body:el(65,16,9,9,F)+ln(65,25,60,50,F)+ln(60,36,44,42,F)+ln(60,36,78,42,F)+ln(60,50,48,70,F)+ln(60,50,72,70,F)+tx(60,88,'TORSO SWAYS',F)},
+  ],
+  ankle: [
+    {cue:'Lift',lbl:'Frame 1 — Foot Lifted',desc:'One foot lifted, ankle hanging freely. The knee is still. The movement will come entirely from the ankle joint.',
+     body:el(60,16,9,9,G)+ln(60,25,60,48,G)+ln(60,36,42,44,G)+ln(60,36,78,44,G)+ln(60,48,52,66,G)+ln(60,48,72,70,G)+ln(52,66,48,82,G)},
+    {cue:'Point',lbl:'Frame 2 — Foot Pointed',desc:'The foot points fully downward — plantarflexion. This is the bottom of the circle. Feel the calf shortening.',
+     body:el(60,16,9,9,G)+ln(60,25,60,48,G)+ln(60,36,42,44,G)+ln(60,36,78,44,G)+ln(60,48,52,66,G)+ln(60,48,72,70,G)+ln(52,66,44,80,G)},
+    {cue:'Flex',lbl:'Frame 3 — Foot Flexed',desc:'The foot pulls back toward the shin — dorsiflexion. The top of the circle. Feel the Achilles and calf stretching.',
+     body:el(60,16,9,9,G)+ln(60,25,60,48,G)+ln(60,36,42,44,G)+ln(60,36,78,44,G)+ln(60,48,52,66,G)+ln(60,48,72,70,G)+ln(52,66,42,68,G)},
+    {cue:'Wrong',lbl:'Frame 4 — Common Folly: Knee Moving',desc:'The whole lower leg is rotating — the knee is swinging rather than the ankle doing the work.',
+     body:el(60,16,9,9,F)+ln(60,25,60,48,F)+ln(60,36,42,44,F)+ln(60,36,78,44,F)+pt('M60 48 Q40 60 52 70 Q64 80 60 48',F)+tx(60,88,'KNEE SWINGS',F)},
+  ],
+  catcow: [
+    {cue:'Neutral',lbl:'Frame 1 — Neutral Table Position',desc:'Hands and knees. Wrists under shoulders, knees under hips. Spine in neutral — neither arched nor rounded. The starting and ending position of every cycle.',
+     body:ln(20,48,100,48,G,3)+el(25,38,8,8,G)+ln(25,46,25,60,G)+ln(25,60,18,72,G)+ln(25,60,32,72,G)+el(95,38,8,8,G)+ln(95,46,95,60,G)},
+    {cue:'Cat',lbl:'Frame 2 — Cat (Exhale and Round)',desc:'Breathe out, tuck the tailbone, round the entire spine upward, pull the navel toward the spine. Head drops naturally. Like an angry cat arching its back.',
+     body:pt('M20 52 Q60 28 100 52',G,3)+el(25,42,8,8,G)+ln(25,50,25,62,G)+ln(25,62,18,74,G)+ln(25,62,32,74,G)+el(95,42,8,8,G)+ln(95,50,95,62,G)},
+    {cue:'Cow',lbl:'Frame 3 — Cow (Inhale and Arch)',desc:'Breathe in, let the belly drop, lift the tailbone, allow a gentle lower back arch. Head rises to look forward. Like a cow\'s sagging belly.',
+     body:pt('M20 44 Q60 62 100 44',G,3)+el(25,34,8,8,G)+ln(25,42,25,56,G)+ln(25,56,18,68,G)+ln(25,56,32,68,G)+el(95,34,8,8,G)+ln(95,42,95,56,G)},
+    {cue:'Flow',lbl:'Frame 4 — Flowing with the Breath',desc:'Moving continuously between Cat and Cow, led by the breath. Exhale into Cat. Inhale into Cow. Ten full cycles.',
+     body:pt('M20 48 Q60 36 100 48',G,3)+el(25,38,8,8,G)+ln(25,46,25,60,G)+ln(25,60,18,72,G)+ln(25,60,32,72,G)+el(95,38,8,8,G)+ln(95,46,95,60,G)},
+    {cue:'Wrong',lbl:'Frame 5 — Common Folly: Only Lower Back Moving',desc:'Only the lumbar spine is moving — the thoracic (upper and mid back) is stiff and uninvolved. The movement needs to travel the full length of the spine.',
+     body:pt('M20 44 Q40 56 60 48 Q80 44 100 44',F,3)+el(25,34,8,8,F)+ln(25,42,25,56,F)+ln(25,56,18,68,F)+ln(25,56,32,68,F)+el(95,34,8,8,F)+ln(95,42,95,56,F)+tx(60,88,'ONLY LUMBAR',F)},
+  ],
+  childs: [
+    {cue:'Table',lbl:'Frame 1 — From Hands and Knees',desc:'Starting position — hands and knees, same as the end of cat-cow. The transition to child\'s pose begins from here.',
+     body:ln(20,48,100,48,G,3)+el(25,38,8,8,G)+ln(25,46,25,60,G)+ln(25,60,18,72,G)+ln(25,60,32,72,G)+el(95,38,8,8,G)+ln(95,46,95,60,G)},
+    {cue:'Sit',lbl:'Frame 2 — Hips Moving Back',desc:'Hips beginning to travel back toward the heels. Arms remain extended. The back begins to lengthen.',
+     body:ln(20,56,80,56,G,3)+el(22,48,8,8,G)+ln(22,56,22,68,G)+ln(22,68,16,80,G)+ln(22,68,28,80,G)+el(80,46,8,8,G)},
+    {cue:'Hold',lbl:'Frame 3 — Full Child\'s Pose',desc:'Hips resting on or toward the heels. Forehead on the floor. Arms extended. Everything passive — gravity doing the work.',
+     body:ln(20,60,80,60,G,3)+el(22,56,8,8,G)+ln(22,64,22,72,G)+ln(22,72,16,80,G)+ln(22,72,28,80,G)+el(80,54,6,6,G)},
+    {cue:'Wrong',lbl:'Frame 4 — Common Folly: Hips Not Reaching',desc:'The hips are hovering mid-air rather than resting toward the heels. The back is under muscular tension rather than releasing passively.',
+     body:ln(20,52,80,52,F,3)+el(22,42,8,8,F)+ln(22,50,22,64,F)+ln(22,64,16,76,F)+ln(22,64,28,76,F)+el(80,42,8,8,F)+tx(60,88,'HIPS HOVERING',F)},
+  ],
+  downdog: [
+    {cue:'Setup',lbl:'Frame 1 — From Child\'s Pose',desc:'Toes curling under, preparing to press up. Hands flat on the floor, fingers spread. The transition to downward dog begins here.',
+     body:ln(20,60,80,60,G,3)+el(22,56,8,8,G)+ln(22,64,22,72,G)+ln(22,72,16,80,G)+ln(22,72,28,80,G)+el(80,54,6,6,G)},
+    {cue:'Rise',lbl:'Frame 2 — Hips Rising',desc:'Pressing through the hands, hips beginning to lift toward the ceiling. The inverted V shape is forming.',
+     body:el(60,26,9,9,G)+pt('M24 72 L60 35 L96 72',G)+ln(24,72,20,80,G)+ln(24,72,28,80,G)+ln(96,72,92,80,G)+ln(96,72,100,80,G)},
+    {cue:'Full',lbl:'Frame 3 — Full Downward Dog',desc:'Hips at the apex of the inverted V. Arms straight. Heels reaching toward the floor. Head hanging freely between the arms.',
+     body:el(60,22,9,9,G)+pt('M20 76 L60 31 L100 76',G)+ln(20,76,16,84,G)+ln(20,76,24,84,G)+ln(100,76,96,84,G)+ln(100,76,104,84,G)},
+    {cue:'Wrong',lbl:'Frame 4 — Common Folly: Rounded Lower Back',desc:'The lower back has rounded to get the heels closer to the floor. The spine is no longer long — it is curved. Bent knees with a straight back would be better.',
+     body:el(60,26,9,9,F)+pt('M20 76 Q40 60 60 40 Q80 52 100 76',F)+ln(20,76,16,84,F)+ln(20,76,24,84,F)+ln(100,76,96,84,F)+ln(100,76,104,84,F)+tx(60,88,'BACK ROUNDED',F)},
+  ],
+  hipflex: [
+    {cue:'Lunge',lbl:'Frame 1 — Kneeling Lunge Position',desc:'One knee on the floor, one foot forward, front shin vertical. Both hips facing forward. This is the starting position before the stretch begins.',
+     body:el(50,18,9,9,G)+ln(50,27,50,48,G)+ln(50,36,34,42,G)+ln(50,36,66,42,G)+ln(50,48,38,62,G)+ln(50,48,66,62,G)+ln(38,62,30,78,G)+ln(66,62,66,78,G)+ln(30,78,20,78,G)},
+    {cue:'Tuck',lbl:'Frame 2 — Posterior Pelvic Tilt',desc:'The tailbone tucks under before driving forward. This is the crucial step — without the pelvic tuck, the stretch goes to the lower back instead of the hip flexor.',
+     body:el(50,18,9,9,G)+ln(50,27,48,48,G)+ln(48,36,32,42,G)+ln(48,36,64,42,G)+ln(48,48,36,62,G)+ln(48,48,64,62,G)+ln(36,62,28,78,G)+ln(64,62,64,78,G)+ln(28,78,18,78,G)},
+    {cue:'Drive',lbl:'Frame 3 — Hips Drive Forward',desc:'Maintaining the pelvic tuck, the whole body shifts forward. The deep hip flexor stretch is felt in the front of the rear hip and thigh.',
+     body:el(56,18,9,9,G)+ln(56,27,54,48,G)+ln(54,36,38,40,G)+ln(54,36,70,40,G)+ln(54,48,44,62,G)+ln(54,48,72,62,G)+ln(44,62,36,78,G)+ln(72,62,72,78,G)+ln(36,78,26,78,G)},
+    {cue:'Wrong',lbl:'Frame 4 — Common Folly: No Pelvic Tuck',desc:'The hips have driven forward without the posterior pelvic tilt. The lower back is arching — the stretch is going to the lumbar spine rather than the hip flexor.',
+     body:el(56,18,9,9,F)+pt('M56 27 Q60 40 58 50',F)+ln(54,36,38,40,F)+ln(54,36,70,40,F)+ln(58,50,46,64,F)+ln(58,50,74,64,F)+ln(46,64,38,80,F)+ln(74,64,74,80,F)+ln(38,80,28,80,F)+tx(60,88,'NO TUCK',F)},
+  ],
+};
+
+function buildStrip(exId) {
+  var strip = document.getElementById('fs-'+exId);
+  var fdLabel = document.getElementById('fdl-'+exId);
+  var fdText  = document.getElementById('fdt-'+exId);
+  if (!strip) return;
+  var frames = strips[exId];
+  if (!frames) return;
+  strip.style.gridTemplateColumns = 'repeat('+frames.length+',1fr)';
+  frames.forEach(function(f, i) {
+    var div = document.createElement('div');
+    var isLast = (i === frames.length - 1);
+    div.className = 'frame' + (i===0?' active':'') + (isLast?' folly-f':'');
+    div.innerHTML = '<div class="frame-n">0'+(i+1)+'</div>'+sv(f.body)+'<div class="frame-cue">'+f.cue+'</div>';
+    div.onclick = (function(frame, el) {
+      return function() {
+        strip.querySelectorAll('.frame').forEach(function(fr){ fr.classList.remove('active'); });
+        el.classList.add('active');
+        if(fdLabel) fdLabel.textContent = frame.lbl;
+        if(fdText)  fdText.textContent  = frame.desc;
+      };
+    })(f, div);
+    strip.appendChild(div);
+  });
+}
+
+Object.keys(strips).forEach(function(id){ buildStrip(id); });
+</script>
+</body>
+</html>
